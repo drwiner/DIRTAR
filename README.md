@@ -1,4 +1,4 @@
-David Winer IE task: DIRTAR: "Discoery of Inference Rules from Text for Action Recognition"
+David Winer IE task: DIRTAR: "Discovery of Inference Rules from Text for Action Recognition"
 
 Summary: Classic DIRT algorithm (Lin and Pantel, 2001) but slots are not "X" and "Y", instead are dependency slots like "Subj", "DObj", and "PP-by". Special "semantic discrimination" module filters candidates for test.
 
