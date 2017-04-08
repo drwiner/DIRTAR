@@ -1,6 +1,8 @@
-David Winer IE intermediate report.
+David Winer IE task: DIRTAR: "Discoery of Inference Rules from Text for Action Recognition"
 
-The movie corpus is collected with the moviescript_crawler.py file (from local path) and each document is inserted into a single document called movie_combo.txt. The text was when formatted with "format_corpus.txt" with output movie_corpus.txt, whose formatting is similar to that as the input file in the DIRT assignment. The DIRT algorithm is run with moviedirt.py and a triple database is dumped with pickle as "trip_database.pkl"
+Summary: Classic DIRT algorithm (Lin and Pantel, 2001) but slots are not "X" and "Y", instead are dependency slots like "Subj", "DObj", and "PP-by". Special "semantic discrimination" module filters candidates for test.
+
+The movie corpus is collected with the moviescript_crawler.py file (from local path) and each document is inserted into a single document called movie_combo.txt. The text was when formatted with "format_corpus.txt" with output movie_corpus.txt, whose formatting is similar to that as the input file in the DIRT assignment. The DIRTAR algorithm is run with moviedirt.py and a triple database is dumped with pickle as "trip_database.pkl"
 
 The "movie_output10.txt" is the output to the moviedirt.py execution where the min-freq is 5 and the number of most-similar phrases to output is 10. The test phrases are in the file "key_phrases" and are the handwritten action phrases.
 
