@@ -1,0 +1,1357 @@
+Ned Nederlander (Martin Short) speaks to crowd -#- square-off stare-at
+Guapo (Abel Franco) smiles at Ned, Ned continues to speak -#- stare-at square-off
+Ned continues speaking, turns, speaks to German (Kai Wulff), German draws gun -#- square-off stare-at draw
+German turns, aims gun, fires gun -#- fire none
+German fires gun several times at pinata, pinata body falls to ground -#- fire
+Dusty Bottoms (Chevy Chase) flinches, grabs hat -#- none
+Guapo smiles at pinata -#- none
+Ned turns to German, German speaks to Ned -#- look-at
+German continues speaking -#- assent
+German turns, walks away from Ned -#- stare-at face-at walk
+German walks toward duel position -#- walk
+Jefe stands up from chair, walks off of stage -#- stand-up walk
+Jefe walks to Ned, grabs Ned's shoulders, turns Ned around -#- look-at walk none
+Jefe puts arm around Ned -#- none
+German continues walking -#- walk
+German turns around -#- look-at square-off
+Jefe and Ned walk to duel position, Ned turns head to Dusty -#- none look-at
+Dusty shrugs, nods at Ned -#- look-at none
+Jefe and Ned continue walking to duel position, bandit turns Ned around -#- look-at none
+Men on stage watch Ned, Guapo lights cigar, shakes out match -#- smoke stare-at stare-at
+Bandit 2 walks to Ned and Jefe, gives gun to Jefe, Jefe speaks to Ned -#- look-at walk walk give taunt
+Jefe continues speaking to Ned, German speaks to Ned -#- taunt assent
+German continues speaking to Ned -#- assent
+Jefe takes gun out of Ned's holster, puts gun in Ned's belt, holds out gun for Ned, Ned takes gun -#- give give drop-gun
+Ned is pulled down by gun's weight, pulls gun back up, attempts to put it in holster -#- drop-gun holster-gun
+Ned misses the holster, stumbles to the side, Bandit 2 keeps Ned from falling over, Ned puts gun in holster, Jefe grabs Ned, kisses his cheek -#- none holster-gun taunt
+Jefe kisses Ned's other cheek, lets go of Ned -#- taunt
+Ned looks at Jefe -#- taunt look-at
+Jefe laughs at Ned -#- provoke
+Bandits 1 and 2 turn and walk away -#- provoke none walk
+Bandits 1 and 2 walk past Dusty, Dusty smiles at them -#- look-at walk none
+Jefe steps onto stage, sits down in chair -#- walk none
+Ned stands in place, watches German -#- square-off
+German stands in place, watches Ned -#- stare-at
+Both men watch eachother with German in foreground, crowd turns to German -#- stare-at stare-at look-at
+German's gun is shown in holster, German watches Ned -#- stare-at
+German and Ned are shown with German's gun in foreground -#- none
+German and Ned are shown with Neds's gun in foreground -#- none
+Guapo watches Ned, inhales cigar -#- stare-at
+Area is shown, Ned and German stand -#- None
+German is watches Ned -#- stare-at
+Ned watches German -#- stare-at
+German's eyes are shown, watches Ned -#- stare-at
+Ned's eyes are shown, watches German -#- stare-at
+German draws gun -#- draw
+Ned draws gun -#- draw
+Ned fire guns -#- fire
+German is thrown backward on the ground, dead -#- get-shot drop-gun fall
+Ned flies backward -#- none
+Ned flies into horse, throws gun up -#- none drop-gun
+Lucky Day (Steve Martin) catches gun -#- drop-gun pickup-gun
+Suited man 1 stands up -#- stand-up draw
+Lucky stands up -#- raise-gun
+Suited man 1 draws gun, fires gun -#- stand-up draw fire
+Lucky aims gun, fires -#- raise-gun fire
+Suited man 1 falls back, dead, suited man 2 stands up, draws gun -#- get-shot drop-gun fall die stand-up draw
+Dusty Bottoms bends down -#- look-at none pick-up
+Dusty takes knife from bandit's boot -#- pick-up
+Dusty throws knife -#- none
+Knife pins suited man 2's arm sleeve to post -#- none
+Ned looks at Bandit 3 -#- none
+Bandit 3 aims gun -#- aim
+Ned draws gun -#- draw
+Guapo looks at Bandit 3 -#- none
+Ned fires gun -#- fire
+Bandit 3 falls off roof -#- get-shot drop-gun fall
+Ned turns to Guapo -#- look-at
+Guapo Stands up, throws cigarette down -#- stand-up
+Thug walks through street, turns head -#- look-at walk
+Unseen person throws lantern -#- none
+Thug raises gun, shoots at lantern, runs to building, shoots twice at darkness, steps onto porch, stands -#- none walk raise-gun fire fire wince run fire fire
+Unknown voice speaks to thug, thug walks away from building, reloads gun  -#- none stare-at walk load-gun
+Thug looks into darkness, the Stranger (Clint Eastwood) enters frame, walks to front of burning house, thug turns around, walks toward Stranger -#- stare-at load-gun walk square-off look-at walk
+Thug continues walking toward Stranger, -#- walk stare-at
+Stranger stands, watches thug -#- stare-at
+Thug continues walking toward Stranger -#- walk
+Stranger moves coat aside -#- reveal
+Thug raises gun -#- raise-gun
+Stranger fires gun, thug flinches, drops gun -#- fire drop-gun
+Thug speaks to Stranger -#- identify
+Stranger lowers gun, pulls back gun hammer -#- lower-gun cock raise-gun
+Stranger fires gun three times, thug is hit all times -#- fire get-shot fire get-shot fire get-shot
+Stranger lowers gun -#- lower-gun
+Thug falls to his knees, speaks to Stranger -#- fall identify
+Stranger watches thug -#- stare-at stare-at
+Thug falls over dead -#- fall
+Stranger watches thug -#- stare-at
+Barman looks around corner of building, walks out from behind building -#- walk raise-gun
+Barman aims gun at Stranger, Mordecai (Billy Curtis) fires gun at barman -#- raise-gun aim get-shot fire
+Stranger looks at barman -#- look-at
+Barman turns around, falls over dead, Mordecai looks at barman, looks at Stranger -#- fall die lower-gun look-at
+Stranger smiles, nods at Mordecai -#- look-at none
+Mordecai smiles -#- none
+Taggart (Slim Pickens) sits on horse, speaks to Bart (Cleavon Little), points at Bart -#- identify identify
+Bart replies to Taggart -#- identify de-escalate identify
+Taggart speaks to thugs, looks around at thugs, Lyle (Burton Gilliam) leans on Taggart, speaks to Taggart, Taggart replies to Lyle, Lyle speaks to thugs -#- provoke none fire fire none fire draw
+Jim (Gene Wilder) speaks to thugs -#- de-escalate de-escalate
+Lyle speaks to thugs -#- taunt
+Jim licks hand, blows on hand, Lyle continues speaking to thugs -#- stare-at stare-at square-off square-off fire
+thugs all hold aim guns, Lyle counts -#- aim aim aim aim fire
+thugs pull back gun hammers, Lyle continues to count -#- aim aim aim aim fire cock cock cock cock
+Jim watches thugs -#- stare-at stare-at stare-at
+thugs continue pulling back hammers, Lyle continues to count -#- aim aim aim aim fire cock cock cock cock
+Jim draws guns and fires -#- draw
+Guns fly out of thugs' hands, thugs clutch hands in pain -#- fire fire fire fire fire fire fire fire fire fire fire fire drop-gun drop-gun drop-gun drop-gun drop-gun drop-gun
+Jim watches thugs -#- stare-at stare-at
+thugs clutch and shake hands in pain -#- wince wince wince
+thugs clutch and shake hands in pain -#- wince wince wince
+Jim holds out hands, crowd high fives him continuously -#- none
+Taggart looks at thugs, Lyle shakes hand in pain, Bart speaks to thugs -#- wince none none none
+Bart continues speaking, draws gun, pulls gun hammer back -#- none none none draw
+thugs clap hands  -#- cheer
+Billy Ray Smith (Anthony Edwards) is pushed out of the house, walks into street -#- none walk square-off
+Pestoso (Luis Contreras) watches Billy Ray, laughs, speaks to Billy Ray -#- stare-at taunt provoke
+Billy Ray reaches into pocket, pulls spur out of pocket, speaks to Pestoso -#- none identify
+Pestoso replies to Billy Ray -#- stare-at identify
+Billy Ray replies to Pestoso -#- none
+Pestoso replies to Billy Ray -#- identify
+Billy Ray replies to Pestoso -#- none
+Pestoso replies to Billy Ray -#- stare-at taunt
+Billy Ray pauses, speaks to Pestoso -#- identify
+Pestoso laughes replies to Billy Ray -#- stare-at taunt provoke
+Billy Ray watches pestoso -#- stare-at
+Pestoso begins walking toward Billy Ray -#- walk
+Billy Ray begins backing up -#- walk
+Pestoso continues walking toward Billy Ray, speaks to Billy Ray -#- walk provoke
+Billy Ray continues backing up, puts spur in pocket -#- walk pick-up
+Pestoso continues walking toward Billy Ray -#- walk
+Billy Ray continues backing up -#- walk
+Pestoso finished walking toward Billy Ray -#- walk square-off
+Billy Ray stops backing up -#- walk
+Pestoso breathes deeply, bystander watches Pestoso -#- stare-at look-at
+Billy Ray watches Pestoso, Billy Ray's legs shake -#- none stare-at
+Pestoso moves poncho to reveal gun, Billy Ray continues watching Pestoso, looks down -#- reveal reveal
+Billy Ray moves coat to reveal gun, Pestoso shakes arms -#- adjust-clothing reveal
+Billy Ray looks back at pestoso -#- reveal
+Pestoso continues movement, adjusts belt -#- adjust-clothing adjust-clothing stare-at
+Billy Ray watches Pestoso -#- none stare-at
+Pestoso crackes knuckles, pulls on indiviual fingers -#- adjust-clothing
+Billy Ray crackes knuckles -#- adjust-clothing
+Pestoso continues to pull on fingers, watches Billy Ray -#- adjust-clothing stare-at
+Billy Ray pulls on individual fingers, winces in pain -#- adjust-clothing
+Pestoso moves arms out of loosen them -#- adjust-clothing
+Billy Ray shakes arms -#- adjust-clothing
+Pestoso glances down at gun -#- look-at
+Both men watch each other, Pestoso in foreground, Billy Ray in background -#- adjust-clothing adjust-clothing
+Both men watch each other, Billy Ray in foreground, Pestoso in background -#- adjust-clothing adjust-clothing
+Billy Ray watches Pestoso -#- stare-at
+Pestoso watches Billy Ray, laughs -#- stare-at provoke
+Billy Ray watches Pestoso -#- stare-at
+Pestoso speaks to Billy Ray, reaches down -#- taunt provoke
+Pestoso draws gun, Billy Ray draws gun -#- draw draw
+Billy Ray clenches teeth, gun shot goes off -#- draw
+Billy Ray fires gun -#- draw fire
+Pestoso is hit by bullet, beguins stumbling -#- get-shot none
+Billy Ray opens eyes, looks at Pestoso -#- look-at
+Pestoso continues stumbling -#- none
+Pestoso looks at Billy Ray, a bullet hole in his forehead -#- none
+Van Leek (Louis Goessett Jr.) climbs down from bell tower -#- walk
+Billy Ray watches Pestoso, looks at gun, looks at Pestoso, Billy Ray narrates -#- look-at none
+Pestoso continues stumbling -#- none none
+Billy Ray watches Pestoso, Van Leek speaks to Billy Ray, Billy Ray looks back at Van Leek -#- look-at none
+Billy Ray turns back to Pestoso, Van Leek walks toward Billy Ray -#- none look-at walk
+Pestoso continues stumbling -#- none none
+Van Leek finishes walking to Billy Ray, speaks to Billy Ray, Billy Ray looks at Van Leek, Van Leek looks at Pestoso, blows toward Pestosos -#- look-at walk none none
+Pestoso falls over -#- none fall die
+Van Leeks looks at Billy Ray, clicks tongue, Billy Ray nods, clicks tongue -#- none none
+Shane (Alan Ladd) walks to the bar structure -#- walk open
+Shane enters the bar structure -#- walk open look-at stare-at
+Jack Wilson (Jack Palance) sits at table looks at Shane -#- look-at stare-at
+Shane looks at Rufus Ryker (Emile Meyer) -#- stare-at look-at open
+Ryker and the bartender look at shane -#- stare-at stare-at
+Shane looks at two other bar patrons -#- look-at open
+The two bar patrons look at Shane -#- look-at
+Shane walks into bar, pauses, a bar patron walks, Shane looks at Wilson -#- open look-at walk walk look-at look-at
+Wilson moves kettle on table -#- none
+Shane continues walking, leans against bar -#- walk look-at none
+boy kneels next to dog just outside door to watch, looks at Wilson -#- none look-at look-at
+Shane addresses Ryker, Ryker responds -#- provoke de-escalate
+boy continues to watch -#- look-at look-at
+Shane continues leaning against bar, replies to Ryker, Ryker replies to Shane, Shane replies to Ryker -#- provoke de-escalate look-at
+The boy looks as Wilson, Ryker replies to Shane -#- look-at look-at de-escalate
+Wilson watches Shane, Shane replies to Ryker -#- look-at de-escalate
+Rifleman watches Shane from second floor, Ryker replies to Shane -#- provoke de-escalate wince
+Shane replies to Ryker, Ryker replies to Shane, Shane replies to Ryker -#- provoke de-escalate look-at
+The boy continues to watch, Ryker replies to Shane -#- look-at look-at de-escalate
+Wilson watches Shane, Ryker continues his reply -#- look-at de-escalate
+Ryker finishes his reply, Shane replies to Ryker, turns to and addresses Wilson -#- provoke de-escalate look-at provoke
+Wilson drinks, sets down cup, replies to Shane, stands, begins to walk around table -#- drop stare-at de-escalate stand-up walk
+Shane and Bartender watch Wilson -#- look-at stare-at walk look-at
+Wilson walks in front of table -#- walk
+Dog gets up and walks past Wilson -#- walk look-at stare-at walk square-off
+Shane continues to wach Wilson, Patron gets up, walks bar -#- stand-up walk stare-at look-at look-at
+Wilson speaks to Shane -#- de-escalate stare-at
+Shane replies to Wilson -#- stare-at provoke
+Wilson replies to Shane -#- de-escalate
+Ryker speaks to Shane -#- de-escalate stare-at look-at look-at
+Ryker speaks to bartender, Shane speaks to Wilson -#- look-at look-at look-at stare-at identify
+Wilson replies to Shane -#- de-escalate
+Shane replies to Wilson -#- provoke look-at stare-at
+Wilson replies to Shane -#- de-escalate
+Shane pushes off of bar, stands -#- square-off
+Wilson watches Shane -#- stare-at
+Shane replies to Wilson -#- square-off provoke
+boy looks at Wilson -#- look-at look-at
+Wilson smiles at Shane -#- stare-at none
+Shane watches Wilson -#- stare-at
+Wilson replies to Shane -#- assent
+Shane watches Wilson -#- stare-at
+Wilson draws his gun -#- draw
+Shane draws his gun and fires -#- draw fire
+Wilson fires and falls back against table -#- get-shot fire fall
+Ryker draws his gun, Shane turns to Ryker, fires his gun, Ryker fires, falls against wall -#- fire draw look-at fire fire get-shot
+Wilson fires and falls into barrels -#- fall fire die
+Rifleman watches Shane from second floor -#- none
+Shane walks toward Ryker -#- lower-gun walk
+Rifleman watches Shane from second floor -#- look-at
+Shane looks at Ryker -#- walk look-at
+Ryker lies against table, dead -#- die
+Shane turns around -#- look-at
+Bartender watches Shane -#- look-at
+Shane flips gun, holsters gun -#- holster-gun
+boy watches Shane -#- stare-at stare-at
+Shane walks toward door -#- walk
+Rifleman aims gun at Shane -#- aim
+boy sees man with gun -#- look-at look-at
+Rifleman aims gun at Shane -#- aim
+boy yells to Shane -#- look-at
+Shane turns around, draw gun, Rifleman fires gun, Shane crouches, fires gun -#- look-at draw fire fire none
+Rifleman stumbles back against wall -#- get-shot fall
+Shane looks up at rifleman -#- look-at
+Rifleman falls forward -#- fall
+Rifleman falls off second floor and through wooden beam -#- fall
+Rifleman falls onto first floor -#- fall
+boy watches man fall -#- stare-at stare-at
+Bartender watches Shane, Shane holsters guns, turns around -#- holster-gun look-at walk
+boy watches Shane -#- stare-at stare-at
+boy stands up, moves out of doorway -#- stand-up
+Shane stops, looks at Wilson -#- walk look-at
+Wilson lies dead among barrels -#- None
+Shane looks back at Rifleman and Ryker -#- look-at
+Rifeman and Ryker both lie dead, Shane turns around, walks bar structure -#- open walk
+Col. Douglas Mortimer (Lee Van Cleef) aims pistol -#- aim
+Nino (Mario Brega) runs out of building -#- open walk
+The Colonel turns and fires pistol -#- aim fire
+Nino falls in mid run, dies -#- walk get-shot drop-gun fall
+The Colonel moves out rom behind rock and runs toward building -#- walk look-at
+El Indio (Gian Maria Volonte) opens door of building, fires pistol -#- open fire
+The Colonel loses his pistol, stops running, looks at El Indio -#- walk drop-gun look-at
+El indio lowers pistol -#- stare-at lower-gun
+The Colonel watch El Indio -#- stare-at
+El Indio walks building, walks down stairs -#- stare-at walk
+The Colonel watch El Indio -#- stare-at
+El Indio walks toward the Colonel, the Colone watches El Indio -#- stare-at walk
+El Indio holsters pistol, holds out locket, speaks the the Colonel -#- walk holster-gun assent
+El Indio continues speaking, the Colonel watches El Indio -#- assent stare-at
+El Indio finishes speaking, opens locket, locket begins playing music -#- provoke
+Music continues playing, the Colonel looks downward -#- stare-at provoke look-at
+The Colonel's pistol lies on the ground -#- None
+The Colonel looks back at El Indio -#- look-at stare-at provoke
+El Indio slowly walks closer to the Colonel, looks down at locket -#- stare-at provoke none look-at
+El Indio stares at Locket, the Colonel watches El Indio, El Indio is in foreground, the Colonel in background -#- look-at look-at stare-at provoke
+The Colonel watches El Indio, the Colonel is in foreground, El Indio in background -#- stare-at stare-at provoke
+The Colonel continues to watch El Indio -#- stare-at provoke
+El Indio watches the Colonel -#- stare-at provoke
+The Colonel continues to watch El Indio -#- stare-at provoke
+El Indio continues to watch the Colonel -#- stare-at provoke
+The Colonel continues to watch El Indio, looks down at pistol -#- look-at provoke
+The Colonel's pistol lies on the ground -#- None
+The Colonel looks back at El Indio -#- look-at stare-at provoke
+El Indio's hand lies at his side -#- provoke
+El Indio continues to watch the Colonel -#- stare-at provoke
+El Indio's hand moves toward his pistol -#- give
+El Indio watches the Colonel, looks to the side, another locket begins playing music -#- stare-at provoke provoke look-at
+The Colonel looks to the side -#- look-at provoke provoke
+Both men look toward camera, Monco's (Clint Eastwood) hand appears, holding another locket -#- provoke provoke stare-at stare-at
+The Colonel reaches into vest pocket, pulls out chain -#- stare-at adjust-clothing provoke provoke
+Chain does not have locket on the end -#- adjust-clothing provoke provoke
+The Colonel looks back up at Monco -#- look-at provoke provoke
+Monco holds locket, watches El Indio -#- provoke provoke stare-at
+El Indio watches Monco, turns to look at the Colonel -#- look-at
+The Colonel watches Monco -#- stare-at
+Monco watches El Indio, begins walking  -#- look-at provoke provoke walk
+Monco walks toward duel ground -#- walk provoke provoke
+El Indio reaches for pistol -#- give stare-at
+Monco continues walking, aims rifle at El Indio, shakes head -#- aim square-off walk provoke provoke
+El Indio takes hand away from pistol -#- give stare-at
+Monco looks at the Colonel, glances at locket, speaks to the Colonel -#- aim look-at provoke provoke taunt
+The Colonel watches Monco -#- look-at
+Monco looks back at El Indio, walks toward the Colonel, El Indio watches Monco, closes locket -#- aim look-at provoke provoke walk look-at
+Monco backs up next to the Colonel -#- aim provoke walk look-at
+El Indio watches the Colonel and Monco -#- stare-at stare-at
+Monco takes off belt, holds belt out to the Colonel, speaks to the Colone, the Colonel removes own belt, takes the belt, puts belt on, Monco speaks to El Indio -#- aim adjust-clothing adjust-clothing give adjust-clothing adjust-clothing assent assent walk
+The Colonel finishes putting on the belt, Monco walks to edge of duel ground, begins sitting down -#- walk adjust-clothing adjust-clothing stare-at stare-at none aim
+Monco finishes sitting down -#- none aim look-at look-at look-at look-at
+El Indio watches the Colonel -#- stare-at
+The Colonel watches El Indio -#- stare-at
+The Colonel continues watching El Indio -#- stare-at
+El Indio continues watching the Colonel -#- stare-at
+The Colonel continues watching El Indio -#- stare-at
+El Indio continues watching the Colonel -#- stare-at
+Monco watches El Indio, looks at locket -#- look-at
+Locket music slows -#- look-at provoke
+Monco looks back up at El Indio -#- look-at provoke
+The Colonel and El Indio face each other -#- stare-at stare-at provoke
+The Colonel and El Indio face each other, the Colonel is in the foreground, El Indio is in the background -#- provoke stare-at stare-at
+The Colonel watches El Indio -#- stare-at provoke
+Monco looks from the Colonel to El Indio -#- provoke look-at
+El Indio watches the Colonel -#- provoke stare-at
+The Colonel watches El Indio -#- provoke stare-at
+El Indio watches the Colonel -#- provoke stare-at
+El Indio's hand moves toward pistol -#- give provoke
+El Indio watches the Colonel -#- provoke stare-at
+El Indio's hand moves toward pistol -#- give provoke
+The Colonel watches El Indio -#- provoke stare-at
+Monco looks at the Colonel, looks at El Indio -#- look-at look-at
+El Indio draws his pistol -#- draw provoke
+The Colonel draws his pistol, fires -#- draw draw fire fire fire
+El Indio his hit, falls back onto ground -#- get-shot fall
+El Indio finishes falling -#- fall
+Monco watches El Indio -#- stare-at
+El Indio crawls backward, leans against rock, aims pistol -#- aim
+Monco watches El Indio -#- stare-at
+The Colonel pulls the pistol hammer back -#- cock
+El Indio aims gun at the Colonel, dies -#- aim die
+The Colonel watches El Indio -#- stare-at
+Monco spits, looks at the Colonel, speaks to the Colonel -#- look-at taunt
+The Colonel looks at Monco -#- look-at
+The Colonel holsters Monco's pistol -#- look-at holster-gun
+Monco watches the Colonel -#- stare-at
+The Colonel walks toward El Indio -#- walk
+Monco watches the Colonel -#- stare-at
+J.D. Ward (Pernell Roberts) walks with henchmen to Alonzo (J.A. Preston), speaks to Alonzo, holds out arm, looks away -#- walk walk ask-for look-at none
+Alonzo drops reigns, walks to rifle case on horse, opens rifle case, pulls out rifle -#- stare-at open draw close look-at look-at
+Will Kane (Lee Majors) exits building, walks to edge of porch -#- walk
+Alonzo looks at Will, speaks to Ward -#- taunt
+Alonzo conitnues speaking to Ward, takes rifle by the barrel, throws rifle -#- taunt drop-gun look-at
+Rifle lands on ground -#- drop-gun
+Ward looks at Alonzo, speaks to Alonzo -#- look-at provoke
+Alonzo replies to Ward, points to Will -#- taunt identify
+Ward looks at Will -#- look-at
+Wil watches Ward, steps off porch, walks out into street -#- walk walk square-off
+Ward looks at rifle -#- look-at
+Rifle is still on the ground -#- None
+Ward walks toward rifle, looks at Will, speaks to Will -#- walk de-escalate
+Will replies to Ward -#- provoke
+Ward continues walking toward rifle, glances right -#- walk
+Will continues replying to Ward -#- stare-at assent
+Ward finishes walking toward rifle, replies to Will -#- walk de-escalate square-off
+Will watches Ward -#- stare-at
+Onlookers watch both men -#- look-at look-at
+Onlookers watch both men -#- look-at look-at
+Henchmen and Alonzo watch both men -#- side-step look-at look-at look-at look-at
+Ward holds out hand, speaks to Will -#- assent
+Will reaches into coat -#- adjust-clothing
+Ward draws gun -#- draw
+Kane draw gun from coat, fires gun -#- draw fire
+Ward fires gun, gets hit by bullet, bends over -#- fire get-shot lower-gun fall
+Ward drops gun, falls to knees, crawls to rifle, grabs rifle, stands up, pulls hammer on rifle back, turns toward Will, Will fires gun, Ward drops rifle, falls over, dies -#- drop-gun fall give stand-up face-at cock fire drop-gun fall die
+Will watches Ward's body, Amy Kane (Katherine Cannon) exits building, Will holsters gun -#- look-at cock walk holster-gun
+Ward lies dead on ground -#- die
+Alonzo leans against pole, turns head away -#- none look-at
+Will puts arm around Amy, holds Amy -#- none
+Will continues holding Amy -#- none walk
+Train slows to a stop, thugA walks along sidetrain, thugB watches train -#- none
+thugA turns and looks at thugB -#- look-at
+thugB looks across train -#- look-at
+Train door opens -#- open
+thugA jerks head towards door -#- look-at
+Door continues to open, thugA reaches for gun -#- give
+thugB looks at door -#- look-at
+Train worker tosses package out of train -#- carry-from-to
+thugC keeps hand on gun -#- give
+thugC watches train -#- stare-at
+Train worker closes train door -#- close look-at look-at
+thugA looks at thugB -#- look-at
+thugB smiles and looks at the passenger car -#- look-at
+thugB keeps hand on gun -#- give
+thugB looks back at thugA, nods head away from train, looks at thugC, nods head away from train, turns around -#- look-at walk walk walk
+thugC steps down from spot, walks toward thugB, whistle blows, thugA walks toward thugB, thugB walks awat from train, stops turns around, all three turn, walk toward horses, Harmonica music starts -#- walk walk walk provoke provoke provoke
+All thugs stop, turn around, thugA looks at thugB, thugB nods, Harmonica (Charles Bronson) plays Harmonica -#- walk walk walk provoke provoke provoke adjust-clothing look-at look-at look-at look-at look-at look-at
+Harmonica continues playing, looks at thugs -#- provoke provoke provoke stare-at stare-at stare-at
+Thugs watch Harmonica, Harmonica continues playing, continues watching thugs -#- provoke provoke provoke stare-at stare-at stare-at
+thugB continues watching Harmonica -#- provoke provoke provoke stare-at stare-at stare-at
+Harmonica finishes playing, lowers Harmonica, speaks to thugB -#- provoke provoke provoke stare-at stare-at stare-at adjust-clothing identify
+thugBs shakes head, replies to Harmonica -#- stare-at stare-at stare-at identify identify identify
+Harmonica speaks to thugB -#- look-at look-at look-at ask-for
+thugA smiles, looks at thugB -#- look-at
+thugBs looks back at horses, replies to Harmonica -#- look-at taunt
+Thugs laugh, Harmonica watches thugs, shakes head, replies to thugB -#- provoke stare-at stare-at stare-at provoke provoke provoke
+thugA stops smiling -#- stare-at stare-at stare-at
+thugB continues watching Harmonica -#- stare-at stare-at stare-at
+All men stare at each other -#- stare-at stare-at stare-at stare-at stare-at stare-at
+Harmonica stares at thugB -#- stare-at stare-at stare-at
+thugB reaches for gun -#- stare-at stare-at stare-at draw
+Harmonica draws gun, shoots, thugB and thugC fall back -#- draw fire get-shot fire get-shot fire get-shot fall fall draw
+thugA fires gun -#- fire
+Harmonica spins back, falls over -#- get-shot fall
+thugA falls back -#- fall fall die die
+Doc Holiday (Val Kilmer) walks from between 2 trees into a clearing -#- walk
+Johnny Ringo (Michael Biehn) notices Doc and greets him, thinking he's Wyatt Earp -#- look-at taunt
+Johnny Ringo pushes off his tree and begins to approach Doc -#- walk
+Johnny continues to approach Doc and speaks to him -#- taunt walk
+Doc continues to approach Johnny and speaks, revealing who he is -#- identify walk
+Johnny stops approaching Doc -#- identify walk
+Doc continues to approach johnny and speaks to him -#- provoke walk
+Johhny replies to Doc, not intending to fight him -#- square-off
+Doc replies for Johnny, persisting on the fight -#- provoke
+Johnny replies to Doc, continuing to refuse -#- square-off
+Doc replies, still persisting -#- provoke
+Johnny stares at Doc -#- stare-at provoke
+Doc reaches to move his coat aside -#- stare-at
+Doc continues his reply and moves his coat to show his badge -#- adjust-clothing reveal provoke
+Johnny continues starting at Doc -#- look-at
+Doc stares at Johnny -#- stare-at
+Johnny replies to Doc, smiling and consenting to the duel -#- assent
+Doc begins circling Johnny -#- walk
+Doc and Johnny circle each other -#- walk walk
+The two continue circling, Johnny in background, Doc in foreground -#- walk walk
+The two continue circling, Doc in background, Johnny in foreground -#- walk walk
+The two stop circling, Johnny in background, Doc in foreground -#- walk walk
+Doc stands and watches Johnny -#- walk
+Both men watch one another, Doc in foreground, Johnny in background -#- square-off
+Doc continues to watch Johnny -#- stare-at
+Johnny continues to watch Doc -#- stare-at
+Docs eyes are shown close up and he speaks to Johnny -#- provoke
+The two men are shown, staring at each other -#- stare-at stare-at
+Johnny continues to watch Doc -#- stare-at
+Johnny's hand slowly slides toward his gun -#- draw
+Doc's mouth is shown, smirking -#- none
+Doc taps the handle of his gun -#- adjust-clothing
+Docs eyes are shown close up -#- stare-at
+Johnny's eyes are shown close up -#- stare-at
+Johnny grabs his gun, pulls back the hammer, and draws -#- draw
+Johnny begins to point his gun, Doc draws his gun -#- draw
+Doc fires his gun -#- fire
+Johnny's head jerks back from the shot -#- get-shot
+Johnny stumbles back a step from the shot -#- none
+Doc holsters his gun -#- holster-gun
+Doc provokes the dying Johnny and backs up, Johnny moves toward him -#- taunt none walk
+Doc continues to provoke Johnny -#- taunt walk
+Johnny continues stumbling forward -#- none
+Johnny fires his gun at the ground -#- fire
+Johnny continues stumbling forward -#- none
+Doc taunts Johnny -#- taunt walk
+Johnny falls forward against a tree and dies -#- taunt fall die
+Doc kneels down to Johnny, speaks to him, removes badge from his shirt and puts it on the corpse, then hears movement and turns, reaching for his gun -#- taunt drop look-at draw
+Wyatt Earp (Kurt Russell) runs toward the scene of the duel -#- run
+Wyatt looks at Doc and the corpse of Johnny Ringo -#- look-at walk
+Doc turns back to Johnny and stands up, Wyatt joins him and Doc speaks to Wyatt -#- de-escalate walk
+Wyatt looks at Doc -#- look-at
+Payden (Kevin Kline) walks down street  -#- walk
+Payden crosses street and turns corner -#- walk walk walk look-at
+Cobb (Brian Dennehy) sits on rocker then stands up -#- none look-at stare-at stand-up
+Payden continues walking down street -#- walk stare-at
+Cobb walks down steps onto street -#- stare-at look-at walk walk look-at
+Payden continues walking down street -#- walk
+Cobb walks towards middle of street and stops -#- walk
+Payden continues walkding down street and stops -#- walk
+Stella (Linda Hunt) approaches street from alley -#- walk look-at look-at
+Payden and Cobb square off while Stella is in background -#- square-off
+Cobb initiates dialog -#- none
+Payden replies -#- none
+Stella looks on from porch -#- look-at
+Cobb adjusts clothing -#- adjust-clothing
+Payden initiates dialog -#- assent
+Cobb replies -#- assent
+Duel begins with Payden's gun in foreground, Cobb in background -#- stare-at
+Alternate shot with Cobb's gun in foregroud, Payden in background -#- stare-at
+Duel transpires (repeat of shot10) -#- draw draw fire fire
+Cobb falls and dies -#- fall die
+Stella reacts to duel outcome -#- look-at
+Payden stares at Cobb's corpse -#- stare-at
+Payden holsters gun -#- holster-gun
+Payden continues to look onto Cobb's corpse -#- stare-at
+Spotted Horse (Jonothon Gill) draws war paint on face with finger, speaks -#- adjust-clothing taunt
+Cort (Russell Crowe) loads bullet into pistol, tests pistol hammer, aims pistol at ground, flips pistol sevral times, holsters pistol, removes coat -#- load-gun cock look-at holster-gun square-off adjust-clothing
+Cort throws his coat aside, rolls up left sleeve, rolls up right sleeve, adjusts vest collar, adjusts belt -#- adjust-clothing adjust-clothing
+Herod (Gene Hackman) looks from Cort to Spotted Horse -#- look-at
+Spotted Horse watches Cort -#- stare-at
+Spotted Horse and Cort face each other -#- square-off stare-at
+Cort watches Spotted Horse -#- stare-at
+Spotted Horse Watches Cort -#- stare-at
+Cort watches Spotted Horse -#- stare-at
+Spotted Horse Watches Cort -#- stare-at
+Cort watches Spotted Horse -#- stare-at
+Guard stands on clock tower, clock doesn't move -#- stare-at
+Spotted Horse reaches for gun -#- adjust-clothing stare-at
+Cort watches Spotted Horse -#- stare-at
+Clock does not move -#- None
+Spotted Horse watches Cort -#- stare-at
+Cort watches Spotted Horse -#- stare-at
+Clock does not move -#- None
+Spotted Horse watches Cort -#- stare-at
+Cort watches Spotted Horse -#- stare-at
+Clock hand moves to 12,  -#- none
+Ellen (Sharon Stone) rides horse away from town, gun shot goes off, Ellen stops, turns head back -#- walk fire face-at look-at stare-at
+Ellen looks at the town -#- stare-at
+Ellen turns horse and continues riding away from town -#- stare-at walk
+Cort stands on street, Spotted Horse lies on the ground, Doc Wallace (Roberts Blossom) walks into street, looks at Spotted Horse, speaks to crowd -#- walk none stare-at
+Cort holsters pistol, crowd enters street, cort turns around to walk, stops, looks back -#- holster-gun walk face-at face-at look-at
+Spotted Horse lifts head off ground -#- stand-up stand-up
+Crowd runs out of street, Cort draw pistol, opens chamber, Spotted Horse speaks -#- look-at draw taunt look-at
+Spotted Horse stands up, continues speaking -#- look-at stand-up
+Cort speaks to Herod -#- ask-for
+Herod replies to Cort -#- fire
+Spotted Horse straightens, aims pistol at Cort -#- stand-up aim
+Cort watches Spotted Horse -#- stare-at
+Spotted Horse pulls back pistol hammer, fires pistol -#- cock aim fire
+Cort flinches/dodges, holds out hand, speaks to Herod -#- wince ask-for
+Herod shakes head, shrugs -#- none
+Spotted Horse fires pistol, Cort looks around, speaks to crowd -#- fire ask-for stare-at
+Blind boy (Jerry Swindall) searches box of bullets -#- none
+Cort looks at blind boy -#- look-at
+Blind boy contines searching box, Cort speaks to blind boy -#- none ask-for
+Blind boy continues searching box -#- none
+Blind boy stares intently, Herod speaks to Cort -#- none taunt
+Herod continues speaking -#- taunt
+Spotted Horse fires pistol -#- fire
+Lamp falls from wire, Cort flinches -#- wince
+Herod speaks to Cort -#- taunt
+Spotted Horse pulls back pistol hammer -#- cock aim
+Cort looks at blind boy, speaks to blind boy, Spotted horse fires pistol -#- fire ask-for
+Blind boy picks up bullet -#- none
+Blind boy takes bullet out of box, turns around -#- none help-up
+Spotted Horse fires pistol -#- fire
+Rope behind cort snaps, Cort looks at blind boy, speaks to blind boy -#- ask-for
+Blind Boy turns around, throws bullet to Cort -#- give
+Bullet flies through the air -#- give
+Cort looks up, jumps -#- look-at none
+Bullet continues to fly through the air -#- give
+Spotted Horse takes pistol in both hands -#- aim
+Cort catches bullet -#- give
+Cort lands on the ground -#- none look-at
+Cort slides bullet into chamber, closes chamber -#- load-gun
+Spotted Horse pulls pistol hammer back -#- cock aim
+Cort looks at Spotted Horse -#- look-at
+Spotted Horse it shot in the head -#- fire get-shot
+Spotted Horse falls back, stands in road -#- fall
+Cort watches Spotted Horse -#- stare-at
+Crowd approaches Spotted Horse ,Spotted Horse raises arm and pistol -#- walk raise-gun
+Cort backs away, watches Spotted Horse -#- stare-at
+Spotted Horse's arm falls back down -#- lower-gun die
+Herod looks at Cort, stands up -#- look-at walk
+Ratsy (Raynor Schiene) speaks to Cort, puts shackles on Cort's wrists -#- adjust-clothing taunt
+Herod walks to Cor, claps, speaks to crowd, crowd claps, Herod puts hand on Corts shoulder, speaks to Cort, tears off Cort's priest collar, tosses collar -#- cheer none cheer adjust-clothing taunt
+John Simpson Chisum (James Coburn) stands on porch, hands cloth to guard, walks down stairs -#- give walk
+Billy the Kid's gang rides toward Chisum, narrator speaks -#- walk walk walk walk walk
+Narrator finishes speaking, Chisum finishes walking, speaks to Billy the Kid (Emilio Estevez) -#- taunt walk walk walk walk walk
+Chisum continues speaking, gang stops in front of Chisum -#- taunt walk walk walk walk walk
+Chisum finishes speaking -#- taunt
+Billy replies to Chisum -#- provoke provoke
+Jose Chavez y Chavez (Lou Diamond Phillips) watches Chisum, Billy continues speaking -#- stare-at provoke
+Billy unfolds paper, continues speaking -#- look-at
+Billy finishes speaking, Chisum watches Billy, looks away, looks back at Billy, smiles at Billy, replies to Billy -#- look-at stare-at provoke
+Billy replies to Chisum -#- provoke
+Chisum replies to Billy, steps toward Billy -#- provoke none
+Billy watches Chisum -#- provoke stare-at
+Chisum continues speaking, thugs appear in background -#- provoke
+Arkansas Dave Rudabaugh (Christian Slater) replies to Chisum, looks back, looks back at Chisum -#- none
+Chisum watches the gang Josiah Gordon 'Doc' Scurlock speaks to Chisum -#- look-at de-escalate
+Doc continues speaking -#- de-escalate
+Doc continues speaking, Chisum watches the gang -#- de-escalate stare-at
+Doc finishes speaking -#- de-escalate
+Chisum replies to Doc, speaks to gang -#- taunt provoke provoke provoke provoke
+Hendry William French (Alan Ruck) replies to Chisum -#- provoke provoke provoke provoke provoke look-at look-at
+Chisum watches Hendry -#- stare-at
+Hendry speaks to Chisum, points at Chisum -#- identify provoke
+Thugs approach Chisum and the gang, Hendry continues speaking -#- walk walk look-at look-at look-at look-at look-at look-at look-at look-at look-at look-at look-at look-at look-at look-at look-at look-at look-at look-at look-at look-at provoke
+Hendry finishes replying -#- provoke
+Thug A speaks to Chisum, Chisum turns around -#- none face-at
+Chisum replies to Thug A, walks toward Thug A, turns back to gang, turns back to Thug A, Billy speaks to Thugs -#- de-escalate walk look-at look-at look-at look-at look-at provoke provoke face-at
+Billy draws gun, aims gun at Thug A, speaks to Thug A -#- draw cock aim provoke provoke
+Thug A watches Billy, Billy speaks to Chisum -#- stare-at provoke provoke
+Dave pulls out shot gun, Billy continues speaking -#- provoke provoke draw aim aim
+Chisum replies to Billy -#- de-escalate
+Thug B replies to Billy -#- assent assent
+Thug A turns head to Thug B, Billy speaks to Thug A, Thug A looks at Billy -#- look-at drop-gun
+Billy continues speaking, Chisum speaks to Billy -#- drop-gun de-escalate aim
+Thug A unbuckles belt, Billy speaks to Thug A, thug A drops belt on the ground, Billy speaks to Thug A -#- drop-gun none adjust-clothing drop-gun
+Billy holsters gun, dismounts horse, throws reigns over horse, walks to duel position, speaks to Chisum -#- aim holster-gun dismount provoke walk
+Chisum watches Billy, turns head to Thug B, Billy continues speaking -#- look-at provoke
+Thug B watches Billy, Billy continues speaking -#- stare-at provoke
+Thug B's hand moves up holster toward gun, Billy continues speaking -#- adjust-clothing provoke
+Billy continues speaking, takes off belt, walks forward, drops belt on ground, walks back, finishes speaking -#- provoke adjust-clothing none drop-gun side-step
+Thug B watches Billy -#- look-at
+Billy speaks to Thug B, spits into hands, rubs hands together -#- assent adjust-clothing
+Thug B flips leather guard off gun hammer -#- adjust-clothing
+Billy speaks to Thug B -#- assent
+Thug B replies to Billy -#- assent
+Billy speaks to Dave -#- fire
+Dave fires shotgun -#- fire
+Thug B falls back, dies -#- get-shot fall die
+Gang's horses move about, Chisum looks at Thug B, Billy crosses arms -#- look-at
+Chisum speaks to himself -#- wince
+Billy speaks to Chisum -#- taunt
+Thug A watches Billy -#- stare-at
+Dave looks at Thug A -#- look-at
+Thug A runs toward gun -#- stare-at walk none
+Billy speaks to Hendry -#- fire
+Hendry tries to pull put rifle, rifle gets stuck -#- draw
+Thug A pulls leather guard off pistol, Hendry exclaims -#- draw
+Billy glances at Hendry, looks back at Thug A -#- wince look-at
+Hendry tries to draw pistol -#- draw draw
+Dave shakes head, Billy speaks to Hendry -#- look-at fire
+Thug A pulls out pistol -#- draw
+Billy watches Thug A -#- stare-at stare-at
+Thug A looks up at Billy, aims pistol at Billy -#- look-at raise-gun
+Rifle fires -#- fire
+Rifle fires (barrel shown) -#- fire
+Thug A is hit -#- get-shot fall
+Thug A falls back, dies, camera pans, Doc is shown aiming rifle -#- fall die raise-gun
+Billy looks at Doc -#- look-at
+Doc looks at Billy, then at Chisum -#- look-at look-at
+Chisum watches Doc, Billy speaks to Chisum, Chisum speaks to Billy -#- taunt provoke
+Doc throws rifle on ground, turns horse -#- drop-gun
+Doc rides away -#- walk
+Rufus Hannassey (Burl Ives) loads two guns for a duel, James Mckay (Gregory Peck) and Buck Hannassey (Chuck Connors) stare eachother down. Rufus walks toward Buck and James, speaks to crowd, speaks to Buck and James, holds both guns out the James, James speaks to Buck, Buck takes a gun, Rufus gives gun to James, speaks to James and Buck, puts a hand of both and turns them back to back.  Buck fiddles with gun, Rufus speaks to Buck, turns around, speaks to crowd, walks back to wagon, Buck speaks to James, Rufus speaks to James and Buck -#- load-gun give load-gun give stare-at stare-at none walk walk assent assent de-escalate give give none none face-at face-at provoke walk walk none
+Rufus continues to speak to James and Buck, Jean Simmons (Julie Maragon) watches both men, closes her eyes -#- assent assent stare-at stare-at
+Rufus continues to speak to James and Buck, both men walk forward ten paces -#- assent assent walk walk
+Jean opens her eyes again and watches both men -#- look-at look-at
+Rufus speaks to James and Buck, both turn around, pull back hammers -#- assent assent fire fire fire fire face-at face-at cock
+Buck stands and watches James -#- stare-at
+James watches Buck -#- stare-at
+Rufus speaks to James and Buck, Jean watches both men -#- stare-at stare-at fire fire fire fire
+Buck aims his gun -#- aim
+James aims his gun -#- aim
+Rufus looks at James, then at Buck -#- look-at
+Buck fires -#- fire
+James jerks back -#- get-shot
+Rufus looks at Buck, moves in his seat -#- fire fire fire fire look-at
+Jean continues watching -#- look-at
+James recovers, touches wound on head -#- look-at
+Jean sighs -#- stare-at stare-at stare-at
+Rufus speaks to Buck, James looks at Buck, speaks to Rufus, Rufus looks at James -#- look-at provoke de-escalate
+James speaks to Rufus -#- de-escalate
+Buck tries to shoot James, looks at gun, looks at James -#- aim look-at look-at
+Rufus looks at James, speaks to James -#- look-at fire
+James watches Buck -#- stare-at
+Buck watches James -#- stare-at
+James watches Buck -#- stare-at
+James aims his gun -#- raise-gun
+James continues aiming his gun -#- aim
+Buck looks at Rufus -#- look-at
+Rufus looks at Buck -#- stare-at
+Buck looks at James -#- look-at
+James continues aiming his gun -#- aim
+James opens his left eye -#- aim
+Buck watches James, shows vsible fear -#- none wince
+Buck crouches down and cowers -#- none wince
+Rufus watches Buck -#- stare-at wince
+Buck stands up and runs -#- none
+Buck falls behind wagon wheel -#- none wince
+James lowers gun -#- aim lower-gun
+Rufus speaks to James, looks at ground -#- look-at fire
+James looks at Rufus -#- look-at
+James looks at gun, fires at ground, throws gun on ground -#- look-at aim fire drop-gun
+James looks at Rufus -#- look-at
+Rufus looks at James -#- look-at
+Rufus climbs down from wagon, walks to Buck, James walks duel position -#- none walk walk
+Rufus looks at Buck, spits on Buck -#- walk wince look-at none
+Buck flinches, Rufus walks away, Buck looks at James -#- none wince walk wince look-at look-at
+James stands with Jean -#- none walk walk
+Buck turns around, looks at man with gun, lunges at man with gun -#- look-at look-at stand-up walk draw
+Rufus sees Buck, speaks to Buck -#- walk provoke
+James and Jean look at Buck -#- look-at look-at
+Buck struggles with man with gun, takes gun, throws man aside, aims gun at James -#- draw provoke
+Rufus draws his gun, fires -#- draw fire
+Buck jerks back -#- get-shot fall
+Buck falls onto side of watter barrel -#- fall
+James and Jean watch Buck -#- stare-at stare-at
+Buck drops gun in water -#- drop-gun
+Rufus walks to Buck -#- walk
+Buck looks at Rufus, tries to move toward him -#- look-at none look-at wince walk
+Rufus watches Buck -#- walk look-at
+Buck continues moving toward Rufus -#- walk
+Rufus speaks to Buck, Buck continues moving toward Rufus, reaches out to Rufus, falls against wagon wheel, Rufus takes his shoulders, Buck falls limp, dies -#- walk de-escalate fall none none die
+James and Jean watch Rufus and Buck -#- stare-at stare-at
+Rufus holds Buck, lowers head -#- none
+Ranse (Stewart) approaches Liberty (Marvin) out in the street -#- walk stare-at none
+Liberty begins provoking Ranse -#- none adjust-clothing walk
+Ranse continues approaching Liberty -#- walk stare-at
+Liberty commands Ranse emerge from the shadows -#- walk
+Ranse walks into a lit area. -#- walk stare-at
+Liberty draws his gun & fires -#- draw fire
+The bullet strikes the hanging pot next to Ranse, jarring him -#- wince look-at provoke
+Liberty laughs at Ranse -#- provoke lower-gun
+Ranse stands his ground -#- walk stare-at square-off
+Liberty stares down Ranse -#- stare-at
+Liberty fires another round -#- fire
+Liberty fires another round -#- fire
+The bullet strikes Ranse's arm, causing him to drop his gun -#- get-shot drop-gun stare-at
+Liberty continues laughing at Ranse -#- provoke lower-gun
+Ranse begins to approach his fallen pistol -#- stare-at walk
+Liberty looks at Ranse -#- stare-at
+Ranse slowly approaches his gun, while Liberty provokes him -#- stare-at walk taunt none draw fire
+Liberty shoots the ground near Ranse's gun -#- none draw
+Ranse successfully picks up his gun and resumes approaching Liberty -#- none draw give stand-up walk square-off
+Liberty announces his next shot will kill Ranse -#- raise-gun cock taunt aim
+Both men fire, and Liberty falls to the street & dies. The crowd swarms Liberty's body. -#- raise-gun fire fire fall-from-to die open none walk run
+Ranse walks away from the scene while clutching his bloody arm. -#- run walk
+Abe Cross (Johnny Cash) and Will Tenneray (Kirk Douglas) stand together and smile for a picture -#- none none
+The photographer takes the picture, the young gunfighter (Keith Carradine) walks up to the front of the bar structure and speaks to the crowd -#- none walk walk none none
+The crowd looks at the man, a citizen replies to the gunfighter and points out Abe and Will -#- identify identify
+The young gunfighter speaks to Abe and Will, tips hat -#- adjust-clothing none none
+Abe and Will nod in acknowledgement -#- none none
+The young gunfighter speaks to Abe and Will -#- adjust-clothing assent assent
+Will looks at the young gunfighter -#- stare-at
+Nora Tenneray (Jane Alexander)  and Bud Tenneray (Eric Douglas) enter the area -#- walk walk
+Abe looks at the young gunfighter -#- look-at
+The young gunfighter speaks to Abe and Will -#- walk assent assent
+The crowd move away from the area -#- walk stare-at stare-at
+Marshal Tom Cater (Robert J. Wilke) walks toward the scene -#- walk walk walk
+The crowd continues clearing out -#- walk
+The crowd continues clearing out -#- walk
+Nora and Bud watch the men -#- look-at look-at
+Abe and Will watch the young gunfighter -#- walk stare-at stare-at
+The Reporter speaks to the photographer, photograhper sets up camera, the reporter speaks to the crowd -#- walk none
+Tom watches the men -#- walk walk look-at look-at
+Abe and Will and the young gunfighter stare at eachother -#- None
+Abe speaks to the young gunfighter -#- stare-at de-escalate
+The young gunfighter looks at Abe -#- look-at
+Abe continues speaking -#- de-escalate stare-at
+The young gunfighter replies -#- assent assent
+Will replies to the young gunfighter -#- de-escalate
+The young gunfighter replies to Will -#- assent assent
+Tom speaks to all three -#- walk walk de-escalate
+Abe and Will look at Tom -#- look-at look-at
+Tom turns, speaks to the young gunfighter -#- look-at look-at de-escalate
+The young gunfighter replies to Tom -#- look-at de-escalate
+Tom watches the young gunfighter -#- look-at
+Abe and Will watch the young gunfighter -#- look-at look-at
+The young gunfighter speaks to Tom -#- de-escalate
+Tom replies to the young gunfighter -#- provoke
+The young gunfighter watches Tom -#- stare-at
+Will speaks to Tom, Tom turns to Will, walks toward Will, replies to Will, points toward young gunfighter -#- de-escalate provoke provoke
+Tom continues reply to Will -#- provoke provoke
+Tom turns to young gunfighter, speaks to young gunfighter -#- look-at look-at provoke
+The young gunfighter watches Tom -#- stare-at
+Tom speaks to the young gunfighter,walks toward young gunfighter, the young gunfighter replies to Tom -#- provoke walk walk square-off
+Young gunfighter continues to reply to Tom -#- square-off
+Tom replies to the young gunfighter, walks toward young gunfighter, the young gunfighter draws gun, fires -#- provoke walk walk draw fire
+Tom jersk back, falls backward, Abe and Will run down from porch -#- get-shot fall none none walk walk
+Bar owner runs out of bar -#- none
+Nora looks at Bud, looks back at men -#- look-at look-at
+Crowd moves forward -#- none
+Abe Will and citizen help Tom up off the ground, Abe and two other citizens help him walk, Tom speaks to crowd, Will looks at young gunfighter -#- help-up help-up none none none stare-at
+Young gunfighter watches Will -#- raise-gun
+Will watches the young gunfighter -#- stare-at
+Young gunfighter watches Will -#- raise-gun
+Citizen speaks to other citizens, pulls them away -#- walk
+Will watches the young gunfighter -#- stare-at
+The young gunfighter speaks to Will -#- stare-at de-escalate
+Will watches the young gunfighter -#- stare-at
+Abe helps Tom walk, lets go of Tom, turns back, walks toward scene -#- none none look-at look-at
+Young gunfighter holsters gun -#- holster-gun
+Will watches the young gunfighter -#- stare-at
+The young gunfighter continues speaking -#- assent
+Will replies to the young gunfighter -#- assent
+Young gunfighter watches Will -#- stare-at
+Nora and Bud watch the men -#- look-at look-at look-at look-at
+Abe looks at Will -#- look-at
+Will watches the young gunfighter -#- stare-at
+The young gunfighter draws his gun -#- stare-at draw
+Will draws his gun, fires -#- draw fire
+The young gunfighter falls backward, dead -#- get-shot fall
+Will watches the young gunfighter -#- look-at
+Nora and Bud turn around to look at Will -#- none none
+The young gunfighter lies on the ground -#- die
+Will looks at Abe -#- look-at
+Abe looks away from Will -#- look-at
+Will looks at young gunfighter, toses gun up -#- raise-gun
+The young gunfighter lies on the ground -#- None
+Abe looks at Will -#- look-at
+Will holsters gun, citizens walk to Will, shake Will's hand, Will walks to duel scene -#- holster-gun none walk
+Abe turns around, walks away -#- look-at walk
+Thug walks through barn, rope is thrown around thug's neck -#- walk none none
+Thug grabs neck, fires gun, falls -#- none fire fall
+Rope is tied to horse, horse runs out of barm, thug is dragged with horse -#- none none look-at
+Horse and thug go toward Stockburn (John Russell) -#- none
+Horse and thug go past Stockburn, Stockburn turns to watch them go -#- none look-at
+The Preacher (Clint Eastwood) steps toward hat, bends down, picks hat up -#- walk none pick-up stand-up look-at
+Stockburn watches thug and horse, turns head to the Preacher brushes off hat -#- adjust-clothing look-at look-at
+Stockburn finishes turning head to the Preacher, looks at The Preacher -#- look-at
+The Preacher puts hat on -#- adjust-clothing
+Stockburn turns body toward the Preacher -#- square-off
+The Preacher adjusts hat, watches Stockburn, turns body toward Stockburn -#- adjust-clothing square-off
+Stockburn removes hands from pockets, moves coat to reveal gun -#- reveal
+The Preacher walks toward Stockburn -#- walk
+Stockburn watches the Preacher -#- stare-at
+The Preacher continues waking toward Stockburn -#- walk load-gun
+The Preacher continues waking toward Stockburn -#- walk
+The Preacher opens gun chamber, reaches for bullet on belt -#- load-gun walk
+Stockburn watches the Preacher -#- stare-at
+The Preacher puts bullet in gun, continues walking toward Stockburn -#- load-gun walk
+The Preacher watches Stockburn -#- stare-at walk
+The Preacher continues loading gun, contiues walking toward Stockburn, woman exits house, runs off screen -#- load-gun walk walk
+Stockburn watches the Preacher -#- stare-at
+Coy LaHood (Richard Dystart) watches the Preacher from inside building -#- look-at walk
+The Preacher continues waking toward Stockburn -#- walk stare-at
+The Preacher nears Stockburn, Stockburn watches the Preacher -#- walk
+The Preacher puts gun in holster, continues walking -#- walk holster-gun
+Stockburn continues watching, the Preacher continues walking -#- walk
+The Preacher stops walking -#- walk
+Stockburns watches the Preacher -#- stare-at
+The Preacher watches Stockburn -#- stare-at
+Stockburn speaks to the Preacher -#- identify
+The Preacher watches Stockburn -#- stare-at
+Stockburn attempts to draw gun -#- draw
+The Preacher draws gun -#- draw aim
+Stockburn pauses -#- draw aim
+The Preacher aims gun at Stockburn -#- aim
+Stockburn speaks to the Preacher -#- identify
+The Preacher watches Stockburn -#- stare-at
+Stockburn attempts to draw gun -#- draw
+The Preacher fires gun -#- fire
+The Preacher continues to fire gun -#- fire
+The Preacher continues to fire gun -#- fire
+Stockburn flinches, the Preacher continues to fire gun -#- get-shot
+The Preacher finishes firing his gun, Stockburn sinks to his knees. -#- get-shot fire fall
+Stockburn bends over, loses hat -#- fall
+The Preacher draws a second gun -#- draw
+Stockburn draws gun -#- draw
+The Preacher watches Stockburn -#- look-at
+Stockburn looks up at the Preacher -#- look-at
+The Preacher aims gun at Stockburn -#- aim fire
+The Preacher fires gun, Stockburn falls forward, dies -#- fire get-shot fall die
+The preacher watches Stockburn's corpse -#- look-at
+LaHood walks to window with rifle, aims at the Preacher -#- walk look-at aim
+Hull Baret (Michael Moriarty) kicks in door -#- none
+LaHood turns to look at Baret -#- look-at
+Baret steps toward LaHood, aims rifle -#- walk aim
+LaHood aims rifle -#- aim look-at
+Baret fires rifle -#- fire
+LaHood falls backward -#- get-shot
+The Preacher looks toward building -#- look-at look-at
+LaHood falls backward, breaks window -#- fall
+LaHood continues breaking window, dies -#- fall
+The Preacher watches LaHood's corpse -#- look-at
+Baret lowers rifle, walks out of building -#- lower-gun walk open
+Baret walks down stairs -#- walk
+Baret walks into street -#- walk
+Baret continues walking into street -#- walk
+The Preacher rides out of barn on horse -#- walk
+The Preacher stops, turns horse toward Baret -#- walk walk
+The Preacher watches Baret -#- walk
+Baret watches the Preacher -#- look-at
+The Preacher watches Baret -#- look-at
+Baret looks down at Stockburn's corpse -#- look-at
+Stockburns corpse lays still -#- None
+Baret looks back at the Preacher -#- look-at
+The Preacher speaks to Baret -#- none
+Baret replies to the Preacher -#- none
+The Preacher nods, rides off out of town -#- walk
+Blondie (Clint Eastwood), Sentenza (Lee VanCleef), and Tuco (Eli Wallach) stand around the center of the graveyard staring at each other -#- square-off square-off square-off square-off square-off square-off
+Tuco watches Blondie, looks toward Sentenza -#- look-at
+Sentenza watches Tuco, looks toward Blondie -#- look-at
+Blondie watches Sentenza, looks at Tuco -#- look-at
+Tuco and Blondie watch eachother with Blondie in the foreground and Tuco in the background -#- stare-at stare-at
+Tuco looks at Sentenza, with Tuco in the foreground and Sentenza in the background -#- look-at
+Sentenza looks at Blondie, with Sentenza in the foreground and Blondie in the background -#- look-at
+Sentenza grips gun with one hand, grips belt with the other -#- adjust-clothing
+Blondie stands idle with on leg on thigh and the other near gun -#- adjust-clothing
+Tuco stands with one hand at his side and the other near gun -#- none
+Tuco watches Sentenza, looks at Blondie -#- look-at
+Blondie watches Tuco, looks at Sentenza -#- look-at
+Sentenza watches Tuco, looks at Blondie -#- look-at
+Blondie watches Sentenza -#- stare-at
+Sentenza watches Blondie -#- stare-at
+Tuco shifts eyes between men -#- look-at look-at
+Tuco's hand lower toward gun -#- draw
+Sentenza looks at Tuco -#- look-at
+Tuco watches Sentenza -#- stare-at
+Tuco's hand hovers near gun -#- none
+Blondie looks at Tuco -#- look-at
+Tuco looks at Blondie -#- look-at
+Blondie watches Tuco -#- stare-at
+Tuco looks at Sentenza, then back at Blondie -#- look-at look-at
+Blondie's hand hangs at side near gun -#- adjust-clothing
+Sentenza watches Blondie, looks at Tuco -#- look-at
+Tuco's hand lower toward gun -#- none
+Sentenza watches Tuco, looks at Blondie -#- look-at
+Sentenza grips gun with one hand, grips belt with the other -#- adjust-clothing
+Blondie watches Tuco, looks at Sentenza -#- look-at
+Sentenza grips gun with one hand, grips belt with the other -#- adjust-clothing
+Sentenza watches Blondie -#- stare-at
+Blondie watches Sentenza -#- stare-at
+Tuco watches Blondie, looks at Sentenza, then back at Blondie -#- look-at look-at
+Blondie looks at Tuco -#- look-at
+Sentenza watches Blondie, looks at Tuco, then back at Blondie -#- look-at look-at
+Sentenza grips gun with one hand, grips belt with the other -#- draw
+Sentenza watches Blondie -#- stare-at
+Blondie watches Tuco -#- stare-at
+Tuco watches Blondie -#- stare-at
+Sentenza watches Tuco -#- stare-at
+Sentenza takes hand off belt, moves hand toward gun -#- draw
+Sentenza watches Blondie, looks toward Tuco -#- look-at
+Tuco watches Blondie -#- stare-at
+Sentenza looks at Blondie -#- look-at
+Sentenza's hand hovers over gun -#- draw
+Sentenza looks at Blondie -#- stare-at
+Blondie watches Tuco -#- stare-at
+Tuco watches Blondie -#- stare-at
+Sentenza's hand hovers over gun -#- draw
+Sentenza looks at Blondie -#- stare-at
+Blondie watches Tuco -#- stare-at
+Tuco watches Blondie -#- stare-at
+Blondie's hand hangs at side near gun -#- adjust-clothing
+Sentenza's hand hovers over gun -#- draw
+Tuco's hand hovers near gun -#- none
+Blondie watches Tuco -#- stare-at
+Tuco watches Blondie, looks at Sentenza, then back at Blondie -#- look-at
+Sentenza's head shifts -#- stare-at
+Sentenza draws gun -#- draw
+Tuco's head shifts -#- stare-at
+Tuco draws gun -#- draw
+Blondie draws gun, fires gun -#- draw
+Sentenza is hit by bullet, falls, Tuco tries to fire gun -#- fire get-shot fall
+Sentenza falls on dirt mound, tries to adjust self -#- fall
+Tuco tries fo fire gun, gun does not fire, Tuco looks down at gun, looks in chambers -#- fire look-at
+Blondie pulls back gun hammer -#- cock aim
+Tuco flinches, steps back -#- wince
+Sentenza struggles on ground to look at Blondie, aims gun -#- stare-at aim
+Blondie fires gun -#- fire
+Sentenza is hit by bullet -#- get-shot fall
+Sentenza drops gun, falls into open grave, dies -#- fall drop-gun die
+Tuco looks at Blondie -#- look-at
+Blondie watches Sentenza's body -#- stare-at
+Blondie lowers gun, beings walking toward Tuco, looks at Sentenza, raises gun, fires gun -#- lower-gun walk look-at fire
+Sentenza's hat flies into grave -#- drop
+Tuco looks at Blondie -#- look-at
+Blondie pulls back gun hammer, fires gun -#- walk fire
+Sentenza's gun flies into grave -#- drop
+Blondie lowers gun, stops walking, looks down, looks back up at Tuco, smiles -#- lower-gun look-at
+Elliot Marston (Alan Rickman) speaks to O'Flynn (Ben Mendelsohn), O'Flynn walks toward Matthew Quigley (Tom Selleck), Marston Kicks O'Flynn -#- identify walk none walk aim look-at
+Quigley looks at O'Flynn -#- look-at walk
+O'Flynn puts a gun in Quigley's belt -#- none
+O'Flynn steps back, draws gun, aim's gun at Quigley, steps to the side Dobkin (Tony Bonner) aims gun at Quigley, Marston speaks to Quigley -#- aim draw cock aim provoke look-at
+Marston continues speaking to Quigley, points to Dobkin, points to O'Flynn, jerks thumbs backward -#- provoke identify identify side-step side-step
+Dobkin and O'Flynn back away from Quigley, Martson speaks to Quigley, backs away from Quigley -#- side-step side-step walk walk side-step side-step
+Quigley watches the men, sighs, Marston speaks -#- look-at side-step side-step
+Marston speaks, stops moving -#- square-off square-off square-off side-step side-step aim aim
+Martson speaks to Quigley, Quigley watches Marston -#- provoke look-at
+Martson reaches to move coat -#- reveal aim
+Marston moves coat to reveal gun, speaks -#- reveal none
+Marston continues to speak -#- none
+Quigley watches Martson -#- look-at
+Marston speaks to Quigley -#- assent
+Quigley adjusts stance -#- square-off
+O'Flynn watches Quigley, smiles -#- stare-at
+Dobkin watches Quigley -#- stare-at
+Marston, O'Flynn, and Dobkin stare at Quigley, Quigley stares at the three men, pulls at fingers of glove -#- none
+Quigley pulls off glove, looks at hand, looks at Marston, speaks to Marston -#- none assent stare-at
+Marston stares at Quigley -#- stare-at
+Marston, O'Flynn, and Dobkin stare at Quigley, Guigley stares at the three men -#- stare-at stare-at stare-at stare-at
+Marston, O'Flynn, and Dobkin stare at Quigley, Guigley stares at the three men -#- stare-at stare-at stare-at stare-at
+Marston stares at Quigley -#- stare-at
+Marston draws gun -#- draw
+Quigley draws and fires gun -#- draw fire
+Marston is hit -#- draw get-shot fire
+Dobkin is hit -#- get-shot fire die
+O'Flynn falls back -#- get-shot fire fall die
+Smoke clears, Quigley looks at 3 men -#- look-at
+Marston falls over, Dobkin and O'Flynn lie dead, Quigley walks to Marston -#- fall look-at walk aim
+Quigley looks down at Marston -#- look-at aim walk
+Marston looks up at Quigley, bleeding to death -#- look-at
+Quigley speaks to Marston -#- taunt
+Marston laughs -#- provoke
+Quigley holsters gun -#- aim holster-gun
+Marston dies -#- die drop-gun
+Andy Warshaw (Steve Ihnat) sits on fence, looks backward at approaching riders, thugA sits on horse, watches approaching riders -#- look-at look-at look-at look-at look-at
+Riders approach pen, thugB looks at riders, nudges thugC, speaks to thugC, thugC looks at riders, replies to thugB, both men lean back -#- look-at look-at look-at look-at look-at none none none walk walk walk walk walk
+Warshaw looks away from riders -#- face-at face-at face-at face-at face-at
+riders 3 and 4 approach thugs B and C, rider 1 aims gun at thugs, thugs B and C stand up, thugB crosses arms -#- aim aim stand-up stand-up
+Rider 5, Doc Holiday (Jason Robards), and Wyatt Earp (James Garner) sit on horses, watch Warshaw, Warshaw puts cigarette in mouth, puts hand in vest pocket, Rider 5 speaks to Warshaw, Warshaw strikes match on post, lights cigarette, replies to Rider 5, Rider 5 speaks to man on horse -#- walk walk walk walk walk smoke arrest provoke none
+Rider 5 continues speaking to thugA, thugA dismounts from horse, leads horse away, Warshaw speaks to Rider 5 -#- none dismount walk walk open walk walk provoke
+Wyatt replies to Warshaw, shifts leg over horse, Warshaw turns to look at men, puts left leg on fense, replies to Wyatt, Watt replies to Warshaw, Warshaw replies to Wyatt, Wyatt replies to Warshaw -#- walk walk arrest face-at adjust-clothing none provoke
+Warshaw replies to Wyatt -#- none
+Wyatt replies to Warshaw -#- provoke
+Warshaw replies to Wyatt -#- none
+Warshaw continues to reply to Wyatt, Wyatt replies to Warshaw, Warshaw replies to Wyatt, Wyatt replies to Warshaw, Warshaw replies to Wyatt, Wyatt replies to Warshaw, Warshaw replies to Wyatt, Wyatt replies to Warshaw, Warshaw replies to Wyatt, glances back at Pen, Wyatt replies to Warshaw -#- none provoke
+Warshaw replies to Wyatt -#- none
+Wyatt interrupts Warshaw -#- provoke
+Warshaw replies to Wyatt -#- none
+Wyatt closes eyes, opens eyes, speaks to Warshaw -#- provoke
+Warshaw replies to Wyatt -#- none
+Wyatt speaks to Warshaw -#- assent
+Warshaw watches Wyatt -#- none
+Riders 3-5 and Doc lower heads -#- none none
+Wyatt starts dismounting from horse -#- dismount
+Warshaw begins dismounting fence -#- none
+Wyatt finishes dismouting horse, Warshaw finishes dismounting fence, Wyatt speaks to Warshaw, Warshaw replies to Wyatt, Wyatt replies to Warshaw -#- dismount none square-off square-off assent square-off
+Wyatt continues speaking to Warshaw, Warshaw watches Wyatt -#- assent look-at look-at
+Wyatt watche Warshaw, continues speaking to Warshaw -#- assent de-escalate
+Rider 3 speaks to Wyatt -#- de-escalate
+Wyatt replies to rider 3 -#- provoke
+Rider 5 replies to Wyatt, Warshaw watches Wyatt -#- de-escalate stare-at
+Rider 5 continues replying to Wyatt, Wyatt watches Warshaw, Wyatt replies to rider 3 -#- de-escalate provoke
+Warshaw watches Wyatt, speaks to Wyatt, throws cigarette on the ground -#- square-off none none
+Wyatt speaks to Warshaw -#- assent
+Warshaw watches Wyatt, Wyatt begins counting -#- stare-at assent
+Warshaw draws gun, Wyatt finishes counting, draws gun, fires gun, Warshaw is thrown back, Wyatt fires again -#- assent draw draw fire fire get-shot fire fall
+Warshaw stumbles, Wyatt fires again, Warshaw falls back against fence, grabs fence for support -#- get-shot fire none fall pick-up
+Wyatt fires again -#- fire
+Wyatt fires again, Warshaw falls to ground -#- fire get-shot fall
+Wyatt fires again -#- fire
+Warshaw convulses, dies -#- get-shot die
+Doc watches Warshaw's body, looks at Wyatt -#- look-at
+Wyatt watches Warshaw's body, speaks to riders -#- none
+John O'Hanlon (James Stewart) and Harley Sullivan (Henry Fonda) walk toward bar structure, step up on front porch, Harley speaks to John -#- walk walk de-escalate pick-up
+Harley grabs John's arm, continues speaking to him, John looks at Harley, turns, goes through door -#- de-escalate pick-up look-at open walk walk
+Bartnder looks at John, speaks to John -#- walk walk walk provoke
+John replies to Bartender -#- provoke
+Bar patrons look at John -#- look-at
+Harley walks to the side, watches John -#- walk look-at
+John speaks to the bar patrons -#- provoke none
+Bar patrons move away from bar -#- walk
+Harley watches bar patrons, removes something from pocket -#- look-at none
+John watches bar patrons -#- look-at
+Bar patrons continue moving, Corey Bannister (Robert J. Wilke) looks at John, stands up straight, turns to John -#- square-off
+Bannister speaks to John -#- square-off identify
+Harley looks at Bannister -#- look-at
+Bannister watches John -#- stare-at
+John replies to Bannister -#- provoke
+Bannister speaks to John -#- provoke
+John replies to Bannister -#- square-off provoke
+Bannister replies to John -#- provoke
+John replies to Bannister -#- provoke
+Bannister laughs, replies to John -#- provoke
+John replies to Bannister, Bannister draws gun, John draws gun -#- provoke draw draw
+Harley cracks nuts in hand -#- none
+Bannister aims at John, aims at Harley -#- draw aim aim
+John aims at Bannister, fires gun -#- draw aim fire
+Bannister falls onto table, falls onto floor, dies -#- get-shot fire fall die
+Harley looks at Bannister, looks at nuts in hand, looks at John -#- look-at look-at stare-at
+John looks at Bannister, looks at gun -#- look-at
+Harley stares at John, shakes head -#- stare-at stare-at none
+John turns around, walks to door, pushes door, walks -#- walk open
+Harley walks to door, pushes door, walks -#- stare-at walk look-at
+Bartender comments about O'Hanlon -#- look-at none
+Jonathan Rudd (Robert Mitchum) drives a carriage along the road -#- walk
+Van Morgan (Dean Martin) leans against a tree, notices Rudd coming toward him, holsters gun, walks toward Rudd -#- load-gun holster-gun look-at walk
+Rudd comes down road, stops carriage next to Morgan -#- walk stand-up
+Morgan speaks to Rudd -#- stand-up none walk
+Rudd replies to Morgan, dismounts carriage, drops Bible, retrieves Bible -#- none dismount drop none pick-up stand-up look-at
+Bible is shown close up, upside down, Rudd brushes off bible -#- none
+Rudd speaks to Morgan -#- look-at none
+Rudd continues speaking to Morgan -#- none
+Morgan speaks to Rudd -#- provoke
+Rudd replies to Morgan -#- de-escalate
+Morgan replies to Rudd -#- provoke
+Rudd replies to Morgan -#- de-escalate
+Morgan replies to Rudd -#- provoke
+Rudd replies to Morgan -#- de-escalate
+Morgan replies to Rudd -#- provoke
+Rudd replies to Morgan, Morgan replies to Rudd, Rudd replies to Morgan -#- de-escalate provoke assent
+Morgan replies to Rudd -#- provoke
+Rudd replies to Morgan -#- assent
+Morgan replies to Rudd -#- provoke
+Rudd replies to Morgan, points at Morgan -#- assent
+Morgan replies to Rudd -#- provoke
+Rudd replies to Morgan -#- assent
+Morgan replies to Rudd -#- provoke
+Rudd stares at Morgan, Morgan continues speaking -#- provoke stare-at
+Morgan continues speaking -#- provoke
+Rudd stares at Morgan, Morgan continues speaking -#- provoke stare-at
+Morgan continues speaking -#- arrest
+Rudd replies to Morgan, opens Bible -#- assent open look-at
+Rudd continues speaking, turns page to reveal hidden gun -#- assent none
+Morgan replies to Rudd -#- provoke
+Rudd looks at Morgan, Morgan speaks to Rudd -#- look-at square-off
+Morgan continues speaking -#- square-off
+Rudd stares at Morgan -#- stare-at
+Morgan stares at Rudd -#- stare-at
+Rudd drops Bible, reaches for gun -#- drop draw draw
+Morgan draws gun, fires gun, turns away, falls, Rudd draws gun, fires gun, turns away, falls -#- draw fire fall draw fire fall get-shot get-shot
+Morgan hits the ground, turns over, aims gun, rises to knee, stands up, walks to Rudd's body -#- fall fall look-at stand-up walk
+Morgan finishes walking to Rudd's body, looks down at body, lowers to knee, reaches for Bible -#- walk look-at none
+Morgan moves Bible from under Rudd's foot, picks up hidden gun, puts gun in Bible, closes Bible, picks Bible up -#- pick-up pick-up pick-up carry-from-to carry-from-to carry-from-to carry-from-to close close pick-up pick-up
+Sam Pierce (Charles Bickford) puts gun on bar, speaks to Zeke (Robert McKenzie), slides gun down to Zeke, takes box out of shirt pocket, Zeke replies, walks to Sam while mixing soda, sets glass on bar, Sam replies to Zeke, shows Zeke ring, Zeke looks ring, replies to Sam, Sam replies to Zeke, speaks to bar patrons, raises soda, Lewton McHandles (Gregory Peck) speaks to Sam, enters bar -#- drop drop pick-up drop ask-for drink-with walk pick-up open none drop none reveal look-at ask-for walk none none provoke walk walk
+McHandles continues speaking to Sam, puts cigarette in mouth -#- smokes provoke
+Sam replies, McHandles replies, Sam replies -#- drop de-escalate look-at provoke de-escalate
+McHandles speaks to Sam -#- provoke
+Sam replies to McHandles -#- de-escalate stare-at
+Sam continues to reply to McHandles, McHandles replies to Sam -#- de-escalate stare-at provoke
+McHandles continues to to reply to Sam -#- provoke
+Sam turns toward Mchandles -#- square-off
+Sam reaches for gun, touches empty holster -#- draw
+Sam replies to McHandles -#- assent stare-at
+McHandles replies to Sam, moves away from bar, Sam walks toward McHandles, Zeke slides Sam his gun, Sam reaches for gun -#- taunt walk square-off walk carry-from-to
+Sam grabs gun -#- carry-from-to none
+McHandles draws gun, Sam aims gun at Mchandles, McHandles fires three times, Sam falls dead -#- draw fire fire fire get-shot fall die
+Sam lets go of ring -#- drop
+McHandles speaks to bar patrons, throws gun up, catches gun, holsters gun, walks toward entrance -#- provoke holster-gun
+Nessuno (Terrence Hill) stands in street, crowd rushes to get out of the way -#- square-off walk
+Crowd continues rushing -#- walk
+Crowd continues rushing, Jack Beauregard (Henry Fonda) walks into street -#- walk square-off
+Crowd continues rusing, camera man runs from side street onto porch with camera, assistant follows -#- walk walk walk none
+Jack watches Nessuno -#- stare-at
+Nessuno looks around street, looks at Jack -#- look-at
+Both Jack and Nessuno watch each other -#- stare-at stare-at
+Nessuno watches Jack -#- stare-at
+Jack watches Nessuno -#- stare-at
+Camera focuses on the two men (camera POV) -#- stare-at stare-at
+Cameraman pulls cover off, grunts to Nessuno -#- stare-at stare-at side-step
+Nessuno looks at Cameraman -#- look-at
+Cameraman points to Nessuno, indicates moving over to Nessuno's right -#- side-step
+Nessuno points thumb to his right, steps to his right -#- none side-step
+Cameraman pulls cover off -#- none
+Camera focuses on the two men, Nessuno continues stepping to his right (camera POV) -#- side-step stare-at
+Cameraman gets button ready -#- none
+Nessuno finishes stepping to the right -#- side-step
+Cameraman holds button up -#- none
+Nessuno nods, adjusts hat -#- look-at adjust-clothing stare-at
+Jack pulls coat away to reveal gun -#- reveal stare-at
+Nessuno pulls off coat -#- stare-at adjust-clothing
+Nessuno continues to pull off coat, drops coat to ground -#- adjust-clothing stare-at stare-at
+Crowd watches Nessuno, looks at Jack -#- look-at
+Jack watches Nessuno -#- stare-at
+Crowd watches both men -#- look-at look-at
+Both Jack and Nessuno watch each other -#- stare-at stare-at
+Jack watches Nessuno -#- stare-at
+Nessuno watches Jack -#- look-at
+Cameraman holds button ready, assistant holds powder tray -#- none
+Nessuno watches Jack -#- look-at
+Jack watches Nessuno -#- stare-at
+Nessuno watches Jack -#- stare-at
+Cameraman focuses on both men -#- none
+Jack draws gun, Nessuno draws gun, fires gun (camera POV) -#- stare-at stare-at draw fire draw
+Jack is hit by bullet -#- get-shot
+Jack stumbles, cameraman takes off cover -#- none
+Assistant lowers powder tray, pokes powder, cameraman looks at powder tray, takes power tray, fiddles with powder, looks at Nessuno, puts cover back on -#- none
+Jack looks down at wound, looks up at Nessuno -#- look-at
+Nessuno speaks to Jack -#- taunt
+Jack watches Nessuno, laughs, begins turning -#- look-at look-at
+Jack turns toward cameraman -#- look-at
+Cameraman presses button -#- none
+Jack falls to knees, camera takes picture (camera POV) -#- look-at fall none look-at
+Ben Orcutt (Forrest Tucker) turns corner, takes out match, lights match, lights cigarette, continues walking, shakes match, sees horse -#- walk look-at
+Barn is shown, a horse is tied up at a fence post -#- None
+Orcutt puts out cigarette, begins walking, throws cigarette away, Brazos Kane (Randolph Scott) speaks to Orcutt, Orcutt stops walking, raises hands, speaks to Brazos, Brazos replies to Orcutt, Orcutt turns around, Brazos stands with hands raised -#- none walk adjust-clothing identify none provoke assent look-at square-off
+Orcutt watches Brazos -#- look-at look-at
+Brazos watches Orcutt, speaks to Orcutt -#- stare-at assent
+Orcutt draws, Brazos fires offscreen, Orcutt falls to his knees, drops gun, falls over, dead -#- stare-at draw get-shot fall die
+Bard Macky (Bruce Cabot), opens door, exits house, looks around, sees Brazos -#- open walk look-at adjust-clothing
+Brazos and Bard walk toward each other, stop, Bard draws gun, Brazos draws gun, fires gun -#- walk square-off walk square-off draw draw fire fire get-shot
+Bard drops gun, falls over -#- get-shot fall drop-gun
+Bard tries crawls, grabs gun, Brazos fires off screen, Bard rolls over, dead -#- give get-shot die
+Bess Banner (Barbara Britton) runs out of house, speaks to Mr. Banner (Griff Barnett), runs down stairs, grabs gun -#- walk de-escalate give
+Bess aims gun at Mr. Banner, Mr. Banner speaks to Brazos, Brazos turns toward Mr. Banner, Bess fires gun, drops gun, runs to Mr. Banner, hugs Mr. Banner, Mr. Banner speaks to Bess, Bess replies to Mr. Banner, Mr. Banner replies to Bess, drops gun -#- give provoke look-at fire look-at walk drop-gun none none
+Brazos holsters gun, turns, walks away -#- look-at holster-gun walk
+Johnny and Ben Yoder (Brett Tucker) walk along porch toward bar, Johnny speaks to Ben, Ben replies to Johnny -#- walk walk drink-with
+Johnny stops walking, looks at Ben, speaks to Ben, adjusts hat, turns to bar door, enters bar, Ben walks to side of entrance, leans against wall, adjusts hat, looks at approaching figure -#- walk walk drink-with none none adjust-clothing walk walk adjust-clothing walk look-at
+Woodrow approaches bar, looks down at Ben -#- walk stare-at
+Ben watches Woodrow -#- look-at
+Woodrow continues walking -#- stare-at walk
+Woodrow walks past Ben, stops, pushes Ben -#- walk look-at provoke
+Woodrow enters bar, Ben moves over to window, looks inside bar -#- walk
+Johnny stands at bar, speaks to bartender -#- ask-for
+The bartender takes two bottles off counter, puts bottles on bar -#- carry-from-to
+Johnny puts coins on bar, looks at bartender -#- carry-from-to none look-at
+Bartender looks at Johnny, looks passed Johnny, looks back to Johnny -#- look-at
+Johnny's eyes shift to the right -#- look-at
+Johnny slowly turns around, bartenders moves out of the way -#- look-at walk look-at
+Johnny continues turning around, Woodrow stares at Johnny -#- look-at stare-at
+Johnny finishes turning around, leans against bar, drinks from bottle, speaks to Woodrow -#- look-at none drink stare-at taunt
+Woodrow continues staring, crowds begins moving -#- stare-at walk
+Johnny watches Woodrow -#- stare-at
+Woodrow watches Johnny -#- stare-at
+Woodrow moves coat to reveal gun -#- reveal
+Crowd continues moving away -#- walk
+Woodrow watches Johnny -#- walk stare-at
+Johnny watches Woodrow -#- stare-at
+Woodrow draw gun -#- draw
+Johnny throws bottle at Woodrow, Woodrow drops gun, cries out -#- none drop-gun
+Johnny walks toward Woodrow, kicks gun away -#- none walk
+Johnny grabs Woodrow by collar -#- walk pick-up walk
+Crowd continues moving away, Ben watches through window, Johnny speaks to Woodrow. -#- stare-at walk
+Johnny continues holding Woodrow, continues speaking to Woodrow -#- pick-up square-off
+Johnny continues speaking to Woodrow, throws Woodrow -#- square-off pick-up
+Johnny walks away from Woodrow -#- stare-at
+Johnny walks away from Woodrow -#- stare-at walk
+Ben runs away from window -#- stare-at walk
+Johnny walks back to bar, speaks to bartender, drinks form bottle -#- walk ask-for drink
+Bartender stands up, walks to counters -#- walk drink drop stand-up walk
+Woodrow looks at Johnny, looks to the right -#- look-at
+thugB moves coat -#- look-at adjust-clothing
+Bartender places bottle on counter -#- drop
+Johnny puts coins on tabe, thugB is shown in mirror moving toward Woodrow, Woodrow leans over to toward thugB -#- none draw none walk draw give
+thugB gives gun to Woodrow -#- draw give stand-up
+Johnny watches mirror -#- stand-up look-at
+Woodrow raises gun -#- stand-up raise-gun
+Johnny turns around draws gun, fires gun, fires gun again -#- none look-at none draw fire
+Woodrow is hit by bullet, Johnny fires gun again, thus stumbles back, falls against piano -#- get-shot drop-gun fall none
+Ben and Rebecca Yoder (Naomi Watts) look in through window -#- look-at look-at
+Johnny straightens up -#- raise-gun stand-up
+Woodrow falls to the floor, dies -#- fall die
+Rebecca stares at Woodrow's body -#- look-at
+Johnny watches Woodrow's body -#- look-at raise-gun
+thugB looks at Woodrow's body -#- look-at
+Johnny looks at thugB -#- look-at
+thugB looks at Johnny, shakes head -#- square-off
+Johnny holsters gun -#- raise-gun holster-gun
+Johnny starts to turn around, looks out window -#- holster-gun look-at
+Rebecca looks at Johnny, looks at Woodrow's body, looks back at Johnny -#- look-at
+Johnny watches Rebecca -#- none
+Rebecca takes Ben away from window -#- walk walk
+Johnny stares at window -#- look-at
+The bounty hunter approaches the bar -#- walk
+A dog outside growls at the bounty hunter -#- none
+Josey Wales (Clint Eastwood) watches out the window -#- look-at
+The bounty hunter pushes open the door and enters the bar -#- open walk
+The bartender speaks to the bounty hunter -#- drink-with
+The bounty hunter states his intent to find Josey wales -#- none
+A young woman looks at the bounty hunter -#- look-at
+An old woman turns around to look at the bounty hunter -#- look-at
+An old man turns to look at the bounty hunter -#- look-at
+Wales responds to the bounty hunter -#- identify
+The man turns to Wales and speaks -#- face-at square-off provoke
+Wales responds to the bounty hunter -#- taunt
+The bounty hunter continues to stare at Wales -#- stare-at
+Wales asks who the bounty hunter is -#- identify
+The bounty hunter replies -#- identify
+Wales replies -#- de-escalate
+The bounty hunter continues to stare at Wales -#- stare-at
+Wales continues his reply -#- square-off
+The bounty hunter continues to stare at Wales -#- stare-at
+Wales stares at the bounty hunter -#- stare-at
+The bounty hunter turns and walks the bar -#- stare-at walk open
+Wales watches the bounty hunter go -#- stare-at
+The young woman looks away from the door -#- look-at
+The bartender and man at the bar return to their drink -#- look-at
+The old woman and her company continue to stare at the door -#- stare-at
+The old man continues to stare at the door -#- stare-at
+Wales stares at the bounty hunter -#- stare-at
+The bounty hunter reenters the bar -#- open walk square-off
+Wales stares at the bounty hunter -#- stare-at
+The young woman looks at the bounty hunter -#- look-at
+The old man looks at the bounty hunter -#- look-at
+The old woman and her company stare at the bounty hunter -#- look-at
+The bartender and the man at the bar stare at the bounty hunter -#- look-at
+Two other patrons look at the bounty hunter -#- look-at
+The bounty hunter speaks to Wales -#- assent
+Wales replies -#- assent
+The bounty hunter draws his gun -#- draw
+Wales draws his gun and fires -#- draw fire
+The bouny hunter falls backward out of the bar -#- fall-from-to
+The bounty hunter hits the ground and dies -#- fall-from-to die
+The bounty hunter's partner sees him dead and runs -#- look-at run
+Wales stares at the door -#- look-at lower-gun
+The old man stares at the door -#- look-at
+The old woman and her company stare at the bounty hunter -#- look-at
+Shep Horgan (Ernest Borgnine) enters the bar structure, armed with a rifle -#- open walk
+The other bar partons turn around, see Shep, move out of the way, Jubal Troop (Glenn Ford) and Red Haislipp (Charles Bronson) nottice Shep, Shep speaks to Jubal -#- look-at walk walk look-at look-at aim assent
+Shep continues speaking to Jubal -#- assent stare-at
+Shep pulls hammer on rifle back, Jubal and Red begin standing up -#- cock stand-up
+Jubal finishes standing up, speaks to Shep -#- stand-up stand-up square-off de-escalate
+Shep replies to Jubal -#- square-off provoke
+Jubal watches Shep -#- stare-at
+Shep fires at Jubal, Jubal and Red both crouch -#- fire wince wince load-gun
+Jubal speaks to Shep, Red speaks to Shep -#- load-gun none de-escalate de-escalate
+Shep replies to red, fires rifle again, Jubal crouches again -#- none fire wince wince
+Jubal speaks to Shep -#- de-escalate
+Shep replies to Jubal -#- assent
+Red picks up table -#- help-up
+Red throws table at Shep -#- none wince
+Shep sidesteps table -#- wince
+Red takes out gun, tosses it to Jubal -#- give
+Jubla catches gun, fires at Shep -#- give pickup-gun cock fire
+Shep stumbles agains table, looks at Jube -#- get-shot none
+Bar patrons watch Shep -#- look-at
+Shep falls, dies, Jubal and Red begin walking over to Shep -#- fall die lower-gun stand-up look-at walk walk
+Jubal and Red finish walking over to Shep, Jubal kneels next to body -#- walk walk look-at none pick-up
+Jubal places a hand on body's back, looks up at Red, Red speaks to Jubal, Jubal looks back down at Shep -#- none pick-up none look-at none walk
+Red walks back, picks up Jubals hat, speaks to bar patrons -#- walk none pick-up stand-up de-escalate
+Bar patrons stare at Red -#- look-at
+Red turns around, begins walking toward door, speaks to Jube -#- walk
+Jube looks up at Red, Red continues walking to door, speaks to Jube -#- look-at walk walk
+Jube stand up, walks away from body -#- stand-up walk walk
+Bar patron speaks, other bar patron replies -#- none walk
+Bar patrons walk toward door -#- walk
+Bar patron gets on horse, rides off -#- walk ride
+Joe (Clint Eastwood) walks toward the mansion -#- walk stare-at
+Joe stops at Coffinmaker, coffinmakersands coffin, hums, Joe turns toward cofffinmaker, speaks to coffinmaker, continues walking -#- walk none none look-at stare-at walk
+Thugs move in front of fence, watch Joe -#- walk
+Man watches Joe pass from inside bar -#- walk look-at stare-at
+Man on balcony watches Joe -#- stare-at
+Thugs continue moving toward duel position -#- walk
+Joe finishes walking toward thugs, thugs walk toward Joe, thug A speaks to Joe -#- walk walk provoke
+Thug A continues speaking to Joe -#- provoke
+Joe watches thugs, thug A continues speaking to Joe, Joe replies to thug A -#- provoke provoke
+Thug A replies to Joe -#- provoke provoke
+Joe replies to thug A -#- provoke
+Thug B watches Joe -#- stare-at
+Thug A watches Joe -#- stare-at
+Thug B speaks to Joe -#- provoke
+Joe replies to thugs -#- provoke provoke
+Thugs laugh -#- provoke
+Thugs continue to laugh -#- provoke
+Joe move poncho to reveal gun, thugs continue laughing -#- provoke
+Thugs continue laughing, thug A stops smiling -#- provoke stare-at
+Joe looks up at thugs, speaks to thugs -#- stare-at provoke provoke
+Thugs stop laughing -#- stare-at
+Thug B stops smiling -#- stare-at
+Joe continues to speak to thugs -#- stare-at provoke
+Thug B watches Joe, Joe continues to speak to thugs -#- stare-at
+Thug B puts hand on gun, Joe continues speaking to thugs -#- adjust-clothing adjust-clothing adjust-clothing
+Thugs watch Joe, Joe continues speaking to thugs -#- stare-at
+Coffinmaker watches all -#- stare-at
+Man watches all -#- stare-at
+Joe watches thugs, thug A continues speaking to Joe, Joe replies to thug A -#- stare-at
+Thugs watch Joe, thug A spits -#- stare-at none
+Joe watches thugs -#- stare-at
+Thugs start to draw guns -#- draw
+Joe draws gun -#- draw draw
+Joe glares at thugs -#- stare-at
+Joe fires gun consecutively, holsters gun -#- fire fire fire fire fire get-shot fall die holster-gun
+Coffinmaker nods in approval -#- stare-at
+John Baxter (Wolfgang Lukschy) and Antonio Baxter (Bruno Carotenuto) exit mansion -#- walk walk
+Joe looks at John, John speaks to Joe -#- look-at look-at give provoke
+John continues to talk to Joe -#- stare-at stare-at provoke
+Joe draws gun, aims gun at John, speaks to John -#- draw aim identify
+John replies to Joe, searches pockets, takes out sherif's badge -#- square-off identify adjust-clothing reveal
+Joe replies to John, pulls poncho back to previous positon, turns around, walks away -#- aim holster-gun taunt adjust-clothing walk
+John looks at corpses of thugs -#- stare-at stare-at
+Jed Cooper (Clint Eastwood) crosses street, lights cigaratte, and notices horse -#- walk smokes smokes look-at
+Horse stands idly -#- None
+Jed walks to horse -#- look-at walk identify identify
+Jed's name is shown on saddle -#- None
+Jed walks to bar entrance -#- look-at walk open
+Jed enters bar and approaches Reno (Joseph Sirola), initiates dialog -#- open walk walk give drink arrest
+Reno responds to Jed -#- provoke
+Jed replies to Reno -#- provoke
+Reno responds to Jed and pours himself a drink -#- de-escalate give
+Reno and Jed continue conversing, Reno sets bottle down -#- de-escalate provoke drop none
+Jed put cigar in Reno's drink -#- de-escalate drop
+Jed retracts his hand and Reno begins turning to him -#- drop look-at square-off
+Reno finishes turning to Jed and asks what he's done -#- assent
+Jed leans toward him and asks if he remembers him -#- identify
+Reno replies -#- none
+Jed pulls down scarf and reveals scar -#- adjust-clothing provoke
+Reno stares -#- identify
+Scar is shown close up along with Jed's face -#- stare-at
+Reno continues to stare -#- stare-at
+Reno backs away from Jed -#- stare-at stare-at walk
+Jed watches Reno -#- stare-at stare-at
+Reno continues to back away toward barrels, Jed speaks -#- stare-at stare-at walk square-off
+Showing Jed's face, Jed continues to speak -#- square-off
+Duel begins with Jed in foreground and Reno in background -#- draw
+Reno draws pistol -#- draw
+Jed shoots Reno -#- draw fire draw
+Close up of Reno's face as he is shot -#- get-shot fire
+Jed pulls back the hammer of his gun repeatedly -#- fire fire
+Reno falls against barrels -#- fire get-shot fall
+Reno falls and dies -#- fall die
+Jed walks from bar to Reno -#- walk
+Jed continues to walk from bar to Reno, Jed holsters his gun -#- walk holster-gun none none
