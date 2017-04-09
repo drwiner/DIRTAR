@@ -91,7 +91,7 @@ class Sentence:
 
 		# create sentence list __self__
 		self.word_list = self.make_words(tokens, dep_dict)
-		self.word_dict = dict(zip(self.raw_dict.keys(), self.word_list))
+		self.word_dict = dict(zip([token['word'] for token in tokens], self.word_list))
 
 		self.clauses = self.integrate_tokens_to_clauses()
 
@@ -112,6 +112,8 @@ class Sentence:
 			head_left = head_noun(tree[0])
 			head_right = head_noun(tree[2])
 			verb = tree[1].leaves()[0]
+			if verb == 'squeezes':
+				print('stop here')
 			if head_left is not None:
 				word = self.word_dict[head_left]
 				left_thing = (word.lemma, tree[0].label(), word.ner, word.dep)
@@ -159,9 +161,9 @@ if __name__ == '__main__':
 
 	nlp_server = StanfordCoreNLP('http://localhost:9000')
 	nlp = partial(nlp_server.annotate, properties={'outputFormat': 'json'})
-	# test_doc = nlp('He licks his lips nervously, squeezes his eyes shut, and hits the button.')
-	# nlp_sent = test_doc['sentences'][0]
-	# clauses = parse_to_clauses(ParentedTree.fromstring(nlp_sent['parse']))
+	test_doc = nlp('He licks his lips nervously, squeezes his eyes shut, and hits the button.')
+	nlp_sent = test_doc['sentences'][0]
+	clauses = parse_to_clauses(ParentedTree.fromstring(nlp_sent['parse']))
 	# test_doc = nlp('They walk forward slowly, carrying their helmets, up the ramp and into the tunnel of light, following the Martian, who retreats before them.')
 	SAVED = True
 	if not SAVED:
