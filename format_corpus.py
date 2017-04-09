@@ -1,4 +1,4 @@
-import spacy
+
 
 def read_corpus(file_name):
 	print('reading')
@@ -69,6 +69,7 @@ def parse_to_output(sents, file_name):
 
 
 if __name__ == '__main__':
+	import spacy
 	print('loading english to spaCy')
 	nlp = spacy.load('en')
 
