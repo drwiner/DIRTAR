@@ -2,6 +2,7 @@
 
 # import collections
 from nltk.tree import ParentedTree
+import pickle
 # from nltk.tree import Tree
 
 class Word:
@@ -26,29 +27,56 @@ def get_left_sibling(subtree):
 		current = current.parent()
 	return None
 
+def get_to_or_at_or_by(subtree):
+	sub_items = []
+	for item in subtree:
+		if item.leaves()[0] in {'at', 'to', 'by'} and item.label() == 'PP':
+			sub_items.append(item)
+	return sub_items
+
 def get_right_sibling(subtree):
 	current = subtree
 	while current.parent() is not None:
 		while current.right_sibling() is not None:
 			if current.right_sibling().label() == "NP":
-				return current.right_sibling()
+				right_tree = current.right_sibling()
+				# check to see if this NP also as a "to" or an "at"
+				sub_items = get_to_or_at_or_by(right_tree)
+				if len(sub_items) == 0:
+					return [right_tree]
+				else:
+					sub_items.append(right_tree)
+					return sub_items
+				# current.right_sibling()[
+				# return current.right_sibling()
+
 			if current.right_sibling().label() == 'PP':
-				if current.right_sibling()[0].leaves()[0] == 'by':
-					return current.parent()[1]
+				if current.right_sibling()[0].leaves()[0] in {'by', 'to', 'at'}:
+					return [current.parent()[1]]
+
 			# elif current.right_sibling().label() == 'VP' and current.right_sibling()[0][0] == 'by':
 			# 	return current.right_sibling()
+
 			current = current.right_sibling()
 		current = current.parent()
 	return None
 
+
 def parse_to_clauses(ptree):
 	clauses = []
-	for tree in ptree.subtrees(filter=lambda x: x.label() in {'VBZ', 'VBN'}):
+	for tree in ptree.subtrees(filter=lambda x: x.label() in {'VBZ', 'VBN', 'VBP'}):
 		if tree.leaves()[0] in {'is', 'be', 'have', 'was', 'has', 'had', 'of', 'would', 'were', 'are'}:
 			continue
-
-		clause_tuple = (get_left_sibling(tree), tree, get_right_sibling(tree))
-		clauses.append(clause_tuple)
+		right_item = get_right_sibling(tree)
+		if right_item is None:
+			clause_tuple = (get_left_sibling(tree), tree, None)
+			clauses.append(clause_tuple)
+		else:
+			# if len(right_item)
+			for item in right_item:
+				# clauses.append
+				clause_tuple = (get_left_sibling(tree), tree, item)
+				clauses.append(clause_tuple)
 	return clauses
 
 def head_noun(ptree):
@@ -57,8 +85,9 @@ def head_noun(ptree):
 	if len(ptree) == 1:
 		return ptree.leaves()[0]
 	if len(ptree) > 1:
-		# try:
+
 		sub_list = list(ptree.subtrees(filter=lambda x: x.label() in {'NNS', 'NNP', 'NN'}))
+
 		if len(sub_list) > 0:
 			sub = sub_list[0]
 			return sub.leaves()[0]
@@ -68,13 +97,14 @@ def head_noun(ptree):
 from collections import namedtuple
 # fake_token = namedtuple('fake_token', 'lemma'.split())
 Clause_relation = namedtuple('Clause_relation', 'verb dep relation'.split())
-
+from clockdeco import clock
+import collections
 class Sentence:
 	"""
 	Reads sentence, spits clauses
 	"""
 	none_tuple = ('None', 'None', 'None', 'None')
-
+	# @clock
 	def __init__(self, nlp_sent):
 		"""
 			:param nlp_sent: sentence extracted from parse from stanford corenlp parser
@@ -87,7 +117,12 @@ class Sentence:
 		self.clause_trees = parse_to_clauses(const_parse)
 		# dependencies
 		deps = nlp_sent['enhancedPlusPlusDependencies']
-		dep_dict = {dep['dependentGloss']: (dep['dep'], dep['governorGloss']) for dep in deps}
+		dep_dict = collections.defaultdict(lambda: (None, None))
+		try:
+			dep_dict.update({dep['dependentGloss']: (dep['dep'], dep['governorGloss']) for dep in deps})
+		except:
+			pass
+
 
 		# create sentence list __self__
 		self.word_list = self.make_words(tokens, dep_dict)
@@ -112,8 +147,6 @@ class Sentence:
 			head_left = head_noun(tree[0])
 			head_right = head_noun(tree[2])
 			verb = tree[1].leaves()[0]
-			if verb == 'squeezes':
-				print('stop here')
 			if head_left is not None:
 				word = self.word_dict[head_left]
 				left_thing = (word.lemma, tree[0].label(), word.ner, word.dep)
@@ -140,43 +173,123 @@ class Sentence:
 		return ' '.join(word.originalText for word in self.word_list)
 
 
-def assemble_clause_relations(doc_sents):
-	return [clause for sent in doc_sents for clause in sent.clauses]
+# def assemble_clause_relations(doc_sents):
+# 	return [clause for sent in doc_sents for clause in sent.clauses]
 
+
+def assemble_clause_relations(doc_sents):
+	for sent in doc_sents:
+		for clause in sent.clauses:
+			yield clause
+	yield None
+
+# @clock
+def digest(rawd):
+	return nlp(text=rawd)
+
+@clock
 def read_corpus(file_name):
+	# import spacy
+	from sentence_splitter import split_into_sentences
+	# print('loading spacy')
+	# spacy_nlp = spacy.load('en')
 	print('reading')
-	raw_doc = ''
+	# sep_docs = []
+	# raw_doc = ''
 	with open(file_name) as fn:
+		doc = split_into_sentences(fn.read())
+	return doc
 		# raw_doc += ' '.join(fn.readlines())
-		for line in fn:
-			sp = line.split()
-			raw_doc += ' '.join(wrd.strip() for wrd in sp if wrd != '\n')
-			raw_doc += ' '
-	print('finished reading, now parsing nlp style')
-	return nlp(raw_doc)
+	# 	for line in fn:
+	# 		sp = line.split()
+	# 		raw_doc += ' '.join(wrd.strip() for wrd in sp if wrd != '\n')
+	# 		raw_doc += ' '
+	# 		# if len(raw_doc) > 90000:
+	# 		# 	print('finished_collecting segment, now parsing')
+	# 		# 	nlp_raw = digest(raw_doc)
+	# 		# 	print('finished_parsing segment')
+	# 		# 	raw_doc = ''
+	# 		# 	# print(len(raw_doc))
+	# 		# 	sep_docs.append(nlp_raw)
+	#
+	# print('finished reading, now parsing nlp style')
+	# return split_into_sentences(raw_doc)
+	# sep_sents = [s.text for s in spacy_nlp(raw_doc).sents]
+	# return sep_sents
+
+# @clock
+def nlp_partial_sent(host_url):
+	nlp_server = StanfordCoreNLP('http://localhost:9000')
+	return partial(nlp_server.annotate, properties={'outputFormat': 'json'})
+
+# @clock
+def nlp_partial(server_annotate, text):
+	parse = server_annotate(text)
+	try:
+		return parse['sentences'][0]
+	except:
+		return None
+		
+		
+def append_sent_dump(doc_sents):
+	with open('movie_clauses.txt', 'a') as clause_file:
+		for clause in assemble_clause_relations(doc_sents):
+			if clause is None:
+				break
+			clause_file.write('({} - {} - {} - {}),\t{},\t({} - {} - {} - {})\n'.format(clause[0][0], clause[0][1], clause[0][2], clause[0][3],
+			                                                                     clause[1],
+			                                                                     clause[2][0], clause[2][1], clause[2][2], clause[2][3]))
 
 if __name__ == '__main__':
 	from pycorenlp import StanfordCoreNLP
 	from functools import partial
 
-	nlp_server = StanfordCoreNLP('http://localhost:9000')
-	nlp = partial(nlp_server.annotate, properties={'outputFormat': 'json'})
-	test_doc = nlp('He licks his lips nervously, squeezes his eyes shut, and hits the button.')
-	nlp_sent = test_doc['sentences'][0]
-	clauses = parse_to_clauses(ParentedTree.fromstring(nlp_sent['parse']))
+	### Setup Stanford server parse function "nlp"
+	annotater = nlp_partial_sent('http://localhost:9000')
+	nlp = partial(nlp_partial, server_annotate=annotater)
+
+	### For local testing
+	# nlp_server = StanfordCoreNLP('http://localhost:9000')
+	# nlp = partial(nlp_server.annotate, properties={'outputFormat': 'json'})
+	# test_doc = nlp('He licks his lips nervously, squeezes his eyes shut, and hits the button.')
+	# test_doc = nlp('He fires the gun at Sam.')
+	# nlp_sent = test_doc['sentences'][0]
+	# clauses = parse_to_clauses(ParentedTree.fromstring(nlp_sent['parse']))
 	# test_doc = nlp('They walk forward slowly, carrying their helmets, up the ramp and into the tunnel of light, following the Martian, who retreats before them.')
-	SAVED = True
+	# clauses = [Sentence(nlp_sent).clauses]
+	
+	#erase this
+	#doc_sents = pickle.load(open('doc_sents800000', 'rb'))
+	#print('loaded 8000')
+	#append_sent_dump(doc_sents)
+	#print('appended to clause text file')
+	
+	### For reading in the text
+	SAVED = 1
 	if not SAVED:
-		parsed_docs = read_corpus('random_test.txt')
-	else:
-		import pickle
-		parsed_docs = pickle.load(open('random_test_dump', 'rb'))
-	doc_sents = [Sentence(sent) for sent in parsed_docs['sentences']]
-	clauses = assemble_clause_relations(doc_sents)
+		unparsed_docs = read_corpus('movie_combo.txt')
+		pickle.dump(unparsed_docs, open('movie_corpus_dump', 'wb'))
+	elif SAVED == 1:
+		print('loading from dump')
+		unparsed_docs = pickle.load(open('movie_corpus_dump', 'rb'))
+		print('finished dump')
 
-	with open('clauses.txt', 'w') as clause_file:
-		for clause in clauses:
-			clause_file.write('({} - {} - {} - {}),\t{},\t({} - {} - {} - {})\n'.format(clause[0][0], clause[0][1], clause[0][2], clause[0][3],
-			                                                                     clause[1],
-			                                                                     clause[2][0], clause[2][1], clause[2][2], clause[2][3]))
+	### Parse each sentence, and dump
+	print(len(unparsed_docs))
+	doc_sents = []
+	for i, sent in enumerate(unparsed_docs[800001:899999]):
+		if i % 10000 == 0:
+			print(i)
+	#	if i % 100000 == 0:
+	#		pickle.dump(doc_sents, open('doc_sents' + str(i), 'wb'))
+	#		print(i)
+		s = digest(sent)
+		if s is not None:
+			doc_sents.append(Sentence(s))
+	pickle.dump(doc_sents, open('last_sents', 'wb'))
 
+	#doc_sents = pickle.load(open('doc_sents900000_copy', 'rb'), encoding='bytes')
+	
+
+	print('loaded pickle dump')
+	append_sent_dump(doc_sents)
