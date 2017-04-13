@@ -13,6 +13,7 @@ from nltk.corpus import wordnet as wn
 from collections import defaultdict
 
 
+
 class ActionFrame:
 	def __init__(self, lemma):
 		self.lemma = lemma
@@ -26,14 +27,20 @@ class ActionFrame:
 			for token in sem_token_list:
 				self.restrictions[slot_pos][dep_type].add(token)
 
-	def filter(self, slot, dep, wn_token):
+	def filter(self, slot, dep, noun, ner):
+		if noun in REMAP.keys():
+			wn_token = REMAP[noun]
+		elif ner == 'PERSON':
+			wn_token = person
+		else:
+			wn_token = wn.synsets(noun, wn.NOUN)[0]
+
 		# returns True if valid and False otherwise
 		sem_types = self.restrictions[slot][dep]
 
 		# if there's no restrictions on this slot, then let it pass
 		if len(sem_types) == 0:
 			return True
-
 
 		for sem_type in sem_types:
 			dist = wn_token.shortest_path_distance(sem_type)
@@ -44,7 +51,7 @@ class ActionFrame:
 
 
 def get_action_lemma_entries():
-	return action_frames
+	return action_frame_dict
 
 if __name__ == '__main__':
 
@@ -126,4 +133,5 @@ if __name__ == '__main__':
 	cock.add_rule('Y', {'dobj'}, [gun])
 
 	action_frames = [shoot, aim, hit, fall, look, stare, walk, draw, cock]
+	action_frame_dict = dict(zip([action.lemma for action in action_frames], action_frames))
 

@@ -11,8 +11,10 @@ from math import log2, sqrt
 import operator
 import pickle
 from clockdeco import clock
+import functools
+from nltk.corpus import wordnet as wn
 
-import semantic_parser
+person = wn.synsets('person', wn.NOUN)[0]
 
 def save_database(db, s_name):
 	with open('dirtar_database_' + s_name + '.pkl', 'wb') as output:
@@ -25,6 +27,7 @@ LEFT_DEPS = ['nsubj', 'nsubj:xsubj', 'nsubjpass', 'nmod:poss']
 REVERSIBLE_LEFTS = ['nsubjpass']
 RIGHT_DEPS = ['dobj', 'nmod:at', 'nmod:from', 'nmod:by', 'nmod:to', 'nmod:agent', 'nmod:in', 'nmod:into', 'nmod:poss', 'nmod:through', 'nmod:on', 'nmod:across', 'nmod:over', 'nmod:away_from']
 REVERSIBLE_RIGHTS = ['nmod:agent', 'nmod:by']
+MULTI_SLOTS = LEFT_DEPS + RIGHT_DEPS
 
 Triple = namedtuple('Triple', ['X', 'path', 'Y'])
 Verb_NP_ner = namedtuple('Verb_NP_ner', ['verb', 'noun', 'ner'])
@@ -32,49 +35,83 @@ Verb_NP_ner = namedtuple('Verb_NP_ner', ['verb', 'noun', 'ner'])
 def cleanLine(line):
 	return ' '.join(line.split()) + ' '
 
+
+def wordnet_replace(word, ner):
+	synsets = wn.synsets(word, wn.NOUN)
+	if len(synsets) == 0 or ner == 'PERSON':
+		return person.lemma_names()[0]
+	h_paths = synsets[0].hypernym_paths()[0]
+	if len(h_paths) < 6:
+		return h_paths[-1].lemma_names()[0]
+	return h_paths[5].lemma_names()[0]
+
 @clock
 def readCorpus(clause_file):
 	with open(clause_file, 'r') as clauses:
-		for line in clauses:
-			entries = line.spilt()
+		for i, line in enumerate(clauses):
+			# print(i)
+			entries = line.split(',')
+			if len(entries) != 3:
+				# there's a comma or number as a word
+				if entries[0] == '(':
+					temp = [None, None, None]
+					temp[0] = '(comma {}'.format(entries[1])
+					temp[1] = entries[2]
+					temp[2] = entries[3]
+					entries = temp
+				else:
+					temp = [None, None, None]
+					temp[0] = entries[0]
+					temp[1] = entries[1]
+					temp[2] = '(number - NP - NUMBER - dobj)'
+					entries = temp
+			if len(entries) != 3:
+				print(line)
+				continue
 			# entry 0 and 2 are (X_orth - X_pos - X_ner - X_dep)
-			x_pieces = entries[0].split('-')
-			y_pieces = entries[2].split('-')
-			x = x_pieces[0].split('(')[1]
-			y = y_pieces[0].split('(')[1]
+			x_pieces = entries[0].split(' - ')
+			y_pieces = entries[2].split(' - ')
+			x = x_pieces[0].split('(')[1].strip().lower()
+			y = y_pieces[0].split('(')[1].strip().lower()
+			path = entries[1].strip()
 
 			# Straightforward X and Y
-			TStream.append(Triple(x, entries[1], y))
+			TStream.append(Triple(x, path, y))
 
 			# X and Y separated by dependencies, can filter by legal dependencies later
-			x_dep = x_pieces[-1].spilt(')')[0]
-			y_dep = y_pieces[-1].split(')')[0]
-			if x_dep != 'None':
-				v_x_dep_dict[(entries[1], x_dep, 'X', x_pieces[2])].append(x)
-				# v_x_dep_dict[x_dep].append(Verb_NP_ner(entries[1], x, x_pieces[2]))
-			if y_dep != 'None':
-				v_y_dep_dict[(entries[1], y_dep, 'Y', y_pieces[2])].append(y)
-				# v_y_dep_dict[y_dep].append(Verb_NP_ner(entries[1], y, y_pieces[2]))
+			x_dep = x_pieces[-1].split(')')[0].strip()
+			x_ner = x_pieces[2].strip()
+
+			y_dep = y_pieces[-1].split(')')[0].strip()
+			y_ner = y_pieces[2].strip()
+
+			# Wstream : swap x and y with wordnet
+			wn_x = wordnet_replace(x, x_ner)
+			wn_y = wordnet_replace(y, y_ner)
+			WStream.append(Triple(wn_x, path, wn_y))
+
+			# left and right are tuples (noun, dep, ner)
+			MStream.append(Triple((x, x_dep,x_ner), path, (y, y_dep, y_ner)))
 
 			# X and Y collapsed but filtered by dependency type
 			if x_dep in LEFT_DEPS and y_dep in RIGHT_DEPS:
 				FTStream.append(Triple(x, entries[1], y))
 				# X and Y recollapsed and filtered by dependency type
 				x_prime, y_prime = decide_swap(x, y, x_dep, y_dep)
-				FCTStream.append(Triple(x_prime, entries[1], y_prime))
+				FCTStream.append(Triple(x_prime, path, y_prime))
 
 			# X and Y recollapsed by dependency type
 			x_prime, y_prime = decide_swap(x, y, x_dep, y_dep)
-			CTStream.append(Triple(x_prime, entries[1], y_prime))
+			CTStream.append(Triple(x_prime, path, y_prime))
 
 
 
 def decide_swap(x, y, x_dep, y_dep):
-	if x_dep != 'None':
+	if x_dep != 'none':
 		if x_dep  in REVERSIBLE_LEFTS:
 			# swap
 			return y, x
-	if y_dep != 'None':
+	if y_dep != 'none':
 		if y_dep in REVERSIBLE_RIGHTS:
 			# swap
 			return y, x
@@ -87,14 +124,13 @@ def apply_MinfreqFilter(stream, stream_name, min_freq):
 	PCounter = Counter([t.path for t in stream])
 	distinct_unfiltered_Pinstances = set(PCounter.keys())
 	distinct_filtered_Pinstances = set(p for p in distinct_unfiltered_Pinstances if PCounter[p] >= min_freq)
-	filtered_Tinstances = [t for t in TStream if PCounter[t.path] >= min_freq]
+	filtered_Tinstances = [t for t in stream if PCounter[t.path] >= min_freq]
 
 	print('{}\n'.format(stream_name))
 	print('Found {} distinct paths, {} after minfreq filtering'.format(len(distinct_unfiltered_Pinstances), len(distinct_filtered_Pinstances)))
-	print('Found {} path instances, {} after minfreq filtering'.format(len(TStream), len(filtered_Tinstances)))
+	print('Found {} path instances, {} after minfreq filtering'.format(len(stream), len(filtered_Tinstances)))
 
-	return len(distinct_unfiltered_Pinstances), len(distinct_filtered_Pinstances), len(stream), filtered_Tinstances
-
+	return len(distinct_unfiltered_Pinstances), len(distinct_filtered_Pinstances), len(stream), len(filtered_Tinstances), filtered_Tinstances
 
 # Entry = namedtuple('Entry', ['word', 'count'=0, 'mi'])
 class Entry:
@@ -117,17 +153,21 @@ class Entry:
 			self.path = path
 		self.count += 1
 
+	def __repr__(self):
+		return '{}\t{}\t{}\t{}'.format(self.path, self.slot, self.word, self.mi)
+
+
 @clock
 def loadDatabase(db, filtered_Tinstances):
 
 	# For each filtered triple instance:
 	for x, path, y in filtered_Tinstances:
-		if path is None or path == 'None':
+		if path is None or path == 'none':
 			continue
 		## Triple Database by-path (default dict, so creates dict at key [path] or reference existing)
 		path_db = db[path]
 
-		if x is not None and x != 'None':
+		if x is not None and str(x) != 'none':
 			if 'X' not in path_db.keys():
 				path_db['X'] = dict()
 			pdbx = path_db['X']
@@ -137,7 +177,7 @@ def loadDatabase(db, filtered_Tinstances):
 			else:
 				pdbx[x] = Entry(path, 'X', x)
 
-		if y is not None and y != 'None':
+		if y is not None and str(y) != 'none':
 			if 'Y' not in path_db.keys():
 				path_db['Y'] = dict()
 			pdby = path_db['Y']
@@ -146,6 +186,7 @@ def loadDatabase(db, filtered_Tinstances):
 				pdby[y].count += 1
 			else:
 				pdby[y] = Entry(path, 'Y', y)
+
 
 # @clock
 def MI(db, wsc, sc, path, slot_pos, word):
@@ -186,6 +227,39 @@ def MI(db, wsc, sc, path, slot_pos, word):
 
 
 @clock
+def loadDatabase_multislot(db, filtered_Tinstances):
+
+	# For each filtered triple instance:
+	for x, path, y in filtered_Tinstances:
+		if path is None or path == 'none':
+			continue
+		## Triple Database by-path (default dict, so creates dict at key [path] or reference existing)
+		path_db = db[path]
+		x_noun, x_dep, x_ner = x
+		y_noun, y_dep, y_ner = y
+		x_slot_name = 'x_' + x_dep
+		y_slot_name = 'y_' + y_dep
+
+		if x_noun is not None and x != 'none':
+			if x_slot_name not in path_db.keys():
+				path_db[x_slot_name] = dict()
+			pdbx = path_db[x_slot_name]
+			if x_noun in pdbx.keys():
+				pdbx[x_noun].count += 1
+			else:
+				pdbx[x_noun] = Entry(path, x_slot_name, x_noun)
+
+		if y_noun is not None and y_noun != 'none':
+			if y_slot_name not in path_db.keys():
+				path_db[y_slot_name] = dict()
+			pdby = path_db[y_slot_name]
+			if y in pdby.keys():
+				pdby[y_noun].count += 1
+			else:
+				pdby[y_noun] = Entry(path, y_slot_name, y_noun)
+
+
+@clock
 def updateMI(db, word_slot_count, slot_count):
 	# db = databases[i]
 	# word_slot_count = word_slot_counts[i]
@@ -223,6 +297,34 @@ def updateMI(db, word_slot_count, slot_count):
 		for entry in tdpy.values():
 			entry.mi = MI(db, word_slot_count, slot_count, entry.path, entry.slot, entry.word)
 
+def updateMI_multislot(db, word_slot_count, slot_count):
+	for p in db.keys():
+		slots = db[p].keys()
+		for slot in slots:
+			for w in db[p][slot].keys():
+				s = db[p][slot][w].count
+				slot_count[slot] += s
+				if w not in word_slot_count.keys():
+					word_slot_count[w] = defaultdict(int)
+				word_slot_count[w][slot] += s
+
+	for path in db.keys():
+		# slot, entries
+		for slot_name, nouns in db[path].items():
+			tdps = db[path][slot_name]
+			for entry in tdps.values():
+				if entry.word == 'none':
+					entry.mi = 0
+					continue
+				if type(tdps[entry.word]) != Entry:
+					entry.mi = 0
+					continue
+				if type(tdps[entry.word]) == defaultdict:
+					entry.mi = 0
+				if entry.word not in tdps.keys():
+					entry.mi = 0
+					continue
+				entry.mi = MI(db, word_slot_count, slot_count, entry.path, entry.slot, entry.word)
 
 # @clock
 def pathSim(p1, p2):
@@ -237,6 +339,23 @@ def pathSimdb(p1, p2, db):
 	slot_y_sim = slotSimdb(p1, p2, 'Y', db)
 
 	return sqrt(slot_x_sim * slot_y_sim)
+
+def pathSim_multiSlot(p1, p2, db):
+	slots = set(db[p1].keys()) | set(db[p2].keys())
+	sim_list = [slotSimdb(p1,p2,slot,db) for slot in slots]
+	k = len(sim_list)
+	a = functools.reduce(operator.mul, sim_list, 1)
+	return a**(1./float(k))
+
+
+def weighted_pathSim_multiSlot(p1, p2, db):
+	slots = set(db[p1].keys()) | set(db[p2].keys())
+	weights = [len(db[p1][slot]) + len(db[p2][slot]) / 2 for slot in slots]
+	slot_weight = zip(slots, weights)
+	sim_list = [w*slotSimdb(p1, p2, slot, db) for slot, w in slot_weight]
+	k = len(sim_list)
+	a = functools.reduce(operator.mul, sim_list, 1)
+	return a ** (1. / float(k))
 
 
 def slotSimdb(p1, p2, slot_pos, db):
@@ -327,6 +446,9 @@ def test_most_similar_to(i, action_lemma_doc, k_most_similar, line1, line2):
 					else:
 						break
 
+# http://stackoverflow.com/questions/19189274/defaultdict-of-defaultdict-nested
+def rec_dd():
+	return defaultdict(rec_dd)
 
 import sys
 
@@ -352,14 +474,17 @@ if __name__ == '__main__':
 	# TStream (triple stream) - collects all triple instances
 	TStream = []
 	# v_dep_dict (verb dependency dict) keys are (verb, dependency, slot) tuples values are noun lists
-	v_x_dep_dict = defaultdict(list)
-	v_y_dep_dict = defaultdict(list)
+	MStream = []
+
 	# CTStream (collapsed triple stream) a list of triple instances, sometimes with x and y flipped
 	CTStream = []
 	# FTSream whose instances are filtered by whether any of the X or Y of that triple aren't legal
 	FTStream = []
 	# FCTStream whose instances are filtere (as above), sometimes with x and y flipped
 	FCTStream = []
+
+	# replace words with wordnet level 6 or leave
+	WStream = []
 
 	print('reading and sorting input clauses')
 	#### READ CLAUSES ####
@@ -383,30 +508,56 @@ if __name__ == '__main__':
 	# 		ydeps.write('\n')
 
 
-	streams = [TStream, CTStream, FTStream, FCTStream]
-	s_names = ['tstream', 'ctstream', 'ftstream', 'fctstream']
+	streams = [TStream, CTStream, FTStream, FCTStream, WStream]
+	s_names = ['tstream', 'ctstream', 'ftstream', 'fctstream', 'wstream']
 
 	# triple_databases - Triple Database - collection of triple instances by path
-	triple_database = defaultdict(dict)
+	triple_database = rec_dd()
 	# FStream
-	triple_dep_filtered = defaultdict(dict)
+	triple_dep_filtered = rec_dd()
 	# CTStream
-	triple_collapsed = defaultdict(dict)
+	triple_collapsed = rec_dd()
 	# FCTStream
-	triple_dep_filtered_collapsed = defaultdict(dict)
+	triple_dep_filtered_collapsed = rec_dd()
+	# WStream
+	triple_W_db = rec_dd()
 
-	databases = [triple_database, triple_dep_filtered, triple_collapsed, triple_dep_filtered_collapsed]
-	ftinstances = [list(), list(), list(), list()]
-	slot_counts = [dict(), dict(), dict(), dict()]
-	word_slot_counts = [dict(), dict(), dict(), dict()]
-	# output_paths_info = [None, None, None, None]
+
+	databases = [triple_database, triple_dep_filtered, triple_collapsed, triple_dep_filtered_collapsed, triple_W_db]
+
+	# delete this, just running this in iso
+	# streams = [WStream]
+	# database = [triple_W_db]
+	# s_names = ['wstream']
+
+	ftinstances = []
+	slot_counts = []
+	word_slot_counts = []
+	for i in range(len(streams)):
+		ftinstances.append(list())
+		slot_counts.append(dict())
+		word_slot_counts.append(dict())
 
 	with open(test_text, 'r') as tt:
 		test_paths = [cleanLine(line) for line in test_text]
 
-	import semantic_parser
+	# import semantic_parser
 
-	action_frames = semantic_parser.get_action_lemma_entries()
+
+	# action_frame_dict = semantic_parser.get_action_lemma_entries()
+
+	# new_database_entries = {'X':}
+	# for (slot, v, dep, ner), nouns in v_x_dep_dict.items():
+	# 	if v in action_frame_dict.keys():
+	# 		with open(v + slot + '_X_nofilter.txt', 'a') as vat:
+	# 			for noun in nouns:
+	# 				vat.write('{}\t{}'.format(noun, dep))
+	# 		with open(v + '_' + slot + '_filtered.txt', 'a') as vat:
+	# 			for noun in nouns:
+	# 				if action_frame_dict[v].filter(slot, dep, noun, ner):
+	# 					vat.write('{}\t{}'.format(noun, dep))
+
+
 
 	for i in range(len(streams)):
 		print(i)
@@ -419,18 +570,25 @@ if __name__ == '__main__':
 		print('loading database')
 		loadDatabase(databases[i], ftinstances)
 		# dump database
-		print('dumping database')
-		save_database(databases[i], s_names[i])
-
-		# create new database entry for each
-		databases[i]['']
+		# print('dumping database')
+		# save_database(databases[i], s_names[i])
 
 		# apply semantic discrimination for each action lemma if in database
 		# use test doc to filter by semantic, but for now, just update
 		print('updating MI')
-		updateMI(databases[i])
+		updateMI(databases[i], word_slot_counts[i], slot_counts[i])
+
+		print('after MI, dumping database')
+		save_database(databases[i], s_names[i])
 
 		line1 = 'Found {} distinct paths, {} after minfreq filtering.\n'.format(dp, dmf)
 		line2 = 'Found {} path instances, {} after minfreq filtering.\n'.format(pi, pimf)
 		test_most_similar_to(i, test_paths, 10, line1, line2)
 
+
+	# MStream
+	triple_multi_slot = rec_dd()
+	dp, dmf, pi, pimf, ftinstances = apply_MinfreqFilter(MStream, 'mstream', min_freq)
+	loadDatabase_multislot(triple_multi_slot, ftinstances)
+	updateMI_multislot(triple_multi_slot, dict(), defaultdict(int))
+	save_database(triple_multi_slot, 'mstream')
