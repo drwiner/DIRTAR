@@ -1,0 +1,9 @@
+shoot
+aim
+hit
+look
+stare
+walk
+fall
+draw
+cock

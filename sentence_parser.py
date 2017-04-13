@@ -258,12 +258,6 @@ if __name__ == '__main__':
 	# test_doc = nlp('They walk forward slowly, carrying their helmets, up the ramp and into the tunnel of light, following the Martian, who retreats before them.')
 	# clauses = [Sentence(nlp_sent).clauses]
 	
-	#erase this
-	#doc_sents = pickle.load(open('doc_sents800000', 'rb'))
-	#print('loaded 8000')
-	#append_sent_dump(doc_sents)
-	#print('appended to clause text file')
-	
 	### For reading in the text
 	SAVED = 1
 	if not SAVED:
@@ -277,7 +271,7 @@ if __name__ == '__main__':
 	### Parse each sentence, and dump
 	print(len(unparsed_docs))
 	doc_sents = []
-	for i, sent in enumerate(unparsed_docs[800001:899999]):
+	for i, sent in enumerate(unparsed_docs):
 		if i % 10000 == 0:
 			print(i)
 	#	if i % 100000 == 0:
@@ -287,9 +281,6 @@ if __name__ == '__main__':
 		if s is not None:
 			doc_sents.append(Sentence(s))
 	pickle.dump(doc_sents, open('last_sents', 'wb'))
-
-	#doc_sents = pickle.load(open('doc_sents900000_copy', 'rb'), encoding='bytes')
-	
 
 	print('loaded pickle dump')
 	append_sent_dump(doc_sents)
