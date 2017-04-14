@@ -1,232 +1,184 @@
 #!/usr/bin/python
 
 import pickle
-import spacy
-import format_corpus as fcorp
 import dirtar as mdirt
-from dirtar import Entry
+from dirtar import Entry, rec_dd
+from pycorenlp import StanfordCoreNLP
+from functools import partial
+
+from sentence_parser import Sentence, Word, parse_to_clauses
+import sentence_splitter
+import semantic_parser
 
 def cleanLine(line):
 	return ' '.join(line.split()) + ' '
 
 
-def parse_clause(sent):
-	parse_list = []
-	s_doc = nlp(sent)
-	nchunks = list(s_doc.noun_chunks)
-	nchunk_indices, nchunk_dict = fcorp.noun_chunk_index_list(nchunks)
-	first_noun_encountered = False
-	for i, token in enumerate(s_doc):
-		# ignore noun phrases, but keep track of first and last
-		if i in nchunk_indices:
-			if i in nchunk_dict.keys():
-				if first_noun_encountered:
-					break
-				first_noun_encountered = True
-			# dont' add nouns to parse_list
-			continue
-		if first_noun_encountered and token.orth_ in fcorp.symb_dict.keys():
-			parse_list.append(fcorp.symb_dict[token.orth_])
-		elif first_noun_encountered:
-			parse_list.append(token.orth_)
-		if len(parse_list) > 0 and parse_list[-1] == '>RPAREN':
-			parse_list = []
-	return ' '.join(parse_list) + ' '
-
-
-def clause_to_path(clause):
-	if clause[0].isupper():
-		# then read this clause as is
-		path = parse_clause(clause)
-	else:
-		# add a pronoun just to get the parsing right...
-		path = parse_clause('he' + clause)
-
-	return path
-
-
-def raw_sent_to_path_list(raw_sent):
-	path_list = []
-	clauses = raw_sent.split(',')
-	path_list.append(parse_clause(clauses[0].strip()))
-	if len(clauses) > 1:
-		for c in clauses[1:]:
-			if c.isspace() or c == '\n':
-				continue
-			# intermediate stage "clause_to_path" makes sure we get parsing right
-			path_list.append(clause_to_path(c.strip()))
-	return path_list
-
-
 def parse_scene_sents(file_name):
 	# each entry in this list is a tuple of the form (clause, action_list)
-	score_sent_list = []
+	sentence_verb_actions = []
 	with open(file_name) as sc_sents:
+
 		for line in sc_sents:
 			raw_sent, raw_actions = line.split('-#-')
 			actions = raw_actions.split()
-			paths = raw_sent_to_path_list(raw_sent)
-			score_sent_list.append((paths, [act for act in actions if act in ACTION_TYPES]))
-			# score_sent_list.extend([(path, actions) for path in paths])
-	return score_sent_list
+			# formats from raw sentence
+			sent = sentence_splitter.split_into_sentences(text=raw_sent + '.')[0]
 
-
-def parse_key_paths(file_name):
-	key_dict = dict()
-	new_key = False
-	current_key = None
-	with open(file_name) as key_phrases:
-		for line in key_phrases:
-			if line == '-\n':
-				#new key, on next line
-				new_key = True
-			elif new_key:
-				new_key = False
-				# turn the phrase such as "look at" into "look-at"
-				current_key = '-'.join(line.split())
-				ACTION_TYPES.append(current_key)
-				key_dict[current_key] = set()
-				key_dict[current_key].add(cleanLine(line))
-			else:
-				key_dict[current_key].add(cleanLine(line))
-	return key_dict
-
-
-def best_phrase_score_tuple_list_intersection(test_phrase, list1, list2, db):
-	# list1 are k-most similar phrases to "test phrase"
-	# list2 are k-most similar phrases to cndt "key phrase"
-	"""
-	for item in intersection:
-		find phrase most similar to original (to list1[0][0])
-	similarity of test phrase to similar phrase, times similarity of
-	"""
-	set1 = {phrase for phrase, score in list1}
-	set2 = {phrase for phrase, score in list2}
-	set_cap = set1.intersection(set2)
-	if len(set_cap) == 0:
-		return None, 0
-	elif len(set_cap) > 1:
-		best_phrase = None
-		max_sc = 0
-		for phrase in set_cap:
-			sc = mdirt.pathSimdb(test_phrase, phrase, db)
-			if sc > max_sc:
-				max_sc = sc
-				best_phrase = phrase
-		return best_phrase, max_sc
-	phrase = set_cap.pop()
-	return phrase, mdirt.pathSimdb(test_phrase, phrase, db)
-
-
-def collect_assignments(key_phrases, test_list, db, k):
-	"""
-	For each test item in test_list, make assignment and score whether correct, and how many missed, etc.
-
-	:param key_phrases: keys are actions whose value is a set of phrases for that key
-	:param test_list: each item is a tuple of the form (phrase_list, action_list) from duel corpus
-	:param db: triple database
-	:param k: k-most similar paths considered (most similar to test-item phrase)
-	:return: precision, recall, and fscore for each test_item
-	"""
-
-	# mdirt_dict: each key is a key phrase and its value is a ranked list of (phrase, score) tuples
-	mdirt_dict = dict()
-	for ky, phrases in key_phrases.items():
-		mdirt_dict.update(mdirt.most_similar_to(phrases, db))
-	# mdirt_dict = mdirt.most_similar_to(key_phrases.values(), db)
-	assignments = []
-	for phrase_list, action_list in test_list:
-		# action_phrase_dict = {act: key_phrases[act] for act in action_list}
-		# assignments.append([])
-		action_checklist = set(action_list)
-		unlabeled_phrases = 0
-		for phrase in phrase_list:
-
-			if phrase not in mdirt_dict.keys():
-				unlabeled_phrases += 1
+			print('Parsing sent: \'{}\' \n'.format(sent))
+			s = digest(sent)
+			if s is None:
+				print('\tdiscontinued\n')
 				continue
 
-			# get k most similar to phrase
-			ranked_dict = mdirt.most_similar_to([phrase], db)
-			k_ranked_list = ranked_dict[phrase][:k]
+			# paths are tuples of the from (left_thing, verb_lemma, right_thing)
+			verb_lemmas = [clause[0] for clause in Sentence(s).clauses]
+			action_lemmas = [act for act in actions if act in ACTION_TYPES]
 
-			# for key key phrase, check
-			best_keyphrase = None
+			# list of sentences of the from (verb_lemmas, action_lemmas)
+			sentence_verb_actions.append((verb_lemmas, action_lemmas))
+
+	return sentence_verb_actions
+
+
+def assign_labels(db, mst_db, sents, K, output):
+
+	for j, (verb_list, action_list) in enumerate(sents):
+		for verb in verb_list:
+			ranked_list = mdirt.most_similar_to(verb, db)
+			best_action = None
 			best_score = 0
 
-			key_phrase_list = mdirt_dict.keys()
-			for kp in key_phrase_list:
-				if kp == phrase:
-					best_keyphrase = kp
-			if best_keyphrase is None:
-				# find best keyphrase if possible.
-				for key_phrase, ranked_list in mdirt_dict.items():
-					best_phrase, sc = best_phrase_score_tuple_list_intersection(phrase, k_ranked_list, ranked_list[:k], db)
-					if best_phrase is None:
+			for k in K:
+				top_k = ranked_list[:k]
+				for action, action_ranked_list in mst_db.items():
+					common = action_ranked_list[:k] & top_k
+					if len(common) == 0:
 						continue
+					elif len(common) > 1:
+						# choose the best score
+						for common_lemma in common:
+							score = mdirt.pathsimdb(common_lemma, action, db)
+							if score > best_score:
+								best_score = score
+								best_action = common_lemma
+					else:
+						best_action = common.pop()
+						best_score = (best_action, action)
 
-					if best_phrase == phrase:
-						best_keyphrase = key_phrase
-						break
+				with open(k + '_' + output, 'a') as ona:
+					ona.write('{}\t{}\t{}\t{}\t{}'.format(j, verb, best_action, best_score, action_list))
 
-					if sc > best_score:
-						best_score = sc
-						best_keyphrase = key_phrase
+				best_action = None
+				best_score = 0
 
-			if best_keyphrase is None:
-				unlabeled_phrases += 1
-				# print('{}\t{}\n'.format(phrase, action_list))
-				# assignments.append((phrase, None, None, action_list))
-				continue
+mdirt_mst = mdirt.most_similar_with_multislot_with_semantic
+def assign_labels_multi(db, mst_db, sents, K, output_names):
+	# action_sim_dict[database] = mst_db
+	#db, action_sim_dict[database]
 
-			for key, k_phrases in key_phrases.items():
-				for keyphrase in k_phrases:
-					if best_keyphrase == keyphrase:
-						if key in action_checklist:
-							action_checklist.remove(key)
-						print('{}\t{}\t{}\t{}\n'.format(phrase, best_keyphrase, key, action_list))
 
-						if key in action_list:
-							assignments.append((phrase, best_keyphrase, key, action_list, str(1)))
+	for j, verb_list, action_list in enumerate(sents):
+		for verb in verb_list:
+			ranked_tuple = mdirt_mst(verb, db)
+
+			best_action = [None, None, None, None]
+			comp_methods = [mdirt.pathSim_multiSlot, mdirt.pathSim_multiSlot, mdirt.weighted_pathSim_multiSlot, mdirt.weighted_pathSim_multiSlot]
+			best_score = [0, 0, 0, 0]
+
+			for i, ranked_list in enumerate(ranked_tuple):
+				for k in K:
+					top_k = ranked_list[:k]
+					for action, action_ranked_tuple in mst_db.items():
+						common = action_ranked_tuple[i][:k] & top_k
+						if len(common) == 0:
+							continue
+						elif len(common) > 1:
+							# choose the best score
+							for common_lemma in common:
+								score = comp_methods[i](common_lemma, action, db)
+								if score > best_score[i]:
+									best_score[i] = score
+									best_action[i] = common_lemma
 						else:
-							assignments.append((phrase, best_keyphrase, key, action_list, str(0)))
+							best_action[i] = common.pop()
+							best_score[i] = comp_methods[i](best_action[i], action)
 
-		if unlabeled_phrases > 0:
-			for action in action_checklist:
-				score = str(unlabeled_phrases / len(action_checklist))
-				print('unlabeled_phrases_found: {}\t{}\t{}\n'.format(unlabeled_phrases, action, score))
-				assignments.append(('unlabeled', unlabeled_phrases, action, score))
+					# append label to each file
+					with open(k + '_' + output_names[i], 'a') as ona:
+						ona.write('{}\t{}\t{}\t{}\t{}'.format(j, verb, best_action[i], best_score[i], action_list))
 
-	return assignments
+					best_action[i] = None
+					best_score[i] = 0
+
+def digest(rawd):
+	return nlp(text=rawd)
+
+def nlp_partial_sent(host_url):
+	nlp_server = StanfordCoreNLP('http://localhost:9000')
+	return partial(nlp_server.annotate, properties={'outputFormat': 'json'})
+
+
+def nlp_partial(server_annotate, text):
+	parse = server_annotate(text)
+	try:
+		return parse['sentences'][0]
+	except:
+		return None
 
 
 if __name__ == '__main__':
-	print('reading spacy english')
-	nlp = spacy.load('en')
-	print('finished reading spacy english')
+
+	### Setup Stanford server parse function "nlp"
+	annotater = nlp_partial_sent('http://localhost:9000')
+	nlp = partial(nlp_partial, server_annotate=annotater)
 
 	# import key paths (action-paths)
-	ACTION_TYPES = []
-	print('importing key paths')
-	key_phrase_dict = parse_key_paths('key_phrases')
-	print('finished importing key paths')
+	ACTION_TYPES = 'shoot aim hit look stare walk fall draw cock'.split()
+
 
 	# import test sentences
 	print('parsing sentence key')
 	# each item in the list is a tuple (phrase_list, action_list)
-	score_list = parse_scene_sents('IE_sent_key.txt')
-	print('finished parsing sentence key')
+	verb_action_lemmas = parse_scene_sents('IE_sent_key.txt')
+	with open('duel_corpus_verb_test_list.txt', 'w') as dv:
+		for i, (verb_list, action_list) in enumerate(verb_action_lemmas):
+			dv.write('{}\t{}\t{}'.format(i, verb_list, action_list))
+	print('finished parsing test sentence')
 
-	# import triple database
-	print('loading triple database for scoring')
-	with open('trip_database.pkl', 'rb') as tripdatabase:
-		trip = pickle.load(tripdatabase)
-	print('finished loading database')
 
-	print('collecting assignments')
-	assignment_tuples = collect_assignments(key_phrase_dict, score_list, trip, k=10)
-	print('finished collecting')
+	# Load databases from storage for use
+	s_names = ['tstream', 'ctstream', 'ftstream', 'fctstream', 'wstream', 'mstream']
+	output_names = ['SVO', 'SVO_corrected', 'SVO_filtered', 'SVO_filtered_corrected', 'SVO_hypernyms', 'NONE']
+	output_name_dict = dict(zip(s_names, output_names))
+	prefix = 'dirtar_database_'
+	suffix = '.pkl'
 
-	with open('assignment_tuples.txt', 'w') as file_tuples:
-		for line in assignment_tuples:
-			file_tuples.write('{}\n'.format(line))
+	action_sim_dict = dict()
+	print('Finding most-similar-to action lemmans')
+	for database in s_names:
+		print(database)
+		with open(prefix + database + suffix, 'rb') as tripdatabase:
+			db = pickle.load(tripdatabase)
+		action_sim_dict[database] = dict()
+
+		for action in ACTION_TYPES:
+			if database != 'mstream':
+				action_sim_dict[database][action] = mdirt.most_similar_to(action, db)
+			else:
+				g_regular, g_semantic, w_regular, w_semantic = mdirt.most_similar_with_multislot_with_semantic(action, db)
+				action_sim_dict[database][action] = (g_regular, g_semantic, w_regular, w_semantic)
+
+
+	print('assigning labels')
+	K = [10, 35, 100]
+	for database in s_names:
+		print(database)
+		with open(prefix + database + suffix, 'rb') as tripdatabase:
+			db = pickle.load(tripdatabase)
+		if database == 'mstream':
+			file_name_outputs = ['multi_reg_geo.txt', 'multi_sem_geo.txt', 'multi_reg_w.txt', 'multi_sem_w.txt']
+			assign_labels_multi(db, action_sim_dict[database], verb_action_lemmas, K, output=file_name_outputs)
+		else:
+			output_file_name = output_name_dict[database]
+			assign_labels(db, action_sim_dict[database], verb_action_lemmas, K, output=output_file_name + '.txt')

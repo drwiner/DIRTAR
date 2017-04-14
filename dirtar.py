@@ -25,7 +25,7 @@ def save_database(db, s_name):
 
 LEFT_DEPS = ['nsubj', 'nsubj:xsubj', 'nsubjpass', 'nmod:poss']
 REVERSIBLE_LEFTS = ['nsubjpass']
-RIGHT_DEPS = ['dobj', 'nmod:at', 'nmod:from', 'nmod:by', 'nmod:to', 'nmod:agent', 'nmod:in', 'nmod:into', 'nmod:poss', 'nmod:through', 'nmod:on', 'nmod:across', 'nmod:over', 'nmod:away_from']
+RIGHT_DEPS = ['iobj, dobj', 'nmod:at', 'nmod:from', 'nmod:by', 'nmod:to', 'nmod:agent', 'nmod:in', 'nmod:into', 'nmod:poss', 'nmod:through', 'nmod:on', 'nmod:across', 'nmod:over', 'nmod:away_from']
 REVERSIBLE_RIGHTS = ['nmod:agent', 'nmod:by']
 MULTI_SLOTS = LEFT_DEPS + RIGHT_DEPS
 
@@ -134,12 +134,16 @@ def apply_MinfreqFilter(stream, stream_name, min_freq):
 
 # Entry = namedtuple('Entry', ['word', 'count'=0, 'mi'])
 class Entry:
-	def __init__(self, path=None, slot=None, word=None):
+	def __init__(self, path=None, slot=None, word=None, dep=None, ner=None):
 		self.path = path
 		self.slot = slot
 		self.word = word
 		self.count = 1
 		self.mi = None
+		if dep is not None:
+			self.dep = dep
+		if ner is not None:
+			self.ner = ner
 
 	def __hash__(self):
 		return hash(self.path ^ self.slot ^ self.word)
@@ -247,7 +251,7 @@ def loadDatabase_multislot(db, filtered_Tinstances):
 			if x_noun in pdbx.keys():
 				pdbx[x_noun].count += 1
 			else:
-				pdbx[x_noun] = Entry(path, x_slot_name, x_noun)
+				pdbx[x_noun] = Entry(path, x_slot_name, x_noun, dep=x_dep, ner=x_ner)
 
 		if y_noun is not None and y_noun != 'none':
 			if y_slot_name not in path_db.keys():
@@ -256,7 +260,7 @@ def loadDatabase_multislot(db, filtered_Tinstances):
 			if y in pdby.keys():
 				pdby[y_noun].count += 1
 			else:
-				pdby[y_noun] = Entry(path, y_slot_name, y_noun)
+				pdby[y_noun] = Entry(path, y_slot_name, y_noun, dep=y_dep, ner=y_ner)
 
 
 @clock
@@ -409,18 +413,63 @@ def slotSim(p1, p2, slot_pos):
 	return n_score/d_score
 
 
-def most_similar_to(test_paths, db):
-	test_dict = dict()
+def most_similar_to(test_lemma, db):
+
+	if test_lemma == ' ' or test_lemma == '\n' or test_lemma not in db.keys():
+		return None
+
+	path_test = dict()
+	for p in db.keys():
+		ps = pathSimdb(test_lemma, p, db)
+		path_test[p] = ps
+
+	return list(reversed(sorted(path_test.items(), key=operator.itemgetter(1))))
+
+
+import semantic_parser
+
+def most_similar_with_multislot_with_semantic(test_lemma, db):
+
+	if test_lemma == ' ' or test_lemma == '\n' or test_lemma not in db.keys():
+		return None
+
+	tp_lemma = semantic_parser.filter_action_lemma(test_lemma, db)
+
+	reg_test = dict()
+	sem_test = dict()
+	weighted_reg_test = dict()
+	weighted_sem_test = dict()
+
+	for p in db.keys():
+		reg_test[p] = pathSim_multiSlot(test_lemma, p, db)
+		weighted_reg_test[p] = weighted_pathSim_multiSlot(test_lemma, p, db)
+
+		#tests with tp_lemma
+		sem_test[p] = pathSim_multiSlot(tp_lemma, p, db)
+		weighted_sem_test[p] = weighted_pathSim_multiSlot(tp_lemma, p, db)
+
+	g_regular = list(reversed(sorted(reg_test.items(), key=operator.itemgetter(1))))
+	g_semantic = list(reversed(sorted(sem_test.items(), key=operator.itemgetter(1))))
+	w_regular = list(reversed(sorted(weighted_reg_test.items(), key=operator.itemgetter(1))))
+	w_semantic = list(reversed(sorted(weighted_sem_test.items(), key=operator.itemgetter(1))))
+
+	return (g_regular, g_semantic, w_regular, w_semantic)
+
+
+# run both geo and weighted-geo measures
+def most_similar_to_test(test_paths, db):
+	tested_dict = dict()
 	for tp in test_paths:
 		if tp == ' ' or tp == '\n' or tp not in db.keys():
 			continue
 
-		path_test = dict()
+		test_paths = dict()
 		for p in db.keys():
-			ps = pathSimdb(tp, p, db)
-			path_test[p] = ps
-		test_dict[tp] = list(reversed(sorted(path_test.items(), key=operator.itemgetter(1))))
-	return test_dict
+			test_paths[p] = pathSimdb(tp, p, db)
+
+		tested_dict[tp] = list(reversed(sorted(test_paths.items(), key=operator.itemgetter(1))))
+
+	return tested_dict
 
 
 def test_most_similar_to(i, action_lemma_doc, k_most_similar, line1, line2):
@@ -525,11 +574,6 @@ if __name__ == '__main__':
 
 	databases = [triple_database, triple_dep_filtered, triple_collapsed, triple_dep_filtered_collapsed, triple_W_db]
 
-	# delete this, just running this in iso
-	# streams = [WStream]
-	# database = [triple_W_db]
-	# s_names = ['wstream']
-
 	ftinstances = []
 	slot_counts = []
 	word_slot_counts = []
@@ -537,26 +581,6 @@ if __name__ == '__main__':
 		ftinstances.append(list())
 		slot_counts.append(dict())
 		word_slot_counts.append(dict())
-
-	with open(test_text, 'r') as tt:
-		test_paths = [cleanLine(line) for line in test_text]
-
-	# import semantic_parser
-
-
-	# action_frame_dict = semantic_parser.get_action_lemma_entries()
-
-	# new_database_entries = {'X':}
-	# for (slot, v, dep, ner), nouns in v_x_dep_dict.items():
-	# 	if v in action_frame_dict.keys():
-	# 		with open(v + slot + '_X_nofilter.txt', 'a') as vat:
-	# 			for noun in nouns:
-	# 				vat.write('{}\t{}'.format(noun, dep))
-	# 		with open(v + '_' + slot + '_filtered.txt', 'a') as vat:
-	# 			for noun in nouns:
-	# 				if action_frame_dict[v].filter(slot, dep, noun, ner):
-	# 					vat.write('{}\t{}'.format(noun, dep))
-
 
 
 	for i in range(len(streams)):
@@ -569,9 +593,6 @@ if __name__ == '__main__':
 		# load database
 		print('loading database')
 		loadDatabase(databases[i], ftinstances)
-		# dump database
-		# print('dumping database')
-		# save_database(databases[i], s_names[i])
 
 		# apply semantic discrimination for each action lemma if in database
 		# use test doc to filter by semantic, but for now, just update
@@ -583,7 +604,7 @@ if __name__ == '__main__':
 
 		line1 = 'Found {} distinct paths, {} after minfreq filtering.\n'.format(dp, dmf)
 		line2 = 'Found {} path instances, {} after minfreq filtering.\n'.format(pi, pimf)
-		test_most_similar_to(i, test_paths, 10, line1, line2)
+
 
 
 	# MStream

@@ -1,4 +1,5 @@
-# http://stackoverflow.com/questions/4576077/python-split-text-on-sentences
+# small edits to http://stackoverflow.com/questions/4576077/python-split-text-on-sentences
+# David Winer
 
 import re
 caps = "([A-Z])"

@@ -11,8 +11,7 @@ inspired by framenet
 
 from nltk.corpus import wordnet as wn
 from collections import defaultdict
-
-
+from dirtar import Entry
 
 class ActionFrame:
 	def __init__(self, lemma):
@@ -49,6 +48,113 @@ class ActionFrame:
 
 		return False
 
+gun = wn.synsets('gun', wn.NOUN)[0]
+body_part = wn.synsets('body_part', wn.NOUN)[0]
+location = wn.synsets('location')[0]
+way = wn.synsets('path')[0]
+bullet = wn.synsets('bullet')[0]
+ammo = wn.synsets('ammo')[0]
+foot = wn.synsets('foot', wn.NOUN)[0]
+hand = wn.synsets('hand', wn.NOUN)[0]
+person = wn.synsets('person', wn.NOUN)[0]
+eyes = wn.synsets('eyes')[0]
+face = wn.synsets('face')[0]
+head = wn.synsets('head')[0]
+gunman = wn.synsets('gunman')[0]
+victim = wn.synsets('victim')[0]
+tree = wn.synsets('tree')[0]
+sky = wn.synsets('sky')[0]
+ground = wn.synsets('ground')[0]
+floor = wn.synsets('floor')[0]
+wall = wn.synsets('wall')[0]
+crowd = wn.synsets('crowd')[0]
+bottle = wn.synsets('bottle')[0]
+
+
+REMAP = {'he': person, 'she': person, 'they': person, 'it': person, 'we': person}
+
+LEFT_DEPS = ['nsubj', 'nsubj:xsubj', 'nsubjpass', 'nmod:poss']
+RIGHT_DEPS = ['dobj', 'iobj', 'nmod:at', 'nmod:from', 'nmod:by', 'nmod:to', 'nmod:agent', 'nmod:in', 'nmod:into', 'nmod:poss', 'nmod:through', 'nmod:on', 'nmod:across', 'nmod:over', 'nmod:away_from']
+
+
+# inspired by framenet
+
+shoot = ActionFrame('shoot')
+shoot.add_rule('X', {'nsubj', 'nsubj:xsubj'}, [person, gunman])
+
+shoot.add_rule('Y', {'nmod:from'}, [gun, ground, floor, location, crowd, tree])
+shoot.add_rule('Y', {'nmod:with'}, [gun, ammo, bullet])
+
+
+aim = ActionFrame('aim')
+aim.add_rule('X', {'nsubj', 'nsubj:xsubj'}, [person, gunman])
+# aim.add_rule('X', {'nsubjpass', 'nmod:poss'}, [person, victim, gunman, body_part, wall, head, ground, eyes, sky, floor, crowd, bottle])
+# aim.add_rule('Y', {'dobj', 'nmod:at'},
+#                [person, victim, gun, floor, ground, crowd, sky, foot, head, eyes, face, wall, bottle, tree,
+#                 body_part])
+aim.add_rule('Y', {'nmod:from'}, [ground, floor, location, crowd, tree])
+aim.add_rule('Y', {'nmod:with'}, [gun])
+
+
+hit = ActionFrame('hit')
+hit.add_rule('X', {'nsubj', 'nsubj:xsubj'}, [person, gunman, bullet])
+# hit.add_rule('Y', {'dobj'}, [person, body_part, foot, eyes, head, face, hand, bottle])
+
+
+fall = ActionFrame('fall')
+fall.add_rule('Y', {'nmod:to'}, [ground, floor, location])
+
+look = ActionFrame('look')
+look.add_rule('X', {'nsubj', 'nsubj:xsubj'}, [person, gunman, victim, eyes, face, head])
+
+stare = ActionFrame('stare')
+stare.add_rule('X', {'nsubj', 'nsubj:xsubj'}, [person, gunman, victim, eyes, face, head])
+
+walk = ActionFrame('walk')
+walk.add_rule('X', {'nsubj', 'nsubj:xsubj'}, [gunman, person, foot, victim])
+walk.add_rule('X', {'nmod:from', 'nmod:away_from'}, [person, location, ground, way, floor, crowd, wall])
+walk.add_rule('X', {'nmod:to'}, [person, location, ground, way, floor, crowd, wall])
+
+draw = ActionFrame('draw')
+draw.add_rule('X', {'nsubj', 'nsubj:xsubj'}, [person, gunman, hand])
+draw.add_rule('Y', {'dobj', 'iobj'}, [gun])
+
+cock = ActionFrame('cock')
+cock.add_rule('X', {'nsubj', 'nmod:poss', 'nsubj:xsubj'}, [person, gunman, hand])
+cock.add_rule('X', {'nsubjpass'}, [gun])
+cock.add_rule('Y', {'dobj', 'iobj'}, [gun])
+
+action_frames = [shoot, aim, hit, fall, look, stare, walk, draw, cock]
+action_frame_dict = dict(zip([action.lemma for action in action_frames], action_frames))
+
+def filter_action_lemma(lemma, db):
+	# entry_db whose keys are slots and whose values are entries, described as follows:
+	"""
+	class Entry
+		self.path = path
+		self.slot = slot
+		self.word = word
+		self.count = 1
+		self.mi = None
+
+	"""
+	if lemma not in action_frame_dict.keys():
+		print('path \'{}\' not found'.format(lemma))
+		return
+	frame = action_frame_dict[lemma]
+	slots = db[lemma].keys()
+
+	for slot in slots:
+		slot_pos = slot[0].upper()
+		entries = db[lemma][slot]
+		filtered_entries = []
+		for entry in entries:
+			if frame.filter(slot_pos, entry.dep, entry.word, entry.ner):
+				filtered_entries.append(entry)
+
+		# add to the db
+		db[lemma][slot] = filtered_entries
+
 
 def get_action_lemma_entries():
 	return action_frame_dict
@@ -56,82 +162,5 @@ def get_action_lemma_entries():
 if __name__ == '__main__':
 
 	# semantic tokens
-	gun = wn.synsets('gun', wn.NOUN)[0]
-	body_part = wn.synsets('body_part', wn.NOUN)[0]
-	location = wn.synsets('location')[0]
-	way = wn.synsets('path')[0]
-	bullet = wn.synsets('bullet')[0]
-	ammo = wn.synsets('ammo')[0]
-	foot = wn.synsets('foot', wn.NOUN)[0]
-	hand = wn.synsets('hand', wn.NOUN)[0]
-	person = wn.synsets('person', wn.NOUN)[0]
-	eyes = wn.synsets('eyes')[0]
-	face = wn.synsets('face')[0]
-	head = wn.synsets('head')[0]
-	gunman = wn.synsets('gunman')[0]
-	victim = wn.synsets('victim')[0]
-	tree = wn.synsets('tree')[0]
-	sky = wn.synsets('sky')[0]
-	ground = wn.synsets('ground')[0]
-	floor = wn.synsets('floor')[0]
-	wall = wn.synsets('wall')[0]
-	crowd = wn.synsets('crowd')[0]
-	bottle = wn.synsets('bottle')[0]
-
-
-	REMAP = {'he': person, 'she': person, 'they': person, 'it': person, 'we': person}
-
-	LEFT_DEPS = ['nsubj', 'nsubj:xsubj', 'nsubjpass', 'nmod:poss']
-	RIGHT_DEPS = ['dobj', 'nmod:at', 'nmod:from', 'nmod:by', 'nmod:to', 'nmod:agent', 'nmod:in', 'nmod:into', 'nmod:poss', 'nmod:through', 'nmod:on', 'nmod:across', 'nmod:over', 'nmod:away_from']
-
-
-	# inspired by framenet
-
-	shoot = ActionFrame('shoot')
-	shoot.add_rule('X', {'nsubj', 'nsubj:xsubj'}, [person, gunman])
-
-	shoot.add_rule('Y', {'nmod:from'}, [gun, ground, floor, location, crowd, tree])
-	shoot.add_rule('Y', {'nmod:with'}, [gun, ammo, bullet])
-
-
-	aim = ActionFrame('aim')
-	aim.add_rule('X', {'nsubj', 'nsubj:xsubj'}, [person, gunman])
-	# aim.add_rule('X', {'nsubjpass', 'nmod:poss'}, [person, victim, gunman, body_part, wall, head, ground, eyes, sky, floor, crowd, bottle])
-	# aim.add_rule('Y', {'dobj', 'nmod:at'},
-	#                [person, victim, gun, floor, ground, crowd, sky, foot, head, eyes, face, wall, bottle, tree,
-	#                 body_part])
-	aim.add_rule('Y', {'nmod:from'}, [ground, floor, location, crowd, tree])
-	aim.add_rule('Y', {'nmod:with'}, [gun])
-
-
-	hit = ActionFrame('hit')
-	hit.add_rule('X', {'nsubj', 'nsubj:xsubj'}, [person, gunman, bullet])
-	# hit.add_rule('Y', {'dobj'}, [person, body_part, foot, eyes, head, face, hand, bottle])
-
-
-	fall = ActionFrame('fall')
-	fall.add_rule('Y', {'nmod:to'}, [ground, floor, location])
-
-	look = ActionFrame('look')
-	look.add_rule('X', {'nsubj', 'nsubj:xsubj'}, [person, gunman, victim, eyes, face, head])
-
-	stare = ActionFrame('stare')
-	stare.add_rule('X', {'nsubj', 'nsubj:xsubj'}, [person, gunman, victim, eyes, face, head])
-
-	walk = ActionFrame('walk')
-	walk.add_rule('X', {'nsubj', 'nsubj:xsubj'}, [gunman, person, foot, victim])
-	walk.add_rule('X', {'nmod:from', 'nmod:away_from'}, [person, location, ground, way, floor, crowd, wall])
-	walk.add_rule('X', {'nmod:to'}, [person, location, ground, way, floor, crowd, wall])
-
-	draw = ActionFrame('draw')
-	draw.add_rule('X', {'nsubj', 'nsubj:xsubj'}, [person, gunman, hand])
-	draw.add_rule('Y', {'dobj'}, [gun])
-
-	cock = ActionFrame('cock')
-	cock.add_rule('X', {'nsubj', 'nmod:poss', 'nsubj:xsubj'}, [person, gunman, hand])
-	cock.add_rule('X', {'nsubjpass'}, [gun])
-	cock.add_rule('Y', {'dobj'}, [gun])
-
-	action_frames = [shoot, aim, hit, fall, look, stare, walk, draw, cock]
-	action_frame_dict = dict(zip([action.lemma for action in action_frames], action_frames))
+	pass
 

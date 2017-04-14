@@ -3,6 +3,7 @@
 # import collections
 from nltk.tree import ParentedTree
 import pickle
+from sentence_splitter import split_into_sentences
 # from nltk.tree import Tree
 
 class Word:
@@ -94,11 +95,9 @@ def head_noun(ptree):
 
 		return None
 
-from collections import namedtuple
-# fake_token = namedtuple('fake_token', 'lemma'.split())
-Clause_relation = namedtuple('Clause_relation', 'verb dep relation'.split())
 from clockdeco import clock
 import collections
+
 class Sentence:
 	"""
 	Reads sentence, spits clauses
@@ -189,36 +188,18 @@ def digest(rawd):
 
 @clock
 def read_corpus(file_name):
-	# import spacy
-	from sentence_splitter import split_into_sentences
-	# print('loading spacy')
-	# spacy_nlp = spacy.load('en')
+
 	print('reading')
-	# sep_docs = []
-	# raw_doc = ''
+
 	with open(file_name) as fn:
 		doc = split_into_sentences(fn.read())
+
 	return doc
-		# raw_doc += ' '.join(fn.readlines())
-	# 	for line in fn:
-	# 		sp = line.split()
-	# 		raw_doc += ' '.join(wrd.strip() for wrd in sp if wrd != '\n')
-	# 		raw_doc += ' '
-	# 		# if len(raw_doc) > 90000:
-	# 		# 	print('finished_collecting segment, now parsing')
-	# 		# 	nlp_raw = digest(raw_doc)
-	# 		# 	print('finished_parsing segment')
-	# 		# 	raw_doc = ''
-	# 		# 	# print(len(raw_doc))
-	# 		# 	sep_docs.append(nlp_raw)
-	#
-	# print('finished reading, now parsing nlp style')
-	# return split_into_sentences(raw_doc)
-	# sep_sents = [s.text for s in spacy_nlp(raw_doc).sents]
-	# return sep_sents
 
 # @clock
 def nlp_partial_sent(host_url):
+	from pycorenlp import StanfordCoreNLP
+	from functools import partial
 	nlp_server = StanfordCoreNLP('http://localhost:9000')
 	return partial(nlp_server.annotate, properties={'outputFormat': 'json'})
 
@@ -229,9 +210,9 @@ def nlp_partial(server_annotate, text):
 		return parse['sentences'][0]
 	except:
 		return None
-		
-		
-def append_sent_dump(doc_sents):
+
+
+def append_sent_dump(name, doc_sents):
 	with open('movie_clauses.txt', 'a') as clause_file:
 		for clause in assemble_clause_relations(doc_sents):
 			if clause is None:
@@ -243,6 +224,8 @@ def append_sent_dump(doc_sents):
 if __name__ == '__main__':
 	from pycorenlp import StanfordCoreNLP
 	from functools import partial
+
+	PARSE_CORPUS = 0
 
 	### Setup Stanford server parse function "nlp"
 	annotater = nlp_partial_sent('http://localhost:9000')
@@ -259,28 +242,28 @@ if __name__ == '__main__':
 	# clauses = [Sentence(nlp_sent).clauses]
 	
 	### For reading in the text
-	SAVED = 1
-	if not SAVED:
-		unparsed_docs = read_corpus('movie_combo.txt')
-		pickle.dump(unparsed_docs, open('movie_corpus_dump', 'wb'))
-	elif SAVED == 1:
-		print('loading from dump')
-		unparsed_docs = pickle.load(open('movie_corpus_dump', 'rb'))
-		print('finished dump')
+	if PARSE_CORPUS:
+		SAVED = 1
+		if not SAVED:
+			unparsed_docs = read_corpus('movie_combo.txt')
+			pickle.dump(unparsed_docs, open('movie_corpus_dump', 'wb'))
+		elif SAVED == 1:
+			print('loading from dump')
+			unparsed_docs = pickle.load(open('movie_corpus_dump', 'rb'))
+			print('finished dump')
 
-	### Parse each sentence, and dump
-	print(len(unparsed_docs))
-	doc_sents = []
-	for i, sent in enumerate(unparsed_docs):
-		if i % 10000 == 0:
-			print(i)
-	#	if i % 100000 == 0:
-	#		pickle.dump(doc_sents, open('doc_sents' + str(i), 'wb'))
-	#		print(i)
-		s = digest(sent)
-		if s is not None:
-			doc_sents.append(Sentence(s))
-	pickle.dump(doc_sents, open('last_sents', 'wb'))
+		### Parse each sentence, then dump
+		print(len(unparsed_docs))
+		doc_sents = []
+		for i, sent in enumerate(unparsed_docs):
+			if i % 10000 == 0:
+				print(i)
+			s = digest(sent)
+			if s is not None:
+				doc_sents.append(Sentence(s))
+		pickle.dump(doc_sents, open('last_sents', 'wb'))
 
-	print('loaded pickle dump')
-	append_sent_dump(doc_sents)
+		print('loaded pickle dump')
+		append_sent_dump(doc_sents)
+
+
