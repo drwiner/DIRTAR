@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 # modified the DIRT algorithm (Lin and Pantel, 2001, ACM)
-# the slots are dependencies such as "subj", "dobj", and "pp-by"
+# the slots are dependencies such as "nsubj", "dobj", and "pp-by", and many others, below
 
 # Written by DAVID WINER
 # Do not take without permission - drwiner@cs.utah.edu
@@ -30,7 +30,6 @@ REVERSIBLE_RIGHTS = ['nmod:agent', 'nmod:by']
 MULTI_SLOTS = LEFT_DEPS + RIGHT_DEPS
 
 Triple = namedtuple('Triple', ['X', 'path', 'Y'])
-Verb_NP_ner = namedtuple('Verb_NP_ner', ['verb', 'noun', 'ner'])
 
 def cleanLine(line):
 	return ' '.join(line.split()) + ' '
@@ -91,7 +90,7 @@ def readCorpus(clause_file):
 			WStream.append(Triple(wn_x, path, wn_y))
 
 			# left and right are tuples (noun, dep, ner)
-			MStream.append(Triple((x, x_dep,x_ner), path, (y, y_dep, y_ner)))
+			MStream.append(Triple((x, x_dep, x_ner), path, (y, y_dep, y_ner)))
 
 			# X and Y collapsed but filtered by dependency type
 			if x_dep in LEFT_DEPS and y_dep in RIGHT_DEPS:
@@ -345,19 +344,23 @@ def pathSimdb(p1, p2, db):
 	return sqrt(slot_x_sim * slot_y_sim)
 
 def pathSim_multiSlot(p1, p2, db):
-	slots = set(db[p1].keys()) | set(db[p2].keys())
-	sim_list = [slotSimdb(p1,p2,slot,db) for slot in slots]
+	slots = set(db[p1].keys()) & set(db[p2].keys())
+	sim_list = [slotSimdb(p1, p2, slot, db) for slot in slots]
 	k = len(sim_list)
+	if k == 0:
+		return 0
 	a = functools.reduce(operator.mul, sim_list, 1)
 	return a**(1./float(k))
 
 
 def weighted_pathSim_multiSlot(p1, p2, db):
-	slots = set(db[p1].keys()) | set(db[p2].keys())
+	slots = set(db[p1].keys()) & set(db[p2].keys())
 	weights = [len(db[p1][slot]) + len(db[p2][slot]) / 2 for slot in slots]
 	slot_weight = zip(slots, weights)
 	sim_list = [w*slotSimdb(p1, p2, slot, db) for slot, w in slot_weight]
 	k = len(sim_list)
+	if k == 0:
+		return 0
 	a = functools.reduce(operator.mul, sim_list, 1)
 	return a ** (1. / float(k))
 
@@ -428,32 +431,43 @@ def most_similar_to(test_lemma, db):
 
 import semantic_parser
 
-def most_similar_with_multislot_with_semantic(test_lemma, db):
+def most_similar_with_multislot_with_semantic(test_lemma, db, semantic=1):
 
 	if test_lemma == ' ' or test_lemma == '\n' or test_lemma not in db.keys():
 		return None
-
-	tp_lemma = semantic_parser.filter_action_lemma(test_lemma, db)
+	if semantic:
+		tp_lemma = semantic_parser.filter_action_lemma(test_lemma, db)
 
 	reg_test = dict()
 	sem_test = dict()
 	weighted_reg_test = dict()
 	weighted_sem_test = dict()
 
-	for p in db.keys():
+	for p in set(db.keys()):
+		print(p)
+
 		reg_test[p] = pathSim_multiSlot(test_lemma, p, db)
 		weighted_reg_test[p] = weighted_pathSim_multiSlot(test_lemma, p, db)
-
+		if semantic:
+			print(tp_lemma)
 		#tests with tp_lemma
-		sem_test[p] = pathSim_multiSlot(tp_lemma, p, db)
-		weighted_sem_test[p] = weighted_pathSim_multiSlot(tp_lemma, p, db)
+		if semantic:
+			if tp_lemma is None:
+				sem_test[p] = 0
+				weighted_sem_test[p] = 0
+			else:
+				sem_test[p] = pathSim_multiSlot(tp_lemma, p, db)
+				weighted_sem_test[p] = weighted_pathSim_multiSlot(tp_lemma, p, db)
 
+	if semantic:
+		g_semantic = list(reversed(sorted(sem_test.items(), key=operator.itemgetter(1))))
+		w_semantic = list(reversed(sorted(weighted_sem_test.items(), key=operator.itemgetter(1))))
 	g_regular = list(reversed(sorted(reg_test.items(), key=operator.itemgetter(1))))
-	g_semantic = list(reversed(sorted(sem_test.items(), key=operator.itemgetter(1))))
 	w_regular = list(reversed(sorted(weighted_reg_test.items(), key=operator.itemgetter(1))))
-	w_semantic = list(reversed(sorted(weighted_sem_test.items(), key=operator.itemgetter(1))))
 
-	return (g_regular, g_semantic, w_regular, w_semantic)
+	if semantic:
+		return (g_regular, g_semantic, w_regular, w_semantic)
+	return (g_regular, w_regular)
 
 
 # run both geo and weighted-geo measures

@@ -1,12 +1,6 @@
 """
-Written by Dav
-each action lemma is assigned a set of rules for left and right slots
-	represented with a nested dictionary as follows:
-	[shoot] --> X, Y
-	[X] -> nsubj, nsubjpass, nsubj:xpass
-	[dep] -> cat1, cat2, (list of valid cats)
-
-inspired by framenet
+Written by David Winer 2017 - 04 - 15
+each action lemma is assigned a set of rules for left and right slots inspired by framenet
 """
 
 from nltk.corpus import wordnet as wn
@@ -32,7 +26,14 @@ class ActionFrame:
 		elif ner == 'PERSON':
 			wn_token = person
 		else:
-			wn_token = wn.synsets(noun, wn.NOUN)[0]
+			tokens = wn.synsets(noun, wn.NOUN)
+			if len(tokens) == 0:
+				if len(self.restrictions[slot][dep]) == 0:
+					# then it doesn't matter
+					return True
+				return False
+
+			wn_token = tokens[0]
 
 		# returns True if valid and False otherwise
 		sem_types = self.restrictions[slot][dep]
@@ -124,36 +125,31 @@ cock.add_rule('X', {'nsubj', 'nmod:poss', 'nsubj:xsubj'}, [person, gunman, hand]
 cock.add_rule('X', {'nsubjpass'}, [gun])
 cock.add_rule('Y', {'dobj', 'iobj'}, [gun])
 
-action_frames = [shoot, aim, hit, fall, look, stare, walk, draw, cock]
+speak = ActionFrame('speak')
+speak.add_rule('X', {'nsubj', 'nsubj:xsubj', 'nsubjpass'}, [person, gunman, victim])
+
+action_frames = [shoot, aim, hit, fall, look, stare, walk, draw, cock, speak]
 action_frame_dict = dict(zip([action.lemma for action in action_frames], action_frames))
 
 def filter_action_lemma(lemma, db):
 	# entry_db whose keys are slots and whose values are entries, described as follows:
-	"""
-	class Entry
-		self.path = path
-		self.slot = slot
-		self.word = word
-		self.count = 1
-		self.mi = None
 
-	"""
 	if lemma not in action_frame_dict.keys():
 		print('path \'{}\' not found'.format(lemma))
 		return
 	frame = action_frame_dict[lemma]
 	slots = db[lemma].keys()
+	new_lemma = lemma + '_lemma'
+	db[new_lemma] = dict()
 
 	for slot in slots:
 		slot_pos = slot[0].upper()
-		entries = db[lemma][slot]
-		filtered_entries = []
-		for entry in entries:
+		db[new_lemma][slot] = dict()
+		for noun, entry in db[lemma][slot].items():
 			if frame.filter(slot_pos, entry.dep, entry.word, entry.ner):
-				filtered_entries.append(entry)
+				db[new_lemma][slot][noun] = entry
 
-		# add to the db
-		db[lemma][slot] = filtered_entries
+	return new_lemma
 
 
 def get_action_lemma_entries():

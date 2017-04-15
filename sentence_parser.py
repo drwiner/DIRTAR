@@ -261,7 +261,7 @@ if __name__ == '__main__':
 			s = digest(sent)
 			if s is not None:
 				doc_sents.append(Sentence(s))
-		pickle.dump(doc_sents, open('last_sents', 'wb'))
+		pickle.dump(doc_sents, open('last_sents,pkl', 'wb'))
 
 		print('loaded pickle dump')
 		append_sent_dump(doc_sents)

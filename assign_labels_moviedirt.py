@@ -1,4 +1,5 @@
-#!/usr/bin/python
+# Written by David Winer
+# 2017 - 04 - 15
 
 import pickle
 import dirtar as mdirt
@@ -12,6 +13,17 @@ import semantic_parser
 
 def cleanLine(line):
 	return ' '.join(line.split()) + ' '
+
+# action_remap_dict = {'fire':'fire', 'aim': 'aim', 'hit': 'get-shot', 'look': 'look-at', 'stare': 'stare-at',
+	                     # 'walk': 'walk', 'fall': 'fall', 'draw': 'draw', 'cock': 'cock'}
+action_remap_dict = {'fire':'fire', 'aim': 'aim', 'get-shot': 'hit', 'look-at': 'look', 'stare-at': 'stare',
+	                     'walk': 'walk', 'walk-to' : 'walk', 'walk-from': 'walk',
+	                 'face' : 'look', 'turn' : 'look', 'face-to': 'look', 'turn-to':'look', 'look-from-to' : 'look',
+	                 'turn-from-to' : 'look', 'face-from-to': 'look',
+	                 'walk-to-from': 'walk', 'arrive' : 'walk', 'leave': 'walk',
+	                 'fall': 'fall', 'draw': 'draw', 'cock': 'cock'}
+# action_remap_dict = {'fire':'fire', 'aim': 'aim', 'hit': 'get-shot', 'look': 'look-at', 'stare': 'stare-at',
+	                     # 'walk': 'walk', 'fall': 'fall', 'draw': 'draw', 'cock': 'cock', None: 'None'}
 
 
 def parse_scene_sents(file_name):
@@ -32,8 +44,8 @@ def parse_scene_sents(file_name):
 				continue
 
 			# paths are tuples of the from (left_thing, verb_lemma, right_thing)
-			verb_lemmas = [clause[0] for clause in Sentence(s).clauses]
-			action_lemmas = [act for act in actions if act in ACTION_TYPES]
+			verb_lemmas = [clause[1].strip() for clause in Sentence(s).clauses]
+			action_lemmas = [action_remap_dict[act] for act in actions if act in action_remap_dict.keys()]
 
 			# list of sentences of the from (verb_lemmas, action_lemmas)
 			sentence_verb_actions.append((verb_lemmas, action_lemmas))
@@ -41,75 +53,133 @@ def parse_scene_sents(file_name):
 	return sentence_verb_actions
 
 
+
+
 def assign_labels(db, mst_db, sents, K, output):
 
 	for j, (verb_list, action_list) in enumerate(sents):
 		for verb in verb_list:
+			print(verb)
+
 			ranked_list = mdirt.most_similar_to(verb, db)
-			best_action = None
-			best_score = 0
+
+			# ain't gonna work kid
+			if ranked_list is None:
+				for k in K:
+					with open(str(k) + '_' + str(output), 'a') as ona:
+						ona.write('{}\t{}\t{}\t{}\t{}\n'.format(j, verb, None, 0, action_list))
+				continue
 
 			for k in K:
-				top_k = ranked_list[:k]
-				for action, action_ranked_list in mst_db.items():
-					common = action_ranked_list[:k] & top_k
-					if len(common) == 0:
-						continue
-					elif len(common) > 1:
-						# choose the best score
-						for common_lemma in common:
-							score = mdirt.pathsimdb(common_lemma, action, db)
-							if score > best_score:
-								best_score = score
-								best_action = common_lemma
-					else:
-						best_action = common.pop()
-						best_score = (best_action, action)
-
-				with open(k + '_' + output, 'a') as ona:
-					ona.write('{}\t{}\t{}\t{}\t{}'.format(j, verb, best_action, best_score, action_list))
-
 				best_action = None
 				best_score = 0
-
-mdirt_mst = mdirt.most_similar_with_multislot_with_semantic
-def assign_labels_multi(db, mst_db, sents, K, output_names):
-	# action_sim_dict[database] = mst_db
-	#db, action_sim_dict[database]
-
-
-	for j, verb_list, action_list in enumerate(sents):
-		for verb in verb_list:
-			ranked_tuple = mdirt_mst(verb, db)
-
-			best_action = [None, None, None, None]
-			comp_methods = [mdirt.pathSim_multiSlot, mdirt.pathSim_multiSlot, mdirt.weighted_pathSim_multiSlot, mdirt.weighted_pathSim_multiSlot]
-			best_score = [0, 0, 0, 0]
-
-			for i, ranked_list in enumerate(ranked_tuple):
-				for k in K:
-					top_k = ranked_list[:k]
-					for action, action_ranked_tuple in mst_db.items():
-						common = action_ranked_tuple[i][:k] & top_k
+				exact_match = 0
+				top_k = {item[0] for item in ranked_list[:k]}
+				if verb in mst_db.keys():
+					exact_match = 1
+					best_action = verb
+					best_score = 1.0
+				else:
+					for action, action_ranked_list in mst_db.items():
+						art = {item[0] for item in action_ranked_list[:k]}
+						common = art & top_k
 						if len(common) == 0:
 							continue
 						elif len(common) > 1:
+							if action in common:
+								best_score = 1.0
+								best_action = action
+								break
 							# choose the best score
 							for common_lemma in common:
-								score = comp_methods[i](common_lemma, action, db)
-								if score > best_score[i]:
-									best_score[i] = score
-									best_action[i] = common_lemma
+								score = mdirt.pathSimdb(common_lemma, action, db)
+								if score > best_score:
+									best_score = score
+									best_action = action
 						else:
-							best_action[i] = common.pop()
-							best_score[i] = comp_methods[i](best_action[i], action)
+							common_lemma = common.pop()
+							if common_lemma == action:
+								best_score = 1.0
+								best_action = action
+								break
+							score = mdirt.pathSimdb(common_lemma, action, db)
+							if score > best_score:
+								best_score = score
+								best_action = action
 
-					# append label to each file
-					with open(k + '_' + output_names[i], 'a') as ona:
-						ona.write('{}\t{}\t{}\t{}\t{}'.format(j, verb, best_action[i], best_score[i], action_list))
+				print('best action: {}'.format(best_action))
 
+				with open(str(k) + '_' + str(output), 'a') as ona:
+					ona.write('{}\t{}\t{}\t{}\t{}\t{}\n'.format(j, verb, best_action, exact_match, best_score, action_list))
+
+
+mdirt_mst = mdirt.most_similar_with_multislot_with_semantic
+def assign_labels_multi(db, mst_db, sents, K, output_names):
+	# mst_db = action_sim_dict[database]
+
+	for j, (verb_list, action_list) in enumerate(sents):
+		for verb in verb_list:
+			print(verb)
+			two_lists = mdirt.most_similar_with_multislot_with_semantic(verb, db, semantic=0)
+
+			# ain't gonna work kid
+			if two_lists is None:
+				for k in K:
+					for output in output_names:
+						with open(str(k) + '_' + str(output), 'a') as ona:
+							ona.write('{}\t{}\t{}\t{}\t{}\n'.format(j, verb, None, 0, action_list))
+				continue
+
+			best_action = [None, None, None, None]
+			best_score = [0, 0, 0, 0]
+			cmp_lists = [two_lists[0], two_lists[1], two_lists[0], two_lists[1]]
+			path_methods = [mdirt.pathSim_multiSlot, mdirt.weighted_pathSim_multiSlot,
+			                mdirt.pathSim_multiSlot, mdirt.weighted_pathSim_multiSlot]
+
+			for k in K:
+				for i in range(4):
 					best_action[i] = None
 					best_score[i] = 0
+					exact_match = 0
+					# item is tuple (verb, score)
+					top_k = {item[0] for item in cmp_lists[i][:k]}
+					if verb in mst_db.keys():
+						exact_match = 1
+						best_action[i] = verb
+						best_score[i] = 1.0
+					else:
+						for action, action_ranked_tuple in mst_db.items():
+							art = {item[0] for item in action_ranked_tuple[i][:k]}
+							common = art & top_k
+							if len(common) == 0:
+								continue
+							elif len(common) > 1:
+								if action in common:
+									best_action[i] = action
+									best_score[i] = 1.0
+									break
+								# choose the best score
+								for common_lemma in common:
+									score = path_methods[i](common_lemma, action, db)
+									if score > best_score[i]:
+										best_score[i] = score
+										best_action[i] = action
+							else:
+								common_lemma = common.pop()
+								if action == common_lemma:
+									best_action[i] = action
+									best_score[i] = 1.0
+									break
+								score = path_methods[i](common_lemma, action, db)
+								if score > best_score[i]:
+									best_score[i] = score
+									best_action[i] = action
+
+					# append label to each file
+					print('best action: {}'.format(best_action[i]))
+
+					with open(str(k) + '_' + output_names[i], 'a') as ona:
+						ona.write('{}\t{}\t{}\t{}\t{}\t{}\n'.format(j, verb, best_action[i], exact_match, best_score[i], action_list))
 
 def digest(rawd):
 	return nlp(text=rawd)
@@ -134,51 +204,50 @@ if __name__ == '__main__':
 	nlp = partial(nlp_partial, server_annotate=annotater)
 
 	# import key paths (action-paths)
-	ACTION_TYPES = 'shoot aim hit look stare walk fall draw cock'.split()
+	ACTION_TYPES = 'fire aim hit look stare walk fall draw cock'.split()
 
 
 	# import test sentences
 	print('parsing sentence key')
 	# each item in the list is a tuple (phrase_list, action_list)
 	verb_action_lemmas = parse_scene_sents('IE_sent_key.txt')
-	with open('duel_corpus_verb_test_list.txt', 'w') as dv:
-		for i, (verb_list, action_list) in enumerate(verb_action_lemmas):
-			dv.write('{}\t{}\t{}'.format(i, verb_list, action_list))
-	print('finished parsing test sentence')
 
 
 	# Load databases from storage for use
 	s_names = ['tstream', 'ctstream', 'ftstream', 'fctstream', 'wstream', 'mstream']
 	output_names = ['SVO', 'SVO_corrected', 'SVO_filtered', 'SVO_filtered_corrected', 'SVO_hypernyms', 'NONE']
+	# s_names = ['mstream']
+	# output_name = ['NONE']
 	output_name_dict = dict(zip(s_names, output_names))
 	prefix = 'dirtar_database_'
 	suffix = '.pkl'
 
-	action_sim_dict = dict()
-	print('Finding most-similar-to action lemmans')
+
+	print('Finding most-similar-to action lemmas')
+	K = [10, 15, 35]
 	for database in s_names:
-		print(database)
+
+		print('loading db: {}'.format(database))
 		with open(prefix + database + suffix, 'rb') as tripdatabase:
 			db = pickle.load(tripdatabase)
-		action_sim_dict[database] = dict()
 
+		action_sim_dict = dict()
+
+		print('Finding most-similar-to action lemmas {}'.format(database))
 		for action in ACTION_TYPES:
 			if database != 'mstream':
-				action_sim_dict[database][action] = mdirt.most_similar_to(action, db)
+				action_sim_dict[action] = mdirt.most_similar_to(action, db)
 			else:
 				g_regular, g_semantic, w_regular, w_semantic = mdirt.most_similar_with_multislot_with_semantic(action, db)
-				action_sim_dict[database][action] = (g_regular, g_semantic, w_regular, w_semantic)
+				action_sim_dict[action] = (g_regular, g_semantic, w_regular, w_semantic)
 
-
-	print('assigning labels')
-	K = [10, 35, 100]
-	for database in s_names:
-		print(database)
-		with open(prefix + database + suffix, 'rb') as tripdatabase:
-			db = pickle.load(tripdatabase)
+		print('assigning labels: {}'.format(database))
 		if database == 'mstream':
 			file_name_outputs = ['multi_reg_geo.txt', 'multi_sem_geo.txt', 'multi_reg_w.txt', 'multi_sem_w.txt']
-			assign_labels_multi(db, action_sim_dict[database], verb_action_lemmas, K, output=file_name_outputs)
+			assign_labels_multi(db, action_sim_dict, verb_action_lemmas, K, output_names=file_name_outputs)
 		else:
 			output_file_name = output_name_dict[database]
-			assign_labels(db, action_sim_dict[database], verb_action_lemmas, K, output=output_file_name + '.txt')
+			assign_labels(db, action_sim_dict, verb_action_lemmas, K, output=output_file_name + '.txt')
+
+
+		# import score_labels_dirtar
