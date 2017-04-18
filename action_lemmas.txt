@@ -1,4 +1,4 @@
-shoot
+fire
 aim
 hit
 look

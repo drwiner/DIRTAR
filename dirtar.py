@@ -488,7 +488,7 @@ def most_similar_to_test(test_paths, db):
 
 def test_most_similar_to(i, action_lemma_doc, k_most_similar, line1, line2):
 	db = databases[i]
-	test_d = most_similar_to(action_lemma_doc, db)
+	test_d = most_similar_to_test(action_lemma_doc, db)
 
 	with open('movie_output-' + str(i), 'w') as ot:
 		ot.write(line1)
