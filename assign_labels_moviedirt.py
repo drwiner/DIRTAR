@@ -22,6 +22,11 @@ action_remap_dict = {'fire':'fire', 'aim': 'aim', 'get-shot': 'hit', 'look-at': 
 	                 'turn-from-to' : 'look', 'face-from-to': 'look',
 	                 'walk-to-from': 'walk', 'arrive' : 'walk', 'leave': 'walk',
 	                 'fall': 'fall', 'draw': 'draw', 'cock': 'cock'}
+
+
+folder = 'redo_labels_420//'
+
+# ATYPES = set(action_remap_dict.values())
 # action_remap_dict = {'fire':'fire', 'aim': 'aim', 'hit': 'get-shot', 'look': 'look-at', 'stare': 'stare-at',
 	                     # 'walk': 'walk', 'fall': 'fall', 'draw': 'draw', 'cock': 'cock', None: 'None'}
 
@@ -53,6 +58,67 @@ def parse_scene_sents(file_name):
 	return sentence_verb_actions
 
 
+def assign_labels_mst_psim(db, mst_db, sents, K, output, k_most_sim, psim):
+
+	for j, (verb_list, action_list) in enumerate(sents):
+		for verb in verb_list:
+			print(verb)
+
+			ranked_list = k_most_sim(verb, db)
+
+			# ain't gonna work kid
+			if ranked_list is None:
+				for k in K:
+					with open(folder + str(k) + '_' + str(output), 'a') as ona:
+						ona.write('{}\t{}\t{}\t{}\t{}\n'.format(j, verb, None, 0, 0, action_list))
+				continue
+
+			for k in K:
+				best_action = None
+				best_score = 0
+				exact_match = 0
+				tk_list = [item[0] for item in ranked_list[:k]]
+				top_k = set(tk_list)
+				if verb in mst_db.keys():
+					exact_match = 1
+					best_action = verb
+					best_score = 1.0
+					with open(folder + str(k) + '_' + str(output), 'a') as ona:
+						ona.write('{}\t{}\t{}\t{}\t{}\t{}\n'.format(j, verb, best_action, exact_match, best_score, action_list))
+					continue
+
+				found = 0
+				for tk in tk_list:
+					if tk in ACTION_TYPES:
+						best_action = tk
+						best_score = 1.0
+						found = 1
+						break
+
+				if not found:
+					for action, action_ranked_list in mst_db.items():
+						art = {item[0] for item in action_ranked_list[:k]}
+						common = art & top_k
+						if len(common) == 0:
+							continue
+						elif len(common) > 1:
+							# choose the best score
+							for common_lemma in common:
+								score = psim(common_lemma, action, db)
+								if score > best_score:
+									best_score = score
+									best_action = action
+						else:
+							common_lemma = common.pop()
+							score = psim(common_lemma, action, db)
+							if score > best_score:
+								best_score = score
+								best_action = action
+
+				print('best action: {}'.format(best_action))
+
+				with open(folder + str(k) + '_' + str(output), 'a') as ona:
+					ona.write('{}\t{}\t{}\t{}\t{}\t{}\n'.format(j, verb, best_action, exact_match, best_score, action_list))
 
 
 def assign_labels(db, mst_db, sents, K, output):
@@ -66,30 +132,40 @@ def assign_labels(db, mst_db, sents, K, output):
 			# ain't gonna work kid
 			if ranked_list is None:
 				for k in K:
-					with open(str(k) + '_' + str(output), 'a') as ona:
-						ona.write('{}\t{}\t{}\t{}\t{}\n'.format(j, verb, None, 0, action_list))
+					with open(folder + str(k) + '_' + str(output), 'a') as ona:
+						ona.write('{}\t{}\t{}\t{}\t{}\t{}\n'.format(j, verb, None, 0, 0, action_list))
 				continue
 
 			for k in K:
 				best_action = None
 				best_score = 0
 				exact_match = 0
-				top_k = {item[0] for item in ranked_list[:k]}
+				tk_list = [item[0] for item in ranked_list[:k]]
+				top_k = set(tk_list)
 				if verb in mst_db.keys():
 					exact_match = 1
 					best_action = verb
 					best_score = 1.0
-				else:
+					with open(folder + str(k) + '_' + str(output), 'a') as ona:
+						ona.write('{}\t{}\t{}\t{}\t{}\t{}\n'.format(j, verb, best_action, exact_match, best_score, action_list))
+					continue
+
+				found = 0
+				for tk in tk_list:
+					if tk in ACTION_TYPES:
+						best_action = tk
+						best_score = 1.0
+						found = 1
+						exact_match = 1
+						break
+
+				if not found:
 					for action, action_ranked_list in mst_db.items():
 						art = {item[0] for item in action_ranked_list[:k]}
 						common = art & top_k
 						if len(common) == 0:
 							continue
 						elif len(common) > 1:
-							if action in common:
-								best_score = 1.0
-								best_action = action
-								break
 							# choose the best score
 							for common_lemma in common:
 								score = mdirt.pathSimdb(common_lemma, action, db)
@@ -98,10 +174,6 @@ def assign_labels(db, mst_db, sents, K, output):
 									best_action = action
 						else:
 							common_lemma = common.pop()
-							if common_lemma == action:
-								best_score = 1.0
-								best_action = action
-								break
 							score = mdirt.pathSimdb(common_lemma, action, db)
 							if score > best_score:
 								best_score = score
@@ -109,7 +181,7 @@ def assign_labels(db, mst_db, sents, K, output):
 
 				print('best action: {}'.format(best_action))
 
-				with open(str(k) + '_' + str(output), 'a') as ona:
+				with open(folder + str(k) + '_' + str(output), 'a') as ona:
 					ona.write('{}\t{}\t{}\t{}\t{}\t{}\n'.format(j, verb, best_action, exact_match, best_score, action_list))
 
 
@@ -126,7 +198,7 @@ def assign_labels_multi(db, mst_db, sents, K, output_names):
 			if two_lists is None:
 				for k in K:
 					for output in output_names:
-						with open(str(k) + '_' + str(output), 'a') as ona:
+						with open(folder + str(k) + '_' + str(output), 'a') as ona:
 							ona.write('{}\t{}\t{}\t{}\t{}\n'.format(j, verb, None, 0, action_list))
 				continue
 
@@ -142,22 +214,33 @@ def assign_labels_multi(db, mst_db, sents, K, output_names):
 					best_score[i] = 0
 					exact_match = 0
 					# item is tuple (verb, score)
-					top_k = {item[0] for item in cmp_lists[i][:k]}
+					tk_list = [item[0] for item in cmp_lists[i][:k]]
+					top_k = set(tk_list)
 					if verb in mst_db.keys():
 						exact_match = 1
 						best_action[i] = verb
 						best_score[i] = 1.0
-					else:
+						with open(folder+str(k) + '_' + output_names[i], 'a') as ona:
+							ona.write('{}\t{}\t{}\t{}\t{}\t{}\n'.format(j, verb, best_action[i], str(exact_match),
+							                                            str(best_score[i]), action_list))
+						continue
+
+					found = 0
+					for tk in tk_list:
+						if tk in ACTION_TYPES:
+							best_action = tk
+							best_score = 1.0
+							found = 1
+							exact_match = 1
+							break
+
+					if not found:
 						for action, action_ranked_tuple in mst_db.items():
 							art = {item[0] for item in action_ranked_tuple[i][:k]}
 							common = art & top_k
 							if len(common) == 0:
 								continue
 							elif len(common) > 1:
-								if action in common:
-									best_action[i] = action
-									best_score[i] = 1.0
-									break
 								# choose the best score
 								for common_lemma in common:
 									score = path_methods[i](common_lemma, action, db)
@@ -166,10 +249,6 @@ def assign_labels_multi(db, mst_db, sents, K, output_names):
 										best_action[i] = action
 							else:
 								common_lemma = common.pop()
-								if action == common_lemma:
-									best_action[i] = action
-									best_score[i] = 1.0
-									break
 								score = path_methods[i](common_lemma, action, db)
 								if score > best_score[i]:
 									best_score[i] = score
@@ -178,11 +257,13 @@ def assign_labels_multi(db, mst_db, sents, K, output_names):
 					# append label to each file
 					print('best action: {}'.format(best_action[i]))
 
-					with open(str(k) + '_' + output_names[i], 'a') as ona:
-						ona.write('{}\t{}\t{}\t{}\t{}\t{}\n'.format(j, verb, best_action[i], exact_match, best_score[i], action_list))
+					with open(folder+str(k) + '_' + output_names[i], 'a') as ona:
+						ona.write('{}\t{}\t{}\t{}\t{}\t{}\n'.format(j, verb, best_action[i], str(exact_match), str(best_score[i]), action_list))
+
 
 def digest(rawd):
 	return nlp(text=rawd)
+
 
 def nlp_partial_sent(host_url):
 	nlp_server = StanfordCoreNLP('http://localhost:9000')
@@ -214,8 +295,8 @@ if __name__ == '__main__':
 
 
 	# Load databases from storage for use
-	s_names = ['tstream', 'ctstream', 'ftstream', 'fctstream', 'wstream', 'mstream']
-	output_names = ['SVO', 'SVO_corrected', 'SVO_filtered', 'SVO_filtered_corrected', 'SVO_hypernyms', 'NONE']
+	s_names = ['tstream', 'ctstream', 'ftstream', 'fctstream', 'wstream', 'cmstream', 'mstream']
+	output_names = ['SVO', 'SVO_corrected', 'SVO_filtered', 'SVO_filtered_corrected', 'SVO_hypernyms', 'multi_corrected_w', 'NONE']
 	# s_names = ['mstream']
 	# output_name = ['NONE']
 	output_name_dict = dict(zip(s_names, output_names))
@@ -224,7 +305,9 @@ if __name__ == '__main__':
 
 
 	print('Finding most-similar-to action lemmas')
-	K = [10, 15, 35]
+	# K = [10, 15, 35]
+	K = [15,20,25]
+
 	for database in s_names:
 
 		print('loading db: {}'.format(database))
@@ -235,16 +318,21 @@ if __name__ == '__main__':
 
 		print('Finding most-similar-to action lemmas {}'.format(database))
 		for action in ACTION_TYPES:
-			if database != 'mstream':
+			if database not in  {'mstream', 'cmstream'}:
 				action_sim_dict[action] = mdirt.most_similar_to(action, db)
-			else:
+			elif database == 'mstream':
 				g_regular, g_semantic, w_regular, w_semantic = mdirt.most_similar_with_multislot_with_semantic(action, db)
 				action_sim_dict[action] = (g_regular, g_semantic, w_regular, w_semantic)
+			else:
+
+				action_sim_dict[action] = mdirt.most_similar_wpathsim(action, db)
 
 		print('assigning labels: {}'.format(database))
 		if database == 'mstream':
 			file_name_outputs = ['multi_reg_geo.txt', 'multi_sem_geo.txt', 'multi_reg_w.txt', 'multi_sem_w.txt']
 			assign_labels_multi(db, action_sim_dict, verb_action_lemmas, K, output_names=file_name_outputs)
+		elif database == 'cmstream':
+			assign_labels_mst_psim(db, action_sim_dict, verb_action_lemmas, K, 'multi_corrected_w.txt', mdirt.most_similar_wpathsim, mdirt.weighted_pathSim_multiSlot)
 		else:
 			output_file_name = output_name_dict[database]
 			assign_labels(db, action_sim_dict, verb_action_lemmas, K, output=output_file_name + '.txt')

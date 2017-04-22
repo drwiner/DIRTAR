@@ -102,7 +102,10 @@ def readCorpus(clause_file):
 			# X and Y recollapsed by dependency type
 			x_prime, y_prime = decide_swap(x, y, x_dep, y_dep)
 			CTStream.append(Triple(x_prime, path, y_prime))
-
+			if x_prime == x:
+				CMStream.append(Triple((x, x_dep, x_ner), path, (y, y_dep, y_ner)))
+			else:
+				CMStream.append(Triple((y, y_dep, y_ner), path, (x, x_dep, x_ner)))
 
 
 def decide_swap(x, y, x_dep, y_dep):
@@ -431,6 +434,18 @@ def most_similar_to(test_lemma, db):
 
 import semantic_parser
 
+
+def most_similar_wpathsim(test_lemma, db):
+	if test_lemma == ' ' or test_lemma == '\n' or test_lemma not in db.keys():
+		return None
+	weighted_reg_test = dict()
+	for p in set(db.keys()):
+		weighted_reg_test[p] = weighted_pathSim_multiSlot(test_lemma, p, db)
+
+	w_regular = list(reversed(sorted(weighted_reg_test.items(), key=operator.itemgetter(1))))
+	return w_regular
+
+
 def most_similar_with_multislot_with_semantic(test_lemma, db, semantic=1):
 
 	if test_lemma == ' ' or test_lemma == '\n' or test_lemma not in db.keys():
@@ -549,6 +564,9 @@ if __name__ == '__main__':
 	# replace words with wordnet level 6 or leave
 	WStream = []
 
+	#corrected and MultiStream
+	CMStream = []
+
 	print('reading and sorting input clauses')
 	#### READ CLAUSES ####
 	readCorpus(corpus_text)
@@ -574,6 +592,7 @@ if __name__ == '__main__':
 	streams = [TStream, CTStream, FTStream, FCTStream, WStream]
 	s_names = ['tstream', 'ctstream', 'ftstream', 'fctstream', 'wstream']
 
+
 	# triple_databases - Triple Database - collection of triple instances by path
 	triple_database = rec_dd()
 	# FStream
@@ -586,44 +605,53 @@ if __name__ == '__main__':
 	triple_W_db = rec_dd()
 
 
+
+
 	databases = [triple_database, triple_dep_filtered, triple_collapsed, triple_dep_filtered_collapsed, triple_W_db]
 
-	ftinstances = []
-	slot_counts = []
-	word_slot_counts = []
-	for i in range(len(streams)):
-		ftinstances.append(list())
-		slot_counts.append(dict())
-		word_slot_counts.append(dict())
+	# ftinstances = []
+	# slot_counts = []
+	# word_slot_counts = []
+	# for i in range(len(streams)):
+	# 	ftinstances.append(list())
+	# 	slot_counts.append(dict())
+	# 	word_slot_counts.append(dict())
+	#
+	#
+	# for i in range(len(streams)):
+	# 	print(i)
+	# 	print('applying filter')
+	# 	#### Apply MinFreq####
+	# 	dp, dmf, pi, pimf, ftinstances = apply_MinfreqFilter(streams[i], s_names[i], min_freq)
+	# 	# save meta path info
+	# 	# output_paths_info[i] = (dp, dmf, pi, pimf)
+	# 	# load database
+	# 	print('loading database')
+	# 	loadDatabase(databases[i], ftinstances)
+	#
+	# 	# apply semantic discrimination for each action lemma if in database
+	# 	# use test doc to filter by semantic, but for now, just update
+	# 	print('updating MI')
+	# 	updateMI(databases[i], word_slot_counts[i], slot_counts[i])
+	#
+	# 	print('after MI, dumping database')
+	# 	save_database(databases[i], s_names[i])
+	#
+	# 	line1 = 'Found {} distinct paths, {} after minfreq filtering.\n'.format(dp, dmf)
+	# 	line2 = 'Found {} path instances, {} after minfreq filtering.\n'.format(pi, pimf)
 
 
-	for i in range(len(streams)):
-		print(i)
-		print('applying filter')
-		#### Apply MinFreq####
-		dp, dmf, pi, pimf, ftinstances = apply_MinfreqFilter(streams[i], s_names[i], min_freq)
-		# save meta path info
-		# output_paths_info[i] = (dp, dmf, pi, pimf)
-		# load database
-		print('loading database')
-		loadDatabase(databases[i], ftinstances)
 
-		# apply semantic discrimination for each action lemma if in database
-		# use test doc to filter by semantic, but for now, just update
-		print('updating MI')
-		updateMI(databases[i], word_slot_counts[i], slot_counts[i])
+	# # MStream
+	# triple_multi_slot = rec_dd()
+	# dp, dmf, pi, pimf, ftinstances = apply_MinfreqFilter(MStream, 'mstream', min_freq)
+	# loadDatabase_multislot(triple_multi_slot, ftinstances)
+	# updateMI_multislot(triple_multi_slot, dict(), defaultdict(int))
+	# save_database(triple_multi_slot, 'mstream')
 
-		print('after MI, dumping database')
-		save_database(databases[i], s_names[i])
-
-		line1 = 'Found {} distinct paths, {} after minfreq filtering.\n'.format(dp, dmf)
-		line2 = 'Found {} path instances, {} after minfreq filtering.\n'.format(pi, pimf)
-
-
-
-	# MStream
+	# CMStream
 	triple_multi_slot = rec_dd()
-	dp, dmf, pi, pimf, ftinstances = apply_MinfreqFilter(MStream, 'mstream', min_freq)
+	dp, dmf, pi, pimf, ftinstances = apply_MinfreqFilter(CMStream, 'cmstream', min_freq)
 	loadDatabase_multislot(triple_multi_slot, ftinstances)
 	updateMI_multislot(triple_multi_slot, dict(), defaultdict(int))
-	save_database(triple_multi_slot, 'mstream')
+	save_database(triple_multi_slot, 'cmstream')
