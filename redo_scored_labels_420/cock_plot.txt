@@ -1,0 +1,17 @@
+name	action	labeled	exact_precision	precision	recall	fscore	
+random	cock	236	0.0	0.012711864406779662	0.012048192771084338	0.012371134020618556	
+15_SVO.txt	cock	4	0.0	0.0	0.0	0	
+15_SVO_filtered.txt	cock	0	0	0	0.0	0	
+15_SVO_corrected.txt	cock	6	0.0	0.0	0.0	0	
+15_SVO_filtered_corrected.txt	cock	14	0.0	0.0	0.0	0	
+15_SVO_hypernyms.txt	cock	7	0.0	0.2857142857142857	0.09090909090909091	0.13793103448275862	
+20_SVO.txt	cock	12	0.0	0.0	0.0	0	
+20_SVO_filtered.txt	cock	0	0	0	0.0	0	
+20_SVO_corrected.txt	cock	9	0.0	0.0	0.0	0	
+20_SVO_filtered_corrected.txt	cock	10	0.0	0.0	0.0	0	
+20_SVO_hypernyms.txt	cock	10	0.0	0.2	0.08	0.11428571428571428	
+25_SVO.txt	cock	14	0.0	0.0	0.0	0	
+25_SVO_filtered.txt	cock	0	0	0	0.0	0	
+25_SVO_corrected.txt	cock	12	0.0	0.0	0.0	0	
+25_SVO_filtered_corrected.txt	cock	1	0.0	0.0	0.0	0	
+25_SVO_hypernyms.txt	cock	8	0.0	0.0	0.0	0	
