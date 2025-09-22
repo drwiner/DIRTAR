@@ -1,3 +1,41 @@
+Metadata-Version: 2.4
+Name: dirtar
+Version: 2.0.0
+Summary: Discovery of Inference Rules from Text for Action Recognition
+Home-page: https://github.com/yourusername/dirtar
+Author: David Winer (original), Modernized 2024
+Author-email: David Winer <drwiner@cs.utah.edu>, Modernized Implementation <your-email@example.com>
+License: MIT
+Project-URL: Homepage, https://github.com/yourusername/dirtar
+Project-URL: Repository, https://github.com/yourusername/dirtar
+Project-URL: Documentation, https://github.com/yourusername/dirtar/blob/main/README.md
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Science/Research
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Programming Language :: Python :: 3.13
+Classifier: Topic :: Scientific/Engineering :: Artificial Intelligence
+Classifier: Topic :: Text Processing :: Linguistic
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+Requires-Dist: nltk>=3.8
+Requires-Dist: pycorenlp>=0.3.0
+Provides-Extra: dev
+Requires-Dist: pytest>=6.0; extra == "dev"
+Requires-Dist: pytest-cov>=2.0; extra == "dev"
+Requires-Dist: black>=21.0; extra == "dev"
+Requires-Dist: isort>=5.0; extra == "dev"
+Requires-Dist: flake8>=3.8; extra == "dev"
+Dynamic: author
+Dynamic: home-page
+Dynamic: requires-python
+
 # DIRTAR: Discovery of Inference Rules from Text for Action Recognition
 
 [![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)

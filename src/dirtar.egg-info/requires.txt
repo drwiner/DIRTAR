@@ -1,0 +1,9 @@
+nltk>=3.8
+pycorenlp>=0.3.0
+
+[dev]
+pytest>=6.0
+pytest-cov>=2.0
+black>=21.0
+isort>=5.0
+flake8>=3.8

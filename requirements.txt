@@ -1,0 +1,5 @@
+nltk>=3.8
+pycorenlp>=0.3.0
+setuptools>=65.0
+pytest>=6.0
+pytest-cov>=2.0
