@@ -205,9 +205,7 @@ Based on the DIRT algorithm:
 
 ## Contact
 
-For questions or issues, please contact:
-- Original Author: David Winer (drwiner@cs.utah.edu)
-- Modernization: [Your contact information]
+For questions or issues, please contact David Winer 
 
 ## Changelog
 
